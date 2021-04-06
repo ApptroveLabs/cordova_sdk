@@ -1,4 +1,4 @@
-package com.trackier.cordova_sdk;
+package com.trackier.sdk;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -7,9 +7,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * This class echoes a string called from JavaScript.
+ * TrackierCordova SDK class
  */
-public class TrackierCordovaSDK extends CordovaPlugin {
+public class TrackierCordova extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -36,8 +36,8 @@ public class TrackierCordovaSDK extends CordovaPlugin {
         if (parameters.containsKey(KEY_ENVIRONMENT)) {
             appToken = parameters.get(KEY_ENVIRONMENT).toString();
         }
-		com.trackier.sdk.TrackierSDKConfig sdkConfig = new com.trackier.sdk.TrackierSDKConfig(this.cordova.getActivity().getApplicationContext(), appToken, environment);
-		com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
+		TrackierSDKConfig sdkConfig = new TrackierSDKConfig(this.cordova.getActivity().getApplicationContext(), appToken, environment);
+		TrackierSDK.initialize(sdkConfig);
 	}
 
     public void trackEvent(JSONArray args) {
@@ -50,8 +50,7 @@ public class TrackierCordovaSDK extends CordovaPlugin {
         if (parameters.containsKey(KEY_EVENT_ID)) {
             eventId = parameters.get(KEY_EVENT_ID).toString();
         }
-        com.trackier.sdk.TrackierEvent evtObj = new com.trackier.sdk.TrackEvent(eventId);
-        com.trackier.sdk.TrackierSDK.trackEvent(evtObj);
+        TrackierEvent evtObj = new TrackEvent(eventId);
+        TrackierSDK.trackEvent(evtObj);
     }
-
 }

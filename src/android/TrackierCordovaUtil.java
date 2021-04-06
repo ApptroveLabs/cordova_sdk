@@ -1,4 +1,4 @@
-package com.trackier.cordova_sdk;
+package com.trackier.sdk;
 
 public class TrackierCordovaUtil {
     public static final String KEY_APP_TOKEN = "appToken";

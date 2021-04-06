@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com-trackier-cordova_sdk" version="1.0.0">
-   <name>TrackierCordovaSDK</name>
-   <js-module name="TrackierCordovaSDK" src="www/TrackierSDK.js">
-      <clobbers target="cordova.plugins.TrackierCordovaSDK" />
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.trackier.sdk" version="1.0.0">
+   <name>TrackierCordova</name>
+   <js-module src="www/TrackierSDK.js" name="TrackierCordova" >
+      <clobbers target="TrackierSDK" />
    </js-module>
    <platform name="android">
       <config-file parent="/*" target="res/xml/config.xml">
-         <feature name="TrackierCordovaSDK">
-            <param name="android-package" value="com.trackier.cordova_sdk.TrackierCordovaSDK" />
+         <feature name="TrackierSDK">
+            <param name="android-package" value="com.trackier.sdk.TrackierCordova" />
+            <param name="onload" value="true" />
          </feature>
       </config-file>
       <config-file parent="/*" target="AndroidManifest.xml" />
-      <source-file src="src/android/TrackierCordovaSDK.java" target-dir="src/com/trackier/cordova_sdk/TrackierCordovaSDK" />
-      <framework custom="true" src="src/android/cordova_sdk-gradle.gradle" type="gradleReference" />
+      <source-file src="src/android/TrackierCordova.java" target-dir="src/com/trackier/sdk" />
+      <source-file src="src/android/TrackierCordovaUtil.java" target-dir="src/com/trackier/sdk" />
+
+      <framework custom="true" src="src/android/cordova_sdk.gradle" type="gradleReference" />
    </platform>
 </plugin>
