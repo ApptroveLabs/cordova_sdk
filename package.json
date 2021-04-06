@@ -1,13 +1,8 @@
 {
-  "name": "com.trackier.cordova_sdk",
+  "name": "com.trackier.sdk",
   "version": "1.0.0",
   "description": "This is Trackier cordova plugin.",
-  "cordova": {
-    "id": "com-trackier-cordova_sdk",
-    "platforms": [
-      "android"
-    ]
-  },
+  "cordova_name": "Trackier SDK Cordova Plugin",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/trackier/cordova_sdk.git"
