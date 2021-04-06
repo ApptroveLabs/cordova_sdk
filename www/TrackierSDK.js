@@ -1,29 +1,30 @@
 var exec = require('cordova/exec');
 
-var TrackierConfig = function(appToken,environment){
+function callCordovaStringify(action) {
+    var args = Array.prototype.slice.call(arguments, 1);
+
+    exec(
+        function callback(data) { },
+        function errorHandler(err) { },
+        'TrackierCordova',
+        action,
+        [JSON.stringify(args)]
+    );
+}
+
+var TrackierConfig = function (appToken, environment) {
     this.appToken = appToken ;
     this.environment = environment ;
 }
 
 var TrackierSDK = {};
 
-TrackierSDK.initialize = function(trackierConfig) {
-    exec(
-        function callback(data) { },
-        function errorHandler(err) { },
-        'TrackierCordova',
-        'initialize', 
-        [JSON.stringify(trackierConfig)]
-    );
+TrackierSDK.initialize = function (trackierConfig) {
+    callCordovaStringify('initialize', trackierConfig);
+};
 
-TrackierSDK.trackEvent = function(trackierEvent) {
-    exec(
-        function callback(data) { },
-        function errorHandler(err) { },
-        'TrackierCordova',
-        'trackEvent', 
-        [JSON.stringify(trackierEvent)]
-    );
+TrackierSDK.trackEvent = function (trackierEvent) {
+    callCordovaStringify('trackEvent', trackierEvent);
 };
 
 TrackierConfig.EnvironmentDevelopment = "development";
