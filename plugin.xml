@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="trackier-cordova-sdk" version="1.0.0">
    <name>TrackierCordovaSDK</name>
-   <js-module src="index.js" name="TrackierCordovaSDK" >
+   <js-module src="www/TrackierCordova.js" name="TrackierCordovaSDK" >
       <clobbers target="TrackierCordovaSDK" />
    </js-module>
    <platform name="android">
