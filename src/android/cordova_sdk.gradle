@@ -1,6 +1,0 @@
-dependencies {
-  compile 'com.google.android.gms:play-services-gcm:9.6.1'
-  compile 'com.google.android.gms:play-services-location:9.6.1'
-  implementation 'com.trackier:android-sdk:1.0.5'
-  implementation 'com.android.installreferrer:installreferrer:2.1'
-}

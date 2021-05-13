@@ -1,0 +1,17 @@
+{
+  "name": "com.trackier.cordova_sdk",
+  "version": "1.0.0",
+  "description": "This is trackier cordova plugin .",
+  "cordova": {
+    "id": "com.trackier.cordova_sdk",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "dev@trackier.com",
+  "license": "MIT"
+}
