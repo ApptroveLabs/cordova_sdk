@@ -1,6 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Plugin, Cordova, CordovaProperty, CordovaInstance, InstanceProperty, IonicNativePlugin } from '@ionic-native/core';
-import { Observable } from 'rxjs';
+import { Plugin, Cordova, IonicNativePlugin } from '@ionic-native/core';
+
+export enum TrackierEnvironment {
+  Development = 'development',
+  Production = 'production'
+}
+
+export class TrackierConfig {
+  private appToken: string;
+  private environment: TrackierEnvironment;
+  constructor(appToken: string, environment: TrackierEnvironment) {
+      this.appToken = appToken;
+      this.environment = environment;
+  }
+}
+
 
 @Plugin({
   pluginName: 'TrackierCordovaPlugin',
@@ -14,11 +28,14 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class TrackierCordovaPlugin extends IonicNativePlugin {
 
-  @Cordova()
-  // functionName(arg1: string, arg2: number): Promise<any> {
+  
+  // @Cordova()
+  // initializeSDK(arg1: string, arg2: number): Promise<any> {
   //   return; // We add return; here to avoid any IDE / Compiler errors
   // }
-  initializeSDK(): Promise<any>{
+
+  @Cordova()
+  initializeSDK(config: TrackierConfig): Promise<any> {
     return;
   }
 

@@ -10,7 +10,7 @@ android {
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
 
-
+    implementation "com.trackier:android-sdk:1.1.0"
 }
 
 

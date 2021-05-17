@@ -24,6 +24,7 @@
     "prettier": "prettier src/**/* --write"
   },
   "dependencies": {
+    "com.trackier.cordova_sdk": "file:../TrackierCordovaPlugin",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
