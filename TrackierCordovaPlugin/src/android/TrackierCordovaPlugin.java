@@ -106,7 +106,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
                 if (trackierEventJson.getString("param10") != null) {            
                     trackierEvent.param10 = trackierEventJson.getString("param10");
                 }
-                if (trackierEventJson.getDouble("revenue") != null) {            
+                if (trackierEventJson.getDouble("revenue") != 0.0) {            
                     trackierEvent.revenue = trackierEventJson.getDouble("revenue");
                 }
 

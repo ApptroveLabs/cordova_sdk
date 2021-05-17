@@ -18,6 +18,12 @@ export class Tab2Page {
     var trackierConfig = new TrackierConfig("xxxx-xx-4505-bc8b-xx",TrackierEnvironment.Development);
     this.trackierCordovaPlugin.initializeSDK(trackierConfig);
     console.log("trackiersdk initialize sdk end............................");
+    setTimeout(function(){ 
+      console.log("trackiersdk trackEvent timeout  called............................");
+      var trackierEvent1 = new TrackierEvent("sEQWVHGThl");
+      this.trackierCordovaPlugin.trackEvent(trackierEvent1);
+      console.log("trackiersdk trackEvent timeout  end............................");
+    }, 3000);
   }
 
   public async showActionSheet(photo: Photo, position: number) {
@@ -29,8 +35,6 @@ export class Tab2Page {
         icon: 'trash',
         handler: () => {
           this.photoService.deletePicture(photo, position);
-          var trackierEvent1 = new TrackierEvent("sEQWVHGThl");
-          this.trackierCordovaPlugin.trackEvent(trackierEvent1);
 
         }
       }, {
