@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Photo, PhotoService } from '../services/photo.service';
-import { TrackierCordovaPlugin, TrackierConfig, TrackierEnvironment} from '@ionic-native/trackier-cordova-plugin/ngx';
+import { TrackierCordovaPlugin, TrackierConfig, TrackierEnvironment, TrackierEvent} from '@ionic-native/trackier-cordova-plugin/ngx';
 
 @Component({
   selector: 'app-tab2',
@@ -29,6 +29,9 @@ export class Tab2Page {
         icon: 'trash',
         handler: () => {
           this.photoService.deletePicture(photo, position);
+          var trackierEvent1 = new TrackierEvent("sEQWVHGThl");
+          this.trackierCordovaPlugin.trackEvent(trackierEvent1);
+
         }
       }, {
         text: 'Cancel',

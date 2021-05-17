@@ -33,10 +33,10 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             String appToken = null;
             String environment = null;
 
-            if(trackiersdkConfigJson.getString("appToken") !== null){
+            if(trackiersdkConfigJson.getString("appToken") != null){
                 appToken = trackiersdkConfigJson.getString("appToken");
             }
-            if(trackiersdkConfigJson.getString("environment") !== null){
+            if(trackiersdkConfigJson.getString("environment") != null){
                 environment = trackiersdkConfigJson.getString("environment");
             }
 
@@ -53,8 +53,8 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             callbackContext.success(message);
             JSONObject trackierEventJson = new JSONObject(message);
 
-            if(trackierEventJson.getString("eventId") !== null){
-                com.trackier.sdk.TrackierEvent trackierEvent = new com.trackier.sdk.TrackierEvent(trackierEventMap.getString("eventId"));
+            if(trackierEventJson.getString("eventId") != null){
+                com.trackier.sdk.TrackierEvent trackierEvent = new com.trackier.sdk.TrackierEvent(trackierEventJson.getString("eventId"));
                 
                 trackierEvent.orderId = null;
                 trackierEvent.currency = null;
@@ -70,43 +70,43 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
                 trackierEvent.param10 = null;
                 trackierEvent.revenue = null;
 
-                if (trackierEventJson.getString("orderId") !== null) {
+                if (trackierEventJson.getString("orderId") != null) {
 			    trackierEvent.orderId = trackierEventJson.getString("orderId");
                 }
-                if (trackierEventJson.getString("currency") !== null) {            
+                if (trackierEventJson.getString("currency") != null) {            
                 trackierEvent.currency = trackierEventJson.getString("currency");
                 }
-                if (trackierEventJson.getString("param1") !== null) {            
+                if (trackierEventJson.getString("param1") != null) {            
                     trackierEvent.param1 = trackierEventJson.getString("param1");
                 }
-                if (trackierEventJson.getString("param2") !== null) {            
+                if (trackierEventJson.getString("param2") != null) {            
                     trackierEvent.param2 = trackierEventJson.getString("param2");
                 }
-                if (trackierEventJson.getString("param3") !== null) {            
+                if (trackierEventJson.getString("param3") != null) {            
                     trackierEvent.param3 = trackierEventJson.getString("param3");
                 }
-                if (trackierEventJson.getString("param4") !== null) {            
+                if (trackierEventJson.getString("param4") != null) {            
                     trackierEvent.param4 = trackierEventJson.getString("param4");
                 }
-                if (trackierEventJson.getString("param5") !== null) {            
+                if (trackierEventJson.getString("param5") != null) {            
                     trackierEvent.param5 = trackierEventJson.getString("param5");
                 }
-                if (trackierEventJson.getString("param6") !== null) {            
+                if (trackierEventJson.getString("param6") != null) {            
                     trackierEvent.param6 = trackierEventJson.getString("param6");
                 }
-                if (trackierEventJson.getString("param7") !== null) {            
+                if (trackierEventJson.getString("param7") != null) {            
                     trackierEvent.param7 = trackierEventJson.getString("param7");
                 }
-                if (trackierEventJson.getString("param8") !== null) {            
+                if (trackierEventJson.getString("param8") != null) {            
                     trackierEvent.param8 = trackierEventJson.getString("param8");
                 }
-                if (trackierEventJson.getString("param9") !== null) {            
+                if (trackierEventJson.getString("param9") != null) {            
                     trackierEvent.param9 = trackierEventJson.getString("param9");
                 }
-                if (trackierEventJson.getString("param10") !== null) {            
+                if (trackierEventJson.getString("param10") != null) {            
                     trackierEvent.param10 = trackierEventJson.getString("param10");
                 }
-                if (trackierEventJson.getDouble("revenue") !== null) {            
+                if (trackierEventJson.getDouble("revenue") != null) {            
                     trackierEvent.revenue = trackierEventJson.getDouble("revenue");
                 }
 
