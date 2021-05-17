@@ -15,6 +15,14 @@ export class TrackierConfig {
   }
 }
 
+export class TrackierEvent {
+  private eventId: string;
+  constructor(eventId:string) {
+      this.eventId = eventId;
+  }
+  setEventValue: (key:string,value:string) => void
+}
+
 
 @Plugin({
   pluginName: 'TrackierCordovaPlugin',
@@ -36,6 +44,11 @@ export class TrackierCordovaPlugin extends IonicNativePlugin {
 
   @Cordova()
   initializeSDK(config: TrackierConfig): Promise<any> {
+    return;
+  }
+
+  @Cordova()
+  trackEvent(trackierEvent: TrackierEvent): Promise<any> {
     return;
   }
 
