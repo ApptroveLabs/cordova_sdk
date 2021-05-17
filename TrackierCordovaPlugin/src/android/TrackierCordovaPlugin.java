@@ -48,12 +48,13 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
         }
     }
 
-        private void trackEvent(String message, CallbackContext callbackContext) throws JSONException {
+    private void trackEvent(String message, CallbackContext callbackContext) throws JSONException {
         if (message != null && message.length() > 0) {
             callbackContext.success(message);
             JSONObject trackierEventJson = new JSONObject(message);
 
             if(trackierEventJson.getString("eventId") != null){
+                
                 com.trackier.sdk.TrackierEvent trackierEvent = new com.trackier.sdk.TrackierEvent(trackierEventJson.getString("eventId"));
                 
                 trackierEvent.orderId = null;
@@ -71,10 +72,10 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
                 trackierEvent.revenue = null;
 
                 if (trackierEventJson.getString("orderId") != null) {
-			    trackierEvent.orderId = trackierEventJson.getString("orderId");
+			        trackierEvent.orderId = trackierEventJson.getString("orderId");
                 }
                 if (trackierEventJson.getString("currency") != null) {            
-                trackierEvent.currency = trackierEventJson.getString("currency");
+                     trackierEvent.currency = trackierEventJson.getString("currency");
                 }
                 if (trackierEventJson.getString("param1") != null) {            
                     trackierEvent.param1 = trackierEventJson.getString("param1");

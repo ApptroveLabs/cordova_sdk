@@ -48,7 +48,7 @@ export class TrackierCordovaPlugin extends IonicNativePlugin {
   }
 
   @Cordova()
-  trackEvent(trackierEvent: TrackierEvent): Promise<any> {
+  trackEvent(event: TrackierEvent): Promise<any> {
     return;
   }
 

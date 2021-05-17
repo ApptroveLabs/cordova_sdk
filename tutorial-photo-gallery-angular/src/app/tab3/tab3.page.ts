@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TrackierCordovaPlugin, TrackierConfig, TrackierEnvironment, TrackierEvent} from '@ionic-native/trackier-cordova-plugin/ngx';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +8,11 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(private trackierCordovaPlugin:TrackierCordovaPlugin) {}
+
+  async ngOnInit() {
+    var trackierEvent = new TrackierEvent("sEQWVHGThl");
+    this.trackierCordovaPlugin.trackEvent(trackierEvent);
+  }
 
 }
