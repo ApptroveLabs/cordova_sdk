@@ -1,6 +1,6 @@
 {
   "name": "com.trackier.cordova_sdk",
-  "version": "1.0.1",
+  "version": "1.5.0",
   "description": "This is trackier cordova plugin .",
   "cordova": {
     "id": "com.trackier.cordova_sdk",
