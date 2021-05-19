@@ -26,100 +26,105 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
         return false;
     }
 
-    private void initializeSDK(String message, CallbackContext callbackContext) throws JSONException {
+    private void initializeSDK(String message, CallbackContext callbackContext){
         if (message != null && message.length() > 0) {
             callbackContext.success(message);
-            JSONObject trackiersdkConfigJson = new JSONObject(message);
-            String appToken = null;
-            String environment = null;
+            try {
+                JSONObject trackiersdkConfigJson = new JSONObject(message);
+                String appToken = trackiersdkConfigJson.getString("appToken");
+                String environment = trackiersdkConfigJson.getString("environment");
 
-            if(trackiersdkConfigJson.getString("appToken") != null){
-                appToken = trackiersdkConfigJson.getString("appToken");
-            }
-            if(trackiersdkConfigJson.getString("environment") != null){
-                environment = trackiersdkConfigJson.getString("environment");
-            }
+                if (appToken != null && environment != null) {
+                    com.trackier.sdk.TrackierSDKConfig sdkConfig = new com.trackier.sdk.TrackierSDKConfig(webView.getContext(), appToken, environment);
+                    com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
+                }
 
-            com.trackier.sdk.TrackierSDKConfig sdkConfig = new com.trackier.sdk.TrackierSDKConfig(webView.getContext(), appToken , environment);
-		    com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
+            } catch (Exception exception){
+
+            }
 
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
     }
 
-    private void trackEvent(String message, CallbackContext callbackContext) throws JSONException {
+    private void trackEvent(String message, CallbackContext callbackContext){
         if (message != null && message.length() > 0) {
             callbackContext.success(message);
-            JSONObject trackierEventJson = new JSONObject(message);
+            try {
+                JSONObject trackierEventJson = new JSONObject(message);
 
-            if(trackierEventJson.getString("eventId") != null){
-                
-                com.trackier.sdk.TrackierEvent trackierEvent = new com.trackier.sdk.TrackierEvent(trackierEventJson.getString("eventId"));
-                
-                trackierEvent.orderId = null;
-                trackierEvent.currency = null;
-                trackierEvent.param1 = null;
-                trackierEvent.param2 = null;
-                trackierEvent.param3 = null;
-                trackierEvent.param4 = null;
-                trackierEvent.param5 = null;
-                trackierEvent.param6 = null;
-                trackierEvent.param7 = null;
-                trackierEvent.param8 = null;
-                trackierEvent.param9 = null;
-                trackierEvent.param10 = null;
-                trackierEvent.revenue = null;
+                String eventId = trackierEventJson.getString("eventId");
+                String orderId = trackierEventJson.getString("orderId");
+                String currency = trackierEventJson.getString("currency");
+                String param1 = trackierEventJson.getString("param1");
+                String param2 = trackierEventJson.getString("param2");
+                String param3 = trackierEventJson.getString("param3");
+                String param4 = trackierEventJson.getString("param4");
+                String param5 = trackierEventJson.getString("param5");
+                String param6 = trackierEventJson.getString("param6");
+                String param7 = trackierEventJson.getString("param7");
+                String param8 = trackierEventJson.getString("param8");
+                String param9 = trackierEventJson.getString("param9");
+                String param10 = trackierEventJson.getString("param10");
+                Double revenue = trackierEventJson.getDouble("revenue");
 
-                if (trackierEventJson.getString("orderId") != null) {
-			        trackierEvent.orderId = trackierEventJson.getString("orderId");
-                }
-                if (trackierEventJson.getString("currency") != null) {            
-                     trackierEvent.currency = trackierEventJson.getString("currency");
-                }
-                if (trackierEventJson.getString("param1") != null) {            
-                    trackierEvent.param1 = trackierEventJson.getString("param1");
-                }
-                if (trackierEventJson.getString("param2") != null) {            
-                    trackierEvent.param2 = trackierEventJson.getString("param2");
-                }
-                if (trackierEventJson.getString("param3") != null) {            
-                    trackierEvent.param3 = trackierEventJson.getString("param3");
-                }
-                if (trackierEventJson.getString("param4") != null) {            
-                    trackierEvent.param4 = trackierEventJson.getString("param4");
-                }
-                if (trackierEventJson.getString("param5") != null) {            
-                    trackierEvent.param5 = trackierEventJson.getString("param5");
-                }
-                if (trackierEventJson.getString("param6") != null) {            
-                    trackierEvent.param6 = trackierEventJson.getString("param6");
-                }
-                if (trackierEventJson.getString("param7") != null) {            
-                    trackierEvent.param7 = trackierEventJson.getString("param7");
-                }
-                if (trackierEventJson.getString("param8") != null) {            
-                    trackierEvent.param8 = trackierEventJson.getString("param8");
-                }
-                if (trackierEventJson.getString("param9") != null) {            
-                    trackierEvent.param9 = trackierEventJson.getString("param9");
-                }
-                if (trackierEventJson.getString("param10") != null) {            
-                    trackierEvent.param10 = trackierEventJson.getString("param10");
-                }
-                if (trackierEventJson.getDouble("revenue") != 0.0) {            
-                    trackierEvent.revenue = trackierEventJson.getDouble("revenue");
-                }
+                if (eventId != null) {
 
-                // Map<String, Object> eventValues = TrackierUtil.toMap(trackierEventMap.getMap("ev"));
-                // Map<String, Object> ev = new LinkedHashMap<String, Object>();
-                // if (eventValues != null) {
-                //     for (Map.Entry<String, Object> entry : eventValues.entrySet()) {
-                //         ev.put(entry.getKey(), entry.getValue().toString());
-                //     }
-                // }
-                // trackierEvent.ev = ev;
-                com.trackier.sdk.TrackierSDK.trackEvent(trackierEvent);
+                    com.trackier.sdk.TrackierEvent trackierEvent = new com.trackier.sdk.TrackierEvent(eventId);
+
+                    if (orderId != null) {
+                        trackierEvent.orderId = orderId;
+                    }
+                    if (currency != null) {
+                        trackierEvent.currency = currency;
+                    }
+                    if (param1 != null) {
+                        trackierEvent.param1 = param1;
+                    }
+                    if (param2 != null) {
+                        trackierEvent.param2 = param2;
+                    }
+                    if (param3!= null) {
+                        trackierEvent.param3 = param3;
+                    }
+                    if (param4 != null) {
+                        trackierEvent.param4 = param4;
+                    }
+                    if (param5 != null) {
+                        trackierEvent.param5 = param5;
+                    }
+                    if (param6 != null) {
+                        trackierEvent.param6 = param6;
+                    }
+                    if (param7 != null) {
+                        trackierEvent.param7 = param7;
+                    }
+                    if (param8 != null) {
+                        trackierEvent.param8 = param8;
+                    }
+                    if (param9 != null) {
+                        trackierEvent.param9 = param9;
+                    }
+                    if (param10 != null) {
+                        trackierEvent.param10 = param10;
+                    }
+                    if (revenue != 0.0) {
+                        trackierEvent.revenue = revenue;
+                    }
+
+                    // Map<String, Object> eventValues = TrackierUtil.toMap(trackierEventMap.getMap("ev"));
+                    // Map<String, Object> ev = new LinkedHashMap<String, Object>();
+                    // if (eventValues != null) {
+                    //     for (Map.Entry<String, Object> entry : eventValues.entrySet()) {
+                    //         ev.put(entry.getKey(), entry.getValue().toString());
+                    //     }
+                    // }
+                    // trackierEvent.ev = ev;
+                    com.trackier.sdk.TrackierSDK.trackEvent(trackierEvent);
+                }
+            } catch (Exception exception){
+
             }
         } else {
             callbackContext.error("Expected one non-empty string argument.");

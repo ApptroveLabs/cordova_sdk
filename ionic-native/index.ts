@@ -28,19 +28,13 @@ export class TrackierEvent {
   pluginName: 'TrackierCordovaPlugin',
   plugin: 'com.trackier.cordova_sdk', // npm package name, example: cordova-plugin-camera
   pluginRef: 'cordova.plugins.TrackierCordovaPlugin', // the variable reference to call the plugin, example: navigator.geolocation
-  //repo: '', // the github repository URL for the plugin
+  repo: 'https://github.com/trackier/cordova_sdk', // the github repository URL for the plugin
   //install: '', // OPTIONAL install command, in case the plugin requires variables
   //installVariables: [], // OPTIONAL the plugin requires variables
   platforms: ['Android'] // Array of platforms supported, example: ['Android', 'iOS']
 })
 @Injectable()
 export class TrackierCordovaPlugin extends IonicNativePlugin {
-
-  
-  // @Cordova()
-  // initializeSDK(arg1: string, arg2: number): Promise<any> {
-  //   return; // We add return; here to avoid any IDE / Compiler errors
-  // }
 
   @Cordova()
   initializeSDK(config: TrackierConfig): Promise<any> {
