@@ -15,5 +15,6 @@
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
         <source-file src="src/android/TrackierCordovaPlugin.java" target-dir="src/com/trackier/cordova_sdk/TrackierCordovaPlugin" />
         <framework src="com.trackier:android-sdk:1.5.0" />
+        <source-file src="src/android/TrackierCordovaUtil.java" target-dir="src/com/trackier/cordova_sdk/TrackierCordovaUtil" />
     </platform>
 </plugin>
