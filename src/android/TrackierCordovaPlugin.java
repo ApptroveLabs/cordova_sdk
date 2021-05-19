@@ -30,58 +30,50 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
         return false;
     }
 
-    private void initializeSDK(String message, CallbackContext callbackContext){
+    private void initializeSDK(String message, CallbackContext callbackContext) {
         if (message == null && message.length() == 0) {
             callbackContext.error("Expected one non-empty string argument.");
             return;
         }
-        callbackContext.success(message);
         try {
             JSONObject trackiersdkConfigJson = new JSONObject(message);
-            com.trackier.sdk.TrackierSDKConfig sdkConfig = new com.trackier.sdk.TrackierSDKConfig(webView.getContext(), TrackierCordovaUtil.checkStringKey("appToken",trackiersdkConfigJson), TrackierCordovaUtil.checkStringKey("environment",trackiersdkConfigJson));
+            com.trackier.sdk.TrackierSDKConfig sdkConfig = new com.trackier.sdk.TrackierSDKConfig(webView.getContext(), TrackierCordovaUtil.getStringVal("appToken",trackiersdkConfigJson), TrackierCordovaUtil.getStringVal("environment",trackiersdkConfigJson));
             com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
         } catch (Exception exception){
 
         }
 
+        callbackContext.success(message);
     }
 
-    private void trackEvent(String message, CallbackContext callbackContext){
-        if (message == null && message.length() == 0) {
+    private void trackEvent(String message, CallbackContext callbackContext) {
+        if (message == null || message.length() == 0) {
             callbackContext.error("Expected one non-empty string argument.");
-            return ;
+            return;
         }
-        callbackContext.success(message);
         try {
             JSONObject trackierEventJson = new JSONObject(message);
             
-            com.trackier.sdk.TrackierEvent trackierEvent = new com.trackier.sdk.TrackierEvent(TrackierCordovaUtil.checkStringKey("eventId",trackierEventJson));
-            trackierEvent.orderId = TrackierCordovaUtil.checkStringKey("orderId",trackierEventJson);
-            trackierEvent.currency = TrackierCordovaUtil.checkStringKey("currency",trackierEventJson);;
-            trackierEvent.param1 = TrackierCordovaUtil.checkStringKey("param1",trackierEventJson);;
-            trackierEvent.param2 = TrackierCordovaUtil.checkStringKey("param2",trackierEventJson);;
-            trackierEvent.param3 = TrackierCordovaUtil.checkStringKey("param3",trackierEventJson);;
-            trackierEvent.param4 = TrackierCordovaUtil.checkStringKey("param4",trackierEventJson);;
-            trackierEvent.param5 = TrackierCordovaUtil.checkStringKey("param5",trackierEventJson);;
-            trackierEvent.param6 = TrackierCordovaUtil.checkStringKey("param6",trackierEventJson);;
-            trackierEvent.param7 = TrackierCordovaUtil.checkStringKey("param7",trackierEventJson);;
-            trackierEvent.param8 = TrackierCordovaUtil.checkStringKey("param8",trackierEventJson);;
-            trackierEvent.param9 = TrackierCordovaUtil.checkStringKey("param9",trackierEventJson);;
-            trackierEvent.param10 = TrackierCordovaUtil.checkStringKey("param10",trackierEventJson);;
-            trackierEvent.revenue = TrackierCordovaUtil.checkDoubleKey("revenue",trackierEventJson);
+            com.trackier.sdk.TrackierEvent trackierEvent = new com.trackier.sdk.TrackierEvent(TrackierCordovaUtil.getStringVal("eventId",trackierEventJson));
+            trackierEvent.orderId = TrackierCordovaUtil.getStringVal("orderId",trackierEventJson);
+            trackierEvent.currency = TrackierCordovaUtil.getStringVal("currency",trackierEventJson);
+            trackierEvent.param1 = TrackierCordovaUtil.getStringVal("param1",trackierEventJson);
+            trackierEvent.param2 = TrackierCordovaUtil.getStringVal("param2",trackierEventJson);
+            trackierEvent.param3 = TrackierCordovaUtil.getStringVal("param3",trackierEventJson);
+            trackierEvent.param4 = TrackierCordovaUtil.getStringVal("param4",trackierEventJson);
+            trackierEvent.param5 = TrackierCordovaUtil.getStringVal("param5",trackierEventJson);
+            trackierEvent.param6 = TrackierCordovaUtil.getStringVal("param6",trackierEventJson);
+            trackierEvent.param7 = TrackierCordovaUtil.getStringVal("param7",trackierEventJson);
+            trackierEvent.param8 = TrackierCordovaUtil.getStringVal("param8",trackierEventJson);
+            trackierEvent.param9 = TrackierCordovaUtil.getStringVal("param9",trackierEventJson);
+            trackierEvent.param10 = TrackierCordovaUtil.getStringVal("param10",trackierEventJson);
+            trackierEvent.revenue = TrackierCordovaUtil.getDoubleVal("revenue",trackierEventJson);
 
-            // Map<String, Object> eventValues = TrackierUtil.toMap(trackierEventMap.getMap("ev"));
-            // Map<String, Object> ev = new LinkedHashMap<String, Object>();
-            // if (eventValues != null) {
-            //     for (Map.Entry<String, Object> entry : eventValues.entrySet()) {
-            //         ev.put(entry.getKey(), entry.getValue().toString());
-            //     }
-            // }
-            // trackierEvent.ev = ev;
             com.trackier.sdk.TrackierSDK.trackEvent(trackierEvent);
         } catch (Exception exception){
 
         }
 
+        callbackContext.success(message);
     }
 }

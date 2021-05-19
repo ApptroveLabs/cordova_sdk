@@ -6,22 +6,19 @@ import org.json.JSONObject;
 
 public class TrackierCordovaUtil {
 
-    public static String checkStringKey(String key, JSONObject jsonObject){
+    public static String getStringVal(String key, JSONObject jsonObject){
         try {
             return jsonObject.getString(key);
-        } catch (JSONException e) {
-            Log.d("trackier_cordova_sdk", "No value found for the key: "+ key);
-        }
+        } catch (JSONException e) {}
         
         return "";
     }
 
-    public static Double checkDoubleKey(String key, JSONObject jsonObject){
+    public static Double getDoubleVal(String key, JSONObject jsonObject){
         try {
             return jsonObject.getDouble(key);
-        } catch (JSONException e) {
-            Log.d("trackier_cordova_sdk", "No value found for the key: "+ key);
-        }
+        } catch (JSONException e) {}
+        
         return 0.0;
     }
 }
