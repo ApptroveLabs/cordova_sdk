@@ -4,7 +4,7 @@ Example app :  There is an example app inside the example directory.
 
 Basic integration First, download the library from npm:
 
-    $ npm install trackier/react-native-sdk
+    $ npm install trackier/cordova_sdk
 
 In case you are using Ionic Native, you can add our SDK from ionic-native repo:
 
