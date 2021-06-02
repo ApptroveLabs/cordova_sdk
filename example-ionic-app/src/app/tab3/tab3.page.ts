@@ -12,6 +12,7 @@ export class Tab3Page {
 
   async ngOnInit() {
     var trackierEvent = new TrackierEvent("sEQWVHGThl");
+    trackierEvent.setParam1("Param 1");
     this.trackierCordovaPlugin.trackEvent(trackierEvent);
   }
 
