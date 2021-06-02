@@ -24,7 +24,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
                 this.trackEvent(message, callbackContext);
                 return true;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
         return false;
@@ -70,7 +70,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             trackierEvent.revenue = TrackierCordovaUtil.getDoubleVal("revenue",trackierEventJson);
 
             com.trackier.sdk.TrackierSDK.trackEvent(trackierEvent);
-        } catch (Exception exception){
+        } catch (Exception exception) {
 
         }
 
