@@ -7,3 +7,4 @@ exports.initializeSDK = function (arg0, success, error) {
 exports.trackEvent = function (arg0, success, error){
     exec(success, error, 'TrackierCordovaPlugin', 'trackEvent', [JSON.stringify(arg0)]);
 };
+

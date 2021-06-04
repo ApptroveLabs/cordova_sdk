@@ -17,4 +17,13 @@
         <framework src="com.trackier:android-sdk:1.6.0" />
         <source-file src="src/android/TrackierCordovaUtil.java" target-dir="src/com/trackier/cordova_sdk/TrackierCordovaUtil" />
     </platform>
+    <platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="TrackierCordovaPlugin">
+				<param name="ios-package" value="TrackierCordovaPlugin" />
+			</feature>
+		</config-file>
+		<source-file src="src/ios/TrackierCordovaPlugin.swift" />
+        <framework src="trackier-ios-sdk" type="podspec" spec="~> 1.5.0" />
+	</platform>
 </plugin>
