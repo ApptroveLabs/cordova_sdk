@@ -5,11 +5,9 @@ import trackier_ios_sdk
 class TrackierCordovaPlugin : CDVPlugin {
     @objc(initializeSDK:)
     func initializeSDK(command: CDVInvokedUrlCommand) {
-
         var pluginResult = CDVPluginResult(
             status: CDVCommandStatus_ERROR
         )
-
         let msg = command.arguments[0] as? String ?? ""
         if (msg.count > 0){
             let dict = convertStringToDictionary(text: msg)
@@ -31,11 +29,9 @@ class TrackierCordovaPlugin : CDVPlugin {
 
     @objc(trackEvent:)
     func trackEvent(command: CDVInvokedUrlCommand) {
-
         var pluginResult = CDVPluginResult(
             status: CDVCommandStatus_ERROR
         )
-
         let msg = command.arguments[0] as? String ?? ""
         if (msg.count > 0) {
             let dict = convertStringToDictionary(text: msg)
