@@ -11,11 +11,8 @@ class TrackierCordovaPlugin : CDVPlugin {
         )
 
         let msg = command.arguments[0] as? String ?? ""
-
-        if (msg.count > 0 ){
-            
+        if (msg.count > 0){
             let dict = convertStringToDictionary(text: msg)
-
             let appToken = dict?["appToken"] as! String;
             let environment = dict?["environment"] as! String;
             let config = TrackierSDKConfig(appToken: appToken , env: environment)
@@ -26,7 +23,6 @@ class TrackierCordovaPlugin : CDVPlugin {
                 messageAs: msg
             )
         }
-
         self.commandDelegate!.send(
             pluginResult, 
             callbackId: command.callbackId
@@ -41,11 +37,8 @@ class TrackierCordovaPlugin : CDVPlugin {
         )
 
         let msg = command.arguments[0] as? String ?? ""
-
-        if (msg.count > 0 ) {
-
+        if (msg.count > 0) {
             let dict = convertStringToDictionary(text: msg)
-
             let currency: String = dict?["currency"] as? String ?? ""
             let revenue: String = dict?["revenue"] as? String ?? ""
             let eventId: String = dict?["eventId"] as! String
@@ -61,11 +54,9 @@ class TrackierCordovaPlugin : CDVPlugin {
             let param9: String = dict?["param9"] as? String ?? ""
             let param10: String = dict?["param10"] as? String ?? ""
             var ev:Dictionary<String,Any> = dict?["ev"] as? Dictionary<String,Any> ?? [:]
-
             for (key, value) in ev {
                 ev[key] = value
             }
-
             let event = TrackierEvent(id: eventId)
             event.setRevenue(revenue: Float64((revenue as NSString).floatValue), currency: currency)
             event.orderId = orderId
@@ -89,7 +80,6 @@ class TrackierCordovaPlugin : CDVPlugin {
                 messageAs: msg
             )
         }
-
         self.commandDelegate!.send(
             pluginResult, 
             callbackId: command.callbackId
@@ -106,5 +96,4 @@ class TrackierCordovaPlugin : CDVPlugin {
         }
         return nil
     }
-
 }
