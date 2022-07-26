@@ -32,7 +32,7 @@ In case you are using Ionic Native, you can add our SDK from ionic-native repo:
 
 ### <a id="qs-implement-trackier-sdk"></a>Integrate and Initialize the Trackier SDK
 
-### <a id="qs-retrieve-dev-key"></a>Retrieve your dev key
+### <a id="qs-retrieve-dev-key"></a>Retrieve your sdk key
 
 For initialising the Trackier SDk. First, We need to generate the Sdk key from the Trackier MMP panel.
 
