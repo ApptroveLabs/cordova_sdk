@@ -7,7 +7,7 @@
 - [Quick start guide](#qs-add-trackier-sdk)
   - [Add Cordova SDK to your app ](#qs-add-sdk)
 - [Integrate and Initialize the Trackier SDK](#qs-implement-trackier-sdk)
-  - [Retrieve your dev key](#qs-retrieve-dev-key)
+  - [Retrieve your sdk key](#qs-retrieve-sdk-key)
   - [Initialize the SDK into your app](#qs-initialize-trackier-sdk)
 - [Events Tracking](#qs-track-event)
   - [Retrieve Event Id from dashboard](#qs-retrieve-event-id)
@@ -32,7 +32,7 @@ In case you are using Ionic Native, you can add our SDK from ionic-native repo:
 
 ### <a id="qs-implement-trackier-sdk"></a>Integrate and Initialize the Trackier SDK
 
-### <a id="qs-retrieve-dev-key"></a>Retrieve your sdk key
+### <a id="qs-retrieve-sdk-key"></a>Retrieve your sdk key
 
 For initialising the Trackier SDk. First, We need to generate the Sdk key from the Trackier MMP panel.
 
