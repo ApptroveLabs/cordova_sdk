@@ -49,7 +49,7 @@ $ ionic cap sync
 
 After following all the above steps, Please add the trackier folder in the the `@awesome-cordova-plugins` which is located in the `node_modules`. 
 
-You can downloads the trackier by the click on below link.
+You can download the trackier folder by the click on below link.
 
 Link - https://github.com/trackier/cordova_sdk/tree/main/ionic-native/trackier
 
@@ -68,12 +68,12 @@ For initialising the Trackier SDk. First, We need to generate the Sdk key from t
 
 Following below are the steps to retrieve your SDK key:-
 
-1.Login to your Trackier MMP account.
-2.Select the application from dashboard which you want to get the app token for.
-3.Go to SDK Integration via the left side navigation menu.
-4.Copy the SDK Key there to be used as the "app_token".
+- Login to your Trackier MMP account.
+- Select the application from dashboard which you want to get the app token for.
+- Go to SDK Integration via the left side navigation menu.
+- Copy the SDK Key there to be used as the "app_token".
 
-After follow all steps, Your SDK key look like the below screenshot
+After following all the steps, Your SDK key should look like the below screenshot
 
 Screenshot[1]
 
