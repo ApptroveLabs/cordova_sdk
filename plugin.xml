@@ -24,6 +24,6 @@
 			</feature>
 		</config-file>
 		<source-file src="src/ios/TrackierCordovaPlugin.swift" />
-        <framework src="trackier-ios-sdk" type="podspec" spec="~> 1.5.0" />
+        <framework src="trackier-ios-sdk" type="podspec" spec="~> 1.6.28" />
 	</platform>
 </plugin>

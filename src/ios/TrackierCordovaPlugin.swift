@@ -27,6 +27,30 @@ class TrackierCordovaPlugin : CDVPlugin {
         )
     }
 
+    @objc(setUserId:)
+    func setUserId(command: CDVInvokedUrlCommand){
+        let msg = command.arguments[0] as? String ?? ""
+        TrackierSDK.setUserID(userId: msg)
+    }
+
+    @objc(setUserEmail:)
+    func setUserEmail(command: CDVInvokedUrlCommand){
+        let msg = command.arguments[0] as? String ?? ""
+        TrackierSDK.setUserEmail(userEmail: msg)
+    }
+
+    @objc(setUserName:)
+    func setUserName(command: CDVInvokedUrlCommand){
+        let msg = command.arguments[0] as? String ?? ""
+        TrackierSDK.setUserName(userName: msg)
+    }
+
+    @objc(setUserPhone:)
+    func setUserPhone(command: CDVInvokedUrlCommand){
+        let msg = command.arguments[0] as? String ?? ""
+        TrackierSDK.setUserPhone(userPhone: msg)
+    }
+
     @objc(trackEvent:)
     func trackEvent(command: CDVInvokedUrlCommand) {
         var pluginResult = CDVPluginResult(
@@ -35,10 +59,12 @@ class TrackierCordovaPlugin : CDVPlugin {
         let msg = command.arguments[0] as? String ?? ""
         if (msg.count > 0) {
             let dict = convertStringToDictionary(text: msg)
-            let currency: String = dict?["currency"] as? String ?? ""
-            let revenue: String = dict?["revenue"] as? String ?? ""
-            let eventId: String = dict?["eventId"] as! String
             let orderId: String = dict?["orderId"] as? String ?? ""
+            let currency: String = dict?["currency"] as? String ?? ""
+            let revenue: Float64 = dict?["revenue"] as? Float64 ?? 0.0
+            let discount: Float64 = dict?["discount"] as? Float64 ?? 0.0
+            let couponCode: String = dict?["couponCode"] as? String ?? ""
+            let eventId: String = dict?["eventId"] as! String
             let param1: String = dict?["param1"] as? String ?? ""
             let param2: String = dict?["param2"] as? String ?? ""
             let param3: String = dict?["param3"] as? String ?? ""
@@ -54,8 +80,10 @@ class TrackierCordovaPlugin : CDVPlugin {
                 ev[key] = value
             }
             let event = TrackierEvent(id: eventId)
-            event.setRevenue(revenue: Float64((revenue as NSString).floatValue), currency: currency)
+            event.setRevenue(revenue: revenue, currency: currency)
             event.orderId = orderId
+            event.setCouponCode(couponCode: couponCode)
+            event.setDiscount(discount: discount)
             event.param1  = param1
             event.param2  = param2
             event.param3  = param3
