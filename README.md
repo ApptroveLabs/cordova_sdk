@@ -28,22 +28,52 @@ Basic integration First, download the library from npm:
 
     $ npm install trackier/cordova_sdk
 
-In case you are using Ionic Native, you can add our SDK from ionic-native repo:
+In case you are using Ionic Native, Please follow the below steps for integration:-
+
+1. Install the the trackier cordova sdk by run the below commands in Terminal/Cmd.
+
+```
+$ npm install trackier/cordova_sdk
+```
+
+2. You need to add the awesome cordova plugins by run the below commands in Terminal/Cmd.
+
+```
+$ npm install @awesome-cordova-plugins/core --save
+```
+
+3. Run the below commands in Terminal/Cmd.
+```
+$ ionic cap sync
+```
+
+After following all the above steps, Please add the trackier folder in the the `@awesome-cordova-plugins` which is located in the `node_modules`. 
+
+You can download the trackier folder by the click on below link.
+
+Link - https://github.com/trackier/cordova_sdk/releases/tag/v1.6.29
+
+Please check the below screenshots for the reference.
+
+<img width="345" alt="Screenshot 2022-08-31 at 1 05 01 AM" src="https://user-images.githubusercontent.com/16884982/187527379-177beea0-b5ab-4dcb-a4fe-8e6ff1e77a7d.png">
+
+Your node_modules looks similar like above screenshots.
+ 
 
 ### <a id="qs-implement-trackier-sdk"></a>Integrate and Initialize the Trackier SDK
 
-### <a id="qs-retrieve-sdk-key"></a>Retrieve your sdk key
+### <a id="qs-retrieve-sdk-key"></a>Retrieve your SDK key
 
 For initialising the Trackier SDk. First, We need to generate the Sdk key from the Trackier MMP panel.
 
-Following below are the steps to retrieve the development key:-
+Following below are the steps to retrieve your SDK key:-
 
-- Login your Trackier Panel
-- Select your application and click on Action button and login as
-- In the Dashboard, Click on the` SDK Integration` option on the left side of panel. 
-- under on the SDK Integration, You will be get the SDK Key.
+- Login to your Trackier MMP account.
+- Select the application from dashboard which you want to get the app token for.
+- Go to SDK Integration via the left side navigation menu.
+- Copy the SDK Key there to be used as the "app_token".
 
-After follow all steps, Your SDK key look like the below screenshot
+After following all the steps, Your SDK key should look like the below screenshot
 
 Screenshot[1]
 
@@ -63,22 +93,30 @@ Depending on whether you build your app for testing or for production, you must 
 
 In your index.js file after you have received the deviceready event, add the following code to initialize the Trackier SDK:
 
-```js 
-export class Tab2Page {
+```js
+ 
+import { Component } from '@angular/core';
+import { TrackierCordovaPlugin, TrackierConfig, TrackierEnvironment, TrackierEvent } from '@awesome-cordova-plugins/trackier/ngx';
 
-constructor(public photoService: PhotoService, public actionSheetController: ActionSheetController, private trackierCordovaPlugin:TrackierCordovaPlugin) {}
+@Component({
+  selector: 'app-tab1',
+  templateUrl: 'tab1.page.html',
+  styleUrls: ['tab1.page.scss']
+})
+
+export class Tab1Page {
+
+  constructor(private trackierCordovaPlugin:TrackierCordovaPlugin) {}
 
   async ngOnInit() {
-    await this.photoService.loadSaved();
 
-    /*While Initializing the Sdk, You need to pass the three parameter in the TrackierSDKConfig.
-         * In first argument, you need to pass the Trackier SDK api key
-         * In second argument, you need to pass the environment which can be either "development", "production" or "testing". */
+    /* While Initializing the Sdk, You need to pass the three parameter in the TrackierSDKConfig.
+     * In first argument, you need to pass the Trackier SDK api key
+     * In second argument, you need to pass the environment which can be either "development", "production" or "testing". */
 
-    var key = "xxxx-xx-4505-bc8b-xx";//Please pass your Development key here.
+    var key = "0455721b-XXXX-XXXXX-596d818d910a";//Please pass your Development key here.
     var trackierConfig = new TrackierConfig(key,TrackierEnvironment.Development);
     this.trackierCordovaPlugin.initializeSDK(trackierConfig);
-
   }
 }
 
@@ -88,7 +126,7 @@ Also, you can the screenshot of example below:-
 
 Screenshot[2]
 
-<img width="1000" alt="Screenshot 2022-07-20 at 5 26 17 PM" src="https://user-images.githubusercontent.com/16884982/179975981-7528b5b0-759f-4f0b-96d2-2c93953baef8.png">
+<img width="1000" alt="Screenshot 2022-08-31 at 1 01 45 AM" src="https://user-images.githubusercontent.com/16884982/187526812-7eadaee0-8610-4e88-8f66-621d7adc8c34.png">
 
 In case you are using ionic native application:
 
@@ -100,9 +138,7 @@ In case you are using ionic native application:
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TrackierCordovaPlugin} from '@ionic-native/trackier-cordova-plugin/ngx';
@@ -138,32 +174,42 @@ Screenshot[3]
 ### Example code for calling Built-in events
 
 ```js
-  export class Tab3Page {
+
+import { Component } from '@angular/core';
+import { TrackierCordovaPlugin, TrackierConfig, TrackierEnvironment, TrackierEvent } from '@awesome-cordova-plugins/trackier/ngx';
+
+@Component({
+  selector: 'app-tab3',
+  templateUrl: 'tab3.page.html',
+  styleUrls: ['tab3.page.scss']
+})
+
+export class Tab3Page {
 
   constructor(private trackierCordovaPlugin:TrackierCordovaPlugin) {}
 
-/*
- * Event Tracking
-  <------------->
- * The below code is the example to pass a event to the Trackier SDK.
- * This event requires only 1 Parameter which is the Event ID.
- * Below are the example of built-in events function calling
- * The arguments - "sEQWVHGThl" passed in the Trackier event class is Events id
- */
   async ngOnInit() {
-    var trackierEvent = new TrackierEvent("sEQWVHGThl");
 
-  /*Below are the function for the adding the extra data,
-    You can add the extra data like login details of user or anything you need.
-    We have 10 params to add data, Below 5 are mentioned*/
+    // Below are the example of built-in events function calling
+    // The arguments - "1CFfUn3xEY" passed in the Trackier event class is Events id
+    var trackierEvent = new TrackierEvent("1CFfUn3xEY");
+
+  /* Below are the function for the adding the extra data,
+     You can add the extra data like login details of user or anything you need.
+     We have 10 params to add data, Below 5 are mentioned */
     trackierEvent.setParam1("Param 1");
     trackierEvent.setParam2("Param 2");
     trackierEvent.setParam3("Param 3");
     trackierEvent.setParam4("Param 4");
     trackierEvent.setParam5("Param 5");
+    trackierEvent.setCouponCode("TestCode");
+    this.trackierCordovaPlugin.setUserId("TesUserId");
+    this.trackierCordovaPlugin.setUserName("Test");
+    this.trackierCordovaPlugin.setUserPhone("8130XXX721");
+    this.trackierCordovaPlugin.setUserEmail("abc@gmail.com");
     this.trackierCordovaPlugin.trackEvent(trackierEvent);
   }
-  
+
 }
 
 ```
@@ -177,7 +223,7 @@ Below are the screenshot of following example
 
 Screenshot[4]
 
-<img width="1000" alt="Screenshot 2022-07-20 at 5 27 54 PM" src="https://user-images.githubusercontent.com/16884982/179976242-949d1535-4fdd-4037-9ff8-780e5b2f6bf8.png">
+<img width="1000" alt="Screenshot 2022-08-30 at 5 00 07 PM" src="https://user-images.githubusercontent.com/16884982/187426023-a16af54c-8790-49d8-a2d9-9cc8fa939b45.png">
 
 #### <a id="qs-customs-events"></a> **Customs Events** - 
 
@@ -192,33 +238,40 @@ Screenshot[5]
 #### Example code for calling Customs Events.
 
 ```js
+import { Component } from '@angular/core';
+import { TrackierCordovaPlugin, TrackierConfig, TrackierEnvironment, TrackierEvent } from '@awesome-cordova-plugins/trackier/ngx';
+
+@Component({
+  selector: 'app-tab3',
+  templateUrl: 'tab3.page.html',
+  styleUrls: ['tab3.page.scss']
+})
 
 export class Tab3Page {
 
   constructor(private trackierCordovaPlugin:TrackierCordovaPlugin) {}
 
-/*
- * Event Tracking
-  <------------->
- * The below code is the example to pass a event to the Trackier SDK.
- * This event requires only 1 Parameter which is the Event ID.
- * Below are the example of built-in events function calling
- * The arguments - "sEMWSCTXeu" passed in the Trackier event class is Events id
- */
   async ngOnInit() {
-    var trackierEvent = new TrackierEvent("sEMWSCTXeu"); //Pass your eventid here
+    // Below are the example of customs events function calling
+    // The arguments - "1CFfUn3xEY" passed in the Trackier event class is Events id
+    var trackierEvent = new TrackierEvent("1CFfUn3xEY");
 
-  /*Below are the function for the adding the extra data,
+ /* Below are the function for the adding the extra data,
     You can add the extra data like login details of user or anything you need.
-    We have 10 params to add data, Below 5 are mentioned*/
+    We have 10 params to add data, Below 5 are mentioned */
     trackierEvent.setParam1("Param 1");
     trackierEvent.setParam2("Param 2");
     trackierEvent.setParam3("Param 3");
     trackierEvent.setParam4("Param 4");
     trackierEvent.setParam5("Param 5");
+    trackierEvent.setCouponCode("TestCode");
+    this.trackierCordovaPlugin.setUserId("TesUserId");
+    this.trackierCordovaPlugin.setUserName("Test");
+    this.trackierCordovaPlugin.setUserPhone("8130XXX721");
+    this.trackierCordovaPlugin.setUserEmail("abc@gmail.com");
     this.trackierCordovaPlugin.trackEvent(trackierEvent);
   }
-  
+
 }
 
 ```
@@ -226,8 +279,7 @@ Below are the screenshot of customs events calling
 
 Screenshot[6]
 
-<img width="1000" alt="Screenshot 2022-07-20 at 5 46 44 PM" src="https://user-images.githubusercontent.com/16884982/179979818-68bf10ea-d216-4fea-bd4e-93ab2fbe18e7.png">
-
+<img width="1000" alt="Screenshot 2022-08-30 at 5 19 44 PM" src="https://user-images.githubusercontent.com/16884982/187429282-a1225ecd-dda9-4dcb-89e0-0fb6a7800457.png">
 
 ### <a id="qs-track-event-with-currencey"></a>Revenue Event Tracking
 
@@ -235,31 +287,38 @@ Trackier allow user to pass the revenue data which is generated from the app thr
 
 ```js
 
+import { Component } from '@angular/core';
+import { TrackierCordovaPlugin, TrackierConfig, TrackierEnvironment, TrackierEvent } from '@awesome-cordova-plugins/trackier/ngx';
+
+@Component({
+  selector: 'app-tab3',
+  templateUrl: 'tab3.page.html',
+  styleUrls: ['tab3.page.scss']
+})
+
 export class Tab3Page {
 
   constructor(private trackierCordovaPlugin:TrackierCordovaPlugin) {}
 
-/*
- * Event Tracking
-  <------------->
- * The below code is the example to pass a event to the Trackier SDK.
- * This event requires only 1 Parameter which is the Event ID.
- * Below are the example of built-in events function calling
- * The arguments - "sEQWVHGThl" passed in the Trackier event class is Events id
- */
   async ngOnInit() {
-    var trackierEvent = new TrackierEvent("sEQWVHGThl"); //Pass your eventid here
+    // Below are the example of customs events function calling
+    // The arguments - "1CFfUn3xEY" passed in the Trackier event class is Events id
+    var trackierEvent = new TrackierEvent("1CFfUn3xEY");
 
-  /*Below are the function for the adding the extra data,
+ /* Below are the function for the adding the extra data,
     You can add the extra data like login details of user or anything you need.
-    We have 10 params to add data, Below 5 are mentioned*/
-    trackierEvent.setParam1("XXXXXX");
-    trackierEvent.setParam2("kkkkkkk");
-    trackierEvent.setRevenue(2.5);//Pass your generated revenue here.
-    trackierEvent.setCurrency("USD");//Pass your currency here.
-    TrackierSDK.trackEvent(trackierEvent);
+    We have 10 params to add data, Below 5 are mentioned */
+    trackierEvent.setParam1("Param 1");
+    trackierEvent.setParam2("Param 2");
+    trackierEvent.setParam3("Param 3");
+    trackierEvent.setParam4("Param 4");
+    trackierEvent.setParam5("Param 5");
+    trackierEvent.setCouponCode("TestCode");
+    trackierEvent.revenue(10.0);
+    trackierEvent.currency("INR");
+    this.trackierCordovaPlugin.trackEvent(trackierEvent);
   }
-  
+
 }
 
 ```
@@ -270,8 +329,7 @@ Screenshot[7]
 
 <img width="1000" alt="Screenshot 2022-07-20 at 5 44 15 PM" src="https://user-images.githubusercontent.com/16884982/179979416-bafcfbe6-80f1-48e9-910e-1d64ecbf8607.png">
 
-    
-    
+        
 ## <a id="qs-progaurd-trackier-sdk"></a>Proguard Settings 
 
 If your app is using proguard then add these lines to the proguard config file 
@@ -290,5 +348,3 @@ If your app is using proguard then add these lines to the proguard config file
   }
   -keep public class com.android.installreferrer.** { *; }
 ```
-
-    
