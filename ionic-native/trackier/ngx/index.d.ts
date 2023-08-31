@@ -51,4 +51,21 @@ export declare class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
     setUserEmail(userEmail: any): Promise<string>;
     setUserName(userName: any): Promise<string>;
     setUserPhone(userPhone: any): Promise<string>;
+    getTrackierId(): Promise<string>;
+    getAd(): Promise<string>;
+    getAdID(): Promise<string>;
+    getCampaign(): Promise<string>;
+    getCampaignID(): Promise<string>;
+    getAdSet(): Promise<string>;
+    getAdSetID(): Promise<string>;
+    getChannel(): Promise<string>;
+    getP1(): Promise<string>;
+    getP2(): Promise<string>;
+    getP3(): Promise<string>;
+    getP4(): Promise<string>;
+    getP5(): Promise<string>;
+    getClickId(): Promise<string>;
+    getDlv(): Promise<string>;
+    getPid(): Promise<string>;
+    getIsRetargeting(): Promise<string>;
 }
