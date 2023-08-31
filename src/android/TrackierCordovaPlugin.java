@@ -34,71 +34,54 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             } else if (action.equals("getTrackierId")) {
                 String trackierId = com.trackier.sdk.TrackierSDK.getTrackierId();
                 callbackContext.success(trackierId);
-                return true;
             } else if (action.equals("getAd")) {
-                String data = "sanu";// com.trackier.sdk.TrackierSDK.getTrackierId();
+                String data = com.trackier.sdk.TrackierSDK.getAd();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getAdID")) {
                 String data = com.trackier.sdk.TrackierSDK.getAdID();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getCampaign")) {
                 String data = com.trackier.sdk.TrackierSDK.getCampaign();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getCampaignID")) {
                 String data = com.trackier.sdk.TrackierSDK.getCampaignID();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getAdSet")) {
                 String data = com.trackier.sdk.TrackierSDK.getAdSet();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getAdSetID")) {
                 String data = com.trackier.sdk.TrackierSDK.getAdSetID();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getChannel")) {
                 String data = com.trackier.sdk.TrackierSDK.getChannel();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getP1")) {
                 String data = com.trackier.sdk.TrackierSDK.getP1();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getP2")) {
                 String data = com.trackier.sdk.TrackierSDK.getP2();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getP3")) {
                 String data = com.trackier.sdk.TrackierSDK.getP3();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getP4")) {
                 String data = com.trackier.sdk.TrackierSDK.getP4();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getP5")) {
                 String data = com.trackier.sdk.TrackierSDK.getP5();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getClickId")) {
                 String data = com.trackier.sdk.TrackierSDK.getClickId();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getDlv")) {
                 String data = com.trackier.sdk.TrackierSDK.getDlv();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getPid")) {
                 String data = com.trackier.sdk.TrackierSDK.getPid();
                 callbackContext.success(data);
-                return true;
             } else if (action.equals("getIsRetargeting")) {
                 String data = com.trackier.sdk.TrackierSDK.getIsRetargeting();
                 callbackContext.success(data);
-                return true;
             }
         } catch (Exception e) {
 
