@@ -51,6 +51,118 @@ class TrackierCordovaPlugin : CDVPlugin {
         TrackierSDK.setUserPhone(userPhone: msg)
     }
 
+    @objc(getTrackierId:)
+    func getTrackierId(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getTrackierId())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getAd:)
+    func getAd(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getAd())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getAdID:)
+    func getAdID(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getAdID())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getCampaign:)
+    func getCampaign(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getCampaign())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getCampaignID:)
+    func getCampaignID(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getCampaignID())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getAdSetID:)
+    func getAdSetID(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getAdSetID())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getChannel:)
+    func getChannel(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getChannel())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getP1:)
+    func getP1(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getP1())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getP2:)
+    func getP2(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getP2())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getP3:)
+    func getP3(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getP3())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getP4:)
+    func getP4(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getP4())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getP5:)
+    func getP5(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getP5())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getClickId:)
+    func getClickId(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getClickId())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getDlv:)
+    func getDlv(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getDlv())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getPid:)
+    func getPid(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getPid())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getIsRetargeting:)
+    func getIsRetargeting(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getIsRetargeting())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+
     @objc(trackEvent:)
     func trackEvent(command: CDVInvokedUrlCommand) {
         var pluginResult = CDVPluginResult(
