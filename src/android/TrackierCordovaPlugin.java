@@ -6,6 +6,7 @@ import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.trackier.cordova_sdk.TrackierCordovaUtil;
+import com.trackier.sdk.TrackierSDK;
 
 /**
  * This class echoes a string called from JavaScript.
@@ -31,6 +32,10 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
                 return setUserName(TrackierCordovaUtil.optString(args, 0));
             } else if (action.equals("setUserPhone")) {
                 return setUserPhone(TrackierCordovaUtil.optString(args, 0));
+            } else if (action.equals("setDOB")) {
+                return setDOB(TrackierCordovaUtil.optString(args, 0));
+            } else if (action.equals("setGender")) {
+                return setGender(TrackierCordovaUtil.optString(args, 0));
             } else if (action.equals("getTrackierId")) {
                 String trackierId = com.trackier.sdk.TrackierSDK.getTrackierId();
                 callbackContext.success(trackierId);
@@ -100,7 +105,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             TrackierCordovaUtil.getStringVal("appToken", trackiersdkConfigJson),
             TrackierCordovaUtil.getStringVal("environment", trackiersdkConfigJson));
             sdkConfig.setSDKType("cordova_sdk");
-            sdkConfig.setSDKVersion("1.6.47");
+            sdkConfig.setSDKVersion("1.6.48");
             com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
         } catch (Exception exception) {
 
@@ -159,6 +164,29 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
 
     private boolean setUserPhone(String optString) {
         com.trackier.sdk.TrackierSDK.setUserPhone(optString);
+        return true;
+    }
+
+    private boolean setDOB(String optString) {
+        com.trackier.sdk.TrackierSDK.setDOB(optString);
+        return true;
+    }
+
+    private boolean setGender(String optString) {
+        switch (optString) {
+            case "Male":
+                com.trackier.sdk.TrackierSDK.setGender(TrackierSDK.Gender.MALE);
+                break;
+            case "Female":
+                com.trackier.sdk.TrackierSDK.setGender(TrackierSDK.Gender.Female);
+                break;
+            case "Others":
+                com.trackier.sdk.TrackierSDK.setGender(TrackierSDK.Gender.OTHERS);
+                break;
+            default:
+                Log.d("TrackierSDK", "No Genders Found");
+                break;
+        }
         return true;
     }
 

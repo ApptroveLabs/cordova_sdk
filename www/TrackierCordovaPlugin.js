@@ -35,6 +35,14 @@ exports.setUserPhone = function (arg0, success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'setUserPhone', [(arg0)]);
 };
 
+exports.setDOB = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'setDOB', [(arg0)]);
+};
+
+exports.setGender = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'setGender', [(arg0)]);
+};
+
 exports.getTrackierId = function (callback) {
     cordovaExecCommandCallback('getTrackierId', callback);
 };

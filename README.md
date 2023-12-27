@@ -55,7 +55,7 @@ After following all the above steps, Please add the trackier folder in the the `
 
 You can download the trackier folder by the click on below link.
 
-Link - https://github.com/trackier/cordova_sdk/releases/tag/v1.6.29
+Link - https://github.com/trackier/cordova_sdk/releases/tag/v1.6.48
 
 Please check the below screenshots for the reference.
 

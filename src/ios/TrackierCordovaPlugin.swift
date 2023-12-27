@@ -14,6 +14,8 @@ class TrackierCordovaPlugin : CDVPlugin {
             let appToken = dict?["appToken"] as! String;
             let environment = dict?["environment"] as! String;
             let config = TrackierSDKConfig(appToken: appToken , env: environment)
+            config.setSDKType(sdkType: "cordova_sdk")
+            config.setSDKVersion(sdkVersion: "1.6.48")
             TrackierSDK.initialize(config: config)
 
             pluginResult = CDVPluginResult(
@@ -49,6 +51,23 @@ class TrackierCordovaPlugin : CDVPlugin {
     func setUserPhone(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
         TrackierSDK.setUserPhone(userPhone: msg)
+    }
+
+    @objc(setDOB:)
+    func setDOB(command: CDVInvokedUrlCommand){
+        let msg = command.arguments[0] as? String ?? ""
+        TrackierSDK.setDOB(dob: msg)
+    }
+    
+    @objc(setGender:)
+    func setGender(command: CDVInvokedUrlCommand){
+        let msg = command.arguments[0] as? String ?? ""
+        switch msg {
+            case "Male": TrackierSDK.setGender(gender: .MALE)
+            case "Female": TrackierSDK.setGender(gender: .FEMALE)
+            case "Others": TrackierSDK.setGender(gender: .OTHERS)
+            default: print("No Gender found")
+        }
     }
 
     @objc(getTrackierId:)

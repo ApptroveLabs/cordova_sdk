@@ -13,8 +13,8 @@ export declare class TrackierEvent {
     private eventId;
     private orderId;
     private currency;
-    private couponCode;
     private discount;
+    private couponCode;
     private param1;
     private param2;
     private param3;
@@ -51,6 +51,8 @@ export declare class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
     setUserEmail(userEmail: any): Promise<string>;
     setUserName(userName: any): Promise<string>;
     setUserPhone(userPhone: any): Promise<string>;
+    setGender(gender: any): Promise<string>;
+    setDOB(dob: any): Promise<string>;
     getTrackierId(): Promise<string>;
     getAd(): Promise<string>;
     getAdID(): Promise<string>;
