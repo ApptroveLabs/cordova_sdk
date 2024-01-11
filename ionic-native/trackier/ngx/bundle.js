@@ -31,9 +31,17 @@ exports.TrackierEnvironment = void 0;
 })(exports.TrackierEnvironment || (exports.TrackierEnvironment = {}));
 var TrackierConfig = /** @class */ (function () {
     function TrackierConfig(appToken, environment) {
+        this.secretId = '';
+        this.secretKey = '';
         this.appToken = appToken;
         this.environment = environment;
+        this.secretId = this.secretId;
+        this.secretKey = this.secretKey;
     }
+    TrackierConfig.prototype.setAppSecret = function (key, value) {
+        this.secretId = key;
+        this.secretKey = value;
+    };
     return TrackierConfig;
 }());
 var TrackierEvent = /** @class */ (function () {
@@ -98,8 +106,6 @@ var TrackierCordovaPlugin = /** @class */ (function (_super) {
     TrackierCordovaPlugin.prototype.setUserEmail = function (userEmail) { return core.cordova(this, "setUserEmail", {}, arguments); };
     TrackierCordovaPlugin.prototype.setUserName = function (userName) { return core.cordova(this, "setUserName", {}, arguments); };
     TrackierCordovaPlugin.prototype.setUserPhone = function (userPhone) { return core.cordova(this, "setUserPhone", {}, arguments); };
-    TrackierCordovaPlugin.prototype.setGender = function (gender) { return core.cordova(this, "setGender", {}, arguments); };
-    TrackierCordovaPlugin.prototype.setDOB = function (dob) { return core.cordova(this, "setDOB", {}, arguments); };
     TrackierCordovaPlugin.prototype.getTrackierId = function () { return core.cordova(this, "getTrackierId", {}, arguments); };
     TrackierCordovaPlugin.prototype.getAd = function () { return core.cordova(this, "getAd", {}, arguments); };
     TrackierCordovaPlugin.prototype.getAdID = function () { return core.cordova(this, "getAdID", {}, arguments); };
@@ -129,7 +135,7 @@ var TrackierCordovaPlugin = /** @class */ (function (_super) {
 }(core.AwesomeCordovaNativePlugin));
 i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.16", ngImport: i0__namespace, type: TrackierCordovaPlugin, decorators: [{
             type: i0.Injectable
-        }], propDecorators: { initializeSDK: [], trackEvent: [], setUserId: [], setUserEmail: [], setUserName: [], setUserPhone: [], setGender: [], setDOB: [], getTrackierId: [], getAd: [], getAdID: [], getCampaign: [], getCampaignID: [], getAdSet: [], getAdSetID: [], getChannel: [], getP1: [], getP2: [], getP3: [], getP4: [], getP5: [], getClickId: [], getDlv: [], getPid: [], getIsRetargeting: [] } });
+        }], propDecorators: { initializeSDK: [], trackEvent: [], setUserId: [], setUserEmail: [], setUserName: [], setUserPhone: [], getTrackierId: [], getAd: [], getAdID: [], getCampaign: [], getCampaignID: [], getAdSet: [], getAdSetID: [], getChannel: [], getP1: [], getP2: [], getP3: [], getP4: [], getP5: [], getClickId: [], getDlv: [], getPid: [], getIsRetargeting: [] } });
 
 exports.TrackierConfig = TrackierConfig;
 exports.TrackierCordovaPlugin = TrackierCordovaPlugin;

@@ -13,9 +13,12 @@ class TrackierCordovaPlugin : CDVPlugin {
             let dict = convertStringToDictionary(text: msg)
             let appToken = dict?["appToken"] as! String;
             let environment = dict?["environment"] as! String;
+            let secretId = dict?["secretId"] as! String;
+            let secretKey = dict?["secretKey"] as! String;
             let config = TrackierSDKConfig(appToken: appToken , env: environment)
+            config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "1.6.48")
+            config.setSDKVersion(sdkVersion: "1.6.49")
             TrackierSDK.initialize(config: config)
 
             pluginResult = CDVPluginResult(

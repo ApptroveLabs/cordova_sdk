@@ -104,8 +104,10 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             com.trackier.sdk.TrackierSDKConfig sdkConfig = new com.trackier.sdk.TrackierSDKConfig(webView.getContext(),
             TrackierCordovaUtil.getStringVal("appToken", trackiersdkConfigJson),
             TrackierCordovaUtil.getStringVal("environment", trackiersdkConfigJson));
+            sdkConfig.setAppSecret(TrackierCordovaUtil.getStringVal("secretId", trackiersdkConfigJson),
+            TrackierCordovaUtil.getStringVal("secretKey", trackiersdkConfigJson));
             sdkConfig.setSDKType("cordova_sdk");
-            sdkConfig.setSDKVersion("1.6.48");
+            sdkConfig.setSDKVersion("1.6.49");
             com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
         } catch (Exception exception) {
 
