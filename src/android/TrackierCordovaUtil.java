@@ -38,9 +38,19 @@ public class TrackierCordovaUtil {
 
     public static String optString(final JSONArray array, final int index) {
         if (array == null || index >= array.length() || array.isNull(index)) {
-          return null;
+            return null;
         }
 
         return array.optString(index, null);
+    }
+    
+    public static Boolean getBooleanVal(String key, JSONObject jsonObject) {
+        try {
+            return jsonObject.getBoolean(key);
+        } catch (JSONException e) {
+
+        }
+
+        return false;
     }
 }

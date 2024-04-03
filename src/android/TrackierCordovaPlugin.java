@@ -1,5 +1,6 @@
 package com.trackier.cordova_sdk;
 
+import android.net.Uri;
 import android.util.Log;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -104,10 +105,11 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             com.trackier.sdk.TrackierSDKConfig sdkConfig = new com.trackier.sdk.TrackierSDKConfig(webView.getContext(),
             TrackierCordovaUtil.getStringVal("appToken", trackiersdkConfigJson),
             TrackierCordovaUtil.getStringVal("environment", trackiersdkConfigJson));
-            sdkConfig.setAppSecret(TrackierCordovaUtil.getStringVal("secretId", trackiersdkConfigJson),
-            TrackierCordovaUtil.getStringVal("secretKey", trackiersdkConfigJson));
+            sdkConfig.setAppSecret(TrackierCordovaUtil.getStringVal("secretId", trackiersdkConfigJson), TrackierCordovaUtil.getStringVal("secretKey", trackiersdkConfigJson));
+            sdkConfig.setManualMode(TrackierCordovaUtil.getBooleanVal("manualMode", trackiersdkConfigJson));
+            sdkConfig.disableOrganicTracking(TrackierCordovaUtil.getBooleanVal("disableorganic", trackiersdkConfigJson));
             sdkConfig.setSDKType("cordova_sdk");
-            sdkConfig.setSDKVersion("1.6.49");
+            sdkConfig.setSDKVersion("1.6.56");
             com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
         } catch (Exception exception) {
 
@@ -189,6 +191,17 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
                 Log.d("TrackierSDK", "No Genders Found");
                 break;
         }
+        return true;
+    }
+
+    private boolean parseDeepLink(String optString) {
+        Uri uri = Uri.parse(optString);
+        com.trackier.sdk.TrackierSDK.parseDeepLink(uri);
+        return true;
+    }
+
+    private boolean fireInstall() {
+        com.trackier.sdk.TrackierSDK.fireInstall();
         return true;
     }
 

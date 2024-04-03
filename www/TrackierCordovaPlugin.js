@@ -43,6 +43,14 @@ exports.setGender = function (arg0, success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'setGender', [(arg0)]);
 };
 
+exports.fireInstall = function (success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'fireInstall');
+};
+
+exports.parseDeepLink = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'parseDeepLink', [(arg0)]);
+};
+
 exports.getTrackierId = function (callback) {
     cordovaExecCommandCallback('getTrackierId', callback);
 };

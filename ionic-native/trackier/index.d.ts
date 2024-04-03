@@ -9,8 +9,13 @@ export declare class TrackierConfig {
     private environment;
     private secretId;
     private secretKey;
+    private manualMode;
+    private disableOrganic;
+    boolean: boolean;
     constructor(appToken: string, environment: TrackierEnvironment);
     setAppSecret(key: string, value: string): void;
+    setManualMode(value: boolean): void;
+    disableOrganicTracking(value: boolean): void;
 }
 export declare class TrackierEvent {
     private eventId;
@@ -54,6 +59,10 @@ export declare class TrackierCordovaPluginOriginal extends AwesomeCordovaNativeP
     setUserEmail(userEmail: any): Promise<string>;
     setUserName(userName: any): Promise<string>;
     setUserPhone(userPhone: any): Promise<string>;
+    setDOB(dob: any): Promise<string>;
+    setGender(gender: any): Promise<string>;
+    parseDeepLink(uri: any): Promise<string>;
+    fireInstall(): Promise<string>;
     getTrackierId(): Promise<string>;
     getAd(): Promise<string>;
     getAdID(): Promise<string>;
