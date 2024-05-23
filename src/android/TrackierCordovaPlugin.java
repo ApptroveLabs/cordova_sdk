@@ -109,7 +109,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             sdkConfig.setManualMode(TrackierCordovaUtil.getBooleanVal("manualMode", trackiersdkConfigJson));
             sdkConfig.disableOrganicTracking(TrackierCordovaUtil.getBooleanVal("disableorganic", trackiersdkConfigJson));
             sdkConfig.setSDKType("cordova_sdk");
-            sdkConfig.setSDKVersion("1.6.56");
+            sdkConfig.setSDKVersion("1.6.57");
             com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
         } catch (Exception exception) {
 
