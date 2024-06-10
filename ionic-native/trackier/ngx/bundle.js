@@ -61,6 +61,9 @@ var TrackierEvent = /** @class */ (function () {
     TrackierEvent.prototype.setOrderId = function (orderId) {
         this.orderId = orderId;
     };
+    TrackierEvent.prototype.setProductId = function (productId) {
+        this.productId = productId;
+    };
     TrackierEvent.prototype.setCurrency = function (currency) {
         this.currency = currency;
     };

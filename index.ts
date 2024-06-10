@@ -42,6 +42,7 @@ export class TrackierEvent {
 
 	private eventId: string;
 	private orderId: string;
+	private productId: string;
 	private currency: string;
 	private couponCode: string;
 	private discount: number
@@ -63,6 +64,9 @@ export class TrackierEvent {
 
 	public setOrderId(orderId: string): void {
 		this.orderId = orderId;
+	}
+	public setProductId(productId: string): void {
+		this.productId = productId;
 	}
 	public setCurrency(currency: string): void {
 		this.currency = currency;

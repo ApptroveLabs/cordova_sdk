@@ -20,6 +20,7 @@ export declare class TrackierConfig {
 export declare class TrackierEvent {
     private eventId;
     private orderId;
+    private productId;
     private currency;
     private couponCode;
     private discount;
@@ -36,6 +37,7 @@ export declare class TrackierEvent {
     private revenue;
     constructor(eventId: string);
     setOrderId(orderId: string): void;
+    setProductId(productId: string): void;
     setCurrency(currency: string): void;
     setCouponCode(couponCode: string): void;
     setDiscount(discount: number): void;

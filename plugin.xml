@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="com.trackier.cordova_sdk" version="1.6.57"
+<plugin id="com.trackier.cordova_sdk" version="1.6.59"
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <name>TrackierCordovaPlugin</name>
@@ -14,7 +14,7 @@
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
         <source-file src="src/android/TrackierCordovaPlugin.java" target-dir="src/com/trackier/cordova_sdk/TrackierCordovaPlugin" />
-        <framework src="com.trackier:android-sdk:1.6.57" />
+        <framework src="com.trackier:android-sdk:1.6.59" />
         <source-file src="src/android/TrackierCordovaUtil.java" target-dir="src/com/trackier/cordova_sdk/TrackierCordovaUtil" />
     </platform>
     <platform name="ios">
@@ -24,6 +24,10 @@
 			</feature>
 		</config-file>
 		<source-file src="src/ios/TrackierCordovaPlugin.swift" />
-        <framework src="trackier-ios-sdk" type="podspec" spec="~> 1.6.49" />
+       <podspec>
+            <pods use-frameworks="true">
+                <pod name="trackier-ios-sdk" spec="~> 1.6.49" />
+            </pods>
+        </podspec>
 	</platform>
 </plugin>

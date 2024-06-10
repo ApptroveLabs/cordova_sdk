@@ -109,7 +109,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             sdkConfig.setManualMode(TrackierCordovaUtil.getBooleanVal("manualMode", trackiersdkConfigJson));
             sdkConfig.disableOrganicTracking(TrackierCordovaUtil.getBooleanVal("disableorganic", trackiersdkConfigJson));
             sdkConfig.setSDKType("cordova_sdk");
-            sdkConfig.setSDKVersion("1.6.57");
+            sdkConfig.setSDKVersion("1.6.59");
             com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
         } catch (Exception exception) {
 
@@ -128,6 +128,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             com.trackier.sdk.TrackierEvent trackierEvent = new com.trackier.sdk.TrackierEvent(
             TrackierCordovaUtil.getStringVal("eventId", trackierEventJson));
             trackierEvent.orderId = TrackierCordovaUtil.getStringVal("orderId", trackierEventJson);
+            trackierEvent.productId = TrackierCordovaUtil.getStringVal("productId", trackierEventJson);
             trackierEvent.currency = TrackierCordovaUtil.getStringVal("currency", trackierEventJson);
             trackierEvent.discount = TrackierCordovaUtil.getFloatVal("discount", trackierEventJson);
             trackierEvent.couponCode = TrackierCordovaUtil.getStringVal("couponCode", trackierEventJson);
@@ -179,13 +180,13 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
     private boolean setGender(String optString) {
         switch (optString) {
             case "Male":
-                com.trackier.sdk.TrackierSDK.setGender(TrackierSDK.Gender.MALE);
+                com.trackier.sdk.TrackierSDK.setGender(TrackierSDK.Gender.Male);
                 break;
             case "Female":
                 com.trackier.sdk.TrackierSDK.setGender(TrackierSDK.Gender.Female);
                 break;
             case "Others":
-                com.trackier.sdk.TrackierSDK.setGender(TrackierSDK.Gender.OTHERS);
+                com.trackier.sdk.TrackierSDK.setGender(TrackierSDK.Gender.Others);
                 break;
             default:
                 Log.d("TrackierSDK", "No Genders Found");
