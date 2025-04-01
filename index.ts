@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export enum TrackierEnvironment {
 	Development = 'development',
-	Production = 'production'
+	Production = 'production',
 	Testing = 'testing'
 }
 
@@ -13,7 +13,8 @@ export class TrackierConfig {
 	private secretId: string = '';
 	private secretKey: string = '';
 	private manualMode: boolean = false;
-	private disableOrganic boolean = false;
+	private disableOrganic: boolean = false;
+	
 	constructor(appToken: string, environment: TrackierEnvironment) {
 		this.appToken = appToken;
 		this.environment = environment;
@@ -35,7 +36,6 @@ export class TrackierConfig {
 	public disableOrganicTracking(value: boolean): void {
 		this.disableOrganic = value
 	}
-
 }
 
 export class TrackierEvent {

@@ -8,11 +8,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import com.trackier.cordova_sdk.TrackierCordovaUtil;
 import com.trackier.sdk.TrackierSDK;
+import org.apache.cordova.PluginResult;
 
 /**
  * This class echoes a string called from JavaScript.
  */
 public class TrackierCordovaPlugin extends CordovaPlugin {
+    private static CallbackContext dplkContext; 
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
@@ -88,6 +90,9 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
             } else if (action.equals("getIsRetargeting")) {
                 String data = com.trackier.sdk.TrackierSDK.getIsRetargeting();
                 callbackContext.success(data);
+            } else if (action.equals("trackier_deferredDeeplink")) {
+                TrackierCordovaPlugin.dplkContext = callbackContext;
+                return true;
             }
         } catch (Exception e) {
 
@@ -103,19 +108,39 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
         try {
             JSONObject trackiersdkConfigJson = new JSONObject(message);
             com.trackier.sdk.TrackierSDKConfig sdkConfig = new com.trackier.sdk.TrackierSDKConfig(webView.getContext(),
-            TrackierCordovaUtil.getStringVal("appToken", trackiersdkConfigJson),
-            TrackierCordovaUtil.getStringVal("environment", trackiersdkConfigJson));
+                TrackierCordovaUtil.getStringVal("appToken", trackiersdkConfigJson),
+                TrackierCordovaUtil.getStringVal("environment", trackiersdkConfigJson));
             sdkConfig.setAppSecret(TrackierCordovaUtil.getStringVal("secretId", trackiersdkConfigJson), TrackierCordovaUtil.getStringVal("secretKey", trackiersdkConfigJson));
             sdkConfig.setManualMode(TrackierCordovaUtil.getBooleanVal("manualMode", trackiersdkConfigJson));
             sdkConfig.disableOrganicTracking(TrackierCordovaUtil.getBooleanVal("disableorganic", trackiersdkConfigJson));
             sdkConfig.setSDKType("cordova_sdk");
             sdkConfig.setSDKVersion("1.6.59");
+
+            // check for deferred deeplink callback
+            sdkConfig.setDeepLinkListener(new DeepLinkListener() {
+                @Override
+                public void onDeepLinking(@NonNull DeepLink deepLink) {
+                    this.sendDeeplinkToJS(deepLink.getUrl());
+                }
+            });
             com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
         } catch (Exception exception) {
 
         }
 
         callbackContext.success(message);
+    }
+
+    private static void sendDeeplinkToJS(String uri) {
+        if (dplkContext != null) {
+            try {
+                PluginResult result = new PluginResult(PluginResult.Status.OK, uri);
+                result.setKeepCallback(true);  // Keep callback open for multiple events
+                callbackContext.sendPluginResult(result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void trackEvent(String message, CallbackContext callbackContext) {

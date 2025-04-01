@@ -118,3 +118,7 @@ exports.getPid = function (callback) {
 exports.getIsRetargeting = function (callback) {
     cordovaExecCommandCallback('getIsRetargeting', callback);
 };
+
+exports.setDeferredDeeplinkCallbackListener = function (callback) {
+    exec(callback, null, "TrackierCordovaPlugin", "trackier_deferredDeeplink", []);
+}
