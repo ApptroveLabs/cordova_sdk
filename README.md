@@ -4,25 +4,33 @@
 
 ### Integration
 
-- [Quick start guide](#qs-add-trackier-sdk)
-  - [Add Cordova SDK to your app ](#qs-add-sdk)
-- [Integrate and Initialize the Trackier SDK](#qs-implement-trackier-sdk)
-  - [Retrieve your sdk key](#qs-retrieve-sdk-key)
-  - [Adding Android install referrer to your app](#qs-add-install-referrer)
-  - [Getting Google Advertising ID](#qs-getting-gaid)
-  - [Initialize the SDK into your app](#qs-initialize-trackier-sdk)
-  - [Getting Google Advertising ID](#qs-getting-gaid)
-- [Events Tracking](#qs-track-event)
-  - [Retrieve Event Id from dashboard](#qs-retrieve-event-id)
-  - [Built-in Events](#qs-built-in)
-  - [Customs Events](#qs-customs-events)
-  - [Revenue Event Tracking](#qs-track-event-with-currencey)
-  - [Passing User Data to SDK](#qs-passing-user-data)
-- [SDK Signing](#qs-sdk-signing)
-- [Uninstall Tracking](#qs-track-uninstall)
-- [Getting Campaign Data](#qs-campaign-data)
-- [Deep linking](#qs-deeplinking)
-- [Proguard Settings](#qs-progaurd-trackier-sdk)
+- [cordova-sdk](#cordova-sdk)
+  - [Table of Content](#table-of-content)
+    - [Integration](#integration)
+  - [Quick start guide](#quick-start-guide)
+    - [Add Cordova SDK to your app](#add-cordova-sdk-to-your-app)
+    - [Integrate and Initialize the Trackier SDK](#integrate-and-initialize-the-trackier-sdk)
+    - [Retrieve your SDK key](#retrieve-your-sdk-key)
+    - [Adding Android install referrer to your app](#adding-android-install-referrer-to-your-app)
+    - [Add required permissions](#add-required-permissions)
+    - [ Getting Google Advertising ID](#-getting-google-advertising-id)
+      - [Integrate the Trackier SDK in the Cordova Application.](#integrate-the-trackier-sdk-in-the-cordova-application)
+      - [Initialize the SDK into your app:](#initialize-the-sdk-into-your-app)
+  - [Events Tracking](#events-tracking)
+      - [ **Built-in Events** -](#-built-in-events--)
+    - [Example code for calling Built-in events](#example-code-for-calling-built-in-events)
+      - [ **Customs Events** -](#-customs-events--)
+      - [Example code for calling Customs Events.](#example-code-for-calling-customs-events)
+    - [Revenue Event Tracking](#revenue-event-tracking)
+  - [Passing User Data to SDK](#passing-user-data-to-sdk)
+  - [SDK Signing](#sdk-signing)
+  - [Uninstall Tracking](#uninstall-tracking)
+  - [Getting Campaign Data](#getting-campaign-data)
+  - [Deeplinking](#deeplinking)
+    - [Normal Deep linking](#normal-deep-linking)
+      - [AndroidManifest.xml](#androidmanifestxml)
+    - [Normal Deep linking Setup for iOS](#normal-deep-linking-setup-for-ios)
+  - [Proguard Settings](#proguard-settings)
 
 ## <a id="qs-add-trackier-sdk"></a>Quick start guide
 
@@ -59,7 +67,7 @@ After following all the above steps, Please add the trackier folder in the the `
 
 You can download the trackier folder by the click on below link.
 
-Link - https://github.com/trackier/cordova_sdk/releases/tag/1.6.64
+Link - https://github.com/trackier/cordova_sdk/releases/tag/1.6.74
 
 Please check the below screenshots for the reference.
 

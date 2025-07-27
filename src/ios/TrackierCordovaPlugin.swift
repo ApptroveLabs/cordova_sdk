@@ -18,7 +18,7 @@ class TrackierCordovaPlugin : CDVPlugin {
             let config = TrackierSDKConfig(appToken: appToken , env: environment)
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "1.6.64")
+            config.setSDKVersion(sdkVersion: "1.6.74")
             TrackierSDK.initialize(config: config)
 
             pluginResult = CDVPluginResult(
