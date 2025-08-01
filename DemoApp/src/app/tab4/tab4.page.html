@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Dynamic Links Testing
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    
+    <!-- Create Dynamic Link -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Create Dynamic Link</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button expand="block" (click)="createDynamicLink()" [disabled]="isLoading">
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          Create Link
+        </ion-button>
+        
+        <div *ngIf="createdDynamicLink" class="result-section">
+          <ion-label color="success">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            Success! Link created
+          </ion-label>
+          <ion-textarea readonly value="{{createdDynamicLink}}" rows="3"></ion-textarea>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Resolve Link -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Resolve Link</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button expand="block" (click)="testProvidedLink()" [disabled]="isLoading">
+          <ion-icon name="link-outline" slot="start"></ion-icon>
+          Resolve Link
+        </ion-button>
+        
+        <div *ngIf="testResult" class="result-section">
+          <ion-label color="success">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            Success! Link resolved
+          </ion-label>
+          <ion-textarea readonly value="{{testResult}}" rows="5"></ion-textarea>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Loading Indicator -->
+    <div *ngIf="isLoading" class="loading-container">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Processing...</p>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Trackier SDK Demo - User Data
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">User Data Management</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Set User Data (README Pattern)</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Set user information following the README pattern:</p>
+        <ul>
+          <li>User ID: TestUserId</li>
+          <li>Name: testName</li>
+          <li>Phone: XXXXXXX</li>
+          <li>Email: sanu@gmail.com</li>
+          <li>DOB: 12/1/2022</li>
+          <li>Gender: Male</li>
+        </ul>
+        <ion-button expand="block" color="secondary" (click)="setUserData()">
+          Set User Data
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

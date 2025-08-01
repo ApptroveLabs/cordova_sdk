@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Trackier SDK Demo - Events & Campaign
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Events & Campaign Data</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Track Custom Event (README Pattern)</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Track a custom event following the README pattern:</p>
+        <ul>
+          <li>Event ID: 1CFfUn3xEY</li>
+          <li>User ID: TesUserId</li>
+          <li>User Name: Test</li>
+          <li>User Phone: 8130XXX721</li>
+          <li>User Email: abc@gmail.com</li>
+          <li>Coupon Code: TestCode</li>
+          <li>Parameters: Param 1-5</li>
+        </ul>
+        <ion-button expand="block" color="success" (click)="trackCustomEvent()">
+          Track Custom Event
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Get Campaign Data (README Pattern)</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Retrieve campaign attribution data following the README pattern:</p>
+        <ul>
+          <li>Trackier ID</li>
+          <li>Ad Information</li>
+          <li>Campaign Details</li>
+          <li>Channel Information</li>
+          <li>All P1-P5 parameters</li>
+          <li>Click ID, DLV, PID</li>
+          <li>Retargeting status</li>
+        </ul>
+        <ion-button expand="block" color="warning" (click)="getCampaignData()">
+          Get Campaign Data
+        </ion-button>
+        <p><small>Check the browser console for the results.</small></p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

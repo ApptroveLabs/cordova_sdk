@@ -43,6 +43,30 @@ exports.setGender = function (arg0, success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'setGender', [(arg0)]);
 };
 
+//  User Additional Details
+exports.setUserAdditionalDetails = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'setUserAdditionalDetails', [JSON.stringify(arg0)]);
+};
+
+// Device Information
+exports.setIMEI = function (arg0, arg1, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'setIMEI', [(arg0), (arg1)]);
+};
+
+exports.setMacAddress = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'setMacAddress', [(arg0)]);
+};
+
+// Dynamic Link Creation
+exports.createDynamicLink = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'createDynamicLink', [JSON.stringify(arg0)]);
+};
+
+// Deeplink URL Resolution
+exports.resolveDeeplinkUrl = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'resolveDeeplinkUrl', [(arg0)]);
+};
+
 exports.fireInstall = function (success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'fireInstall');
 };

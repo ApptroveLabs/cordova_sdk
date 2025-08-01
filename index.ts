@@ -1,12 +1,20 @@
-import { AwesomeCordovaNativePlugin } from '@awesome-cordova-plugins/core';
 import { Injectable } from '@angular/core';
+import { Cordova, AwesomeCordovaNativePlugin, Plugin } from '@awesome-cordova-plugins/core';
 import { Observable } from 'rxjs';
 import { fromEvent } from 'rxjs';
+
+declare const cordova: any;
 
 export enum TrackierEnvironment {
 	Development = 'development',
 	Production = 'production',
 	Testing = 'testing',
+}
+
+export enum TrackierRegion {
+	IN = 'IN',
+	GLOBAL = 'GLOBAL',
+	NONE = 'NONE'
 }
 
 export class TrackierConfig {
@@ -17,6 +25,7 @@ export class TrackierConfig {
 	private manualMode: boolean = false;
 	private disableOrganic: boolean = false;
 	private attributionParams: { [key: string]: string } = {};
+	private region: string = '';
 	
 	constructor(appToken: string, environment: TrackierEnvironment) {
 		this.appToken = appToken;
@@ -42,8 +51,11 @@ export class TrackierConfig {
 
 	public setAttributionParams(params: { [key: string]: string }): void {
 		this.attributionParams = { ...this.attributionParams, ...params };
-	} 
+	}
 
+	public setRegion(region: TrackierRegion): void {
+		this.region = region;
+	}
 }
 
 export class TrackierEvent {
@@ -176,6 +188,69 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 		return;
 	}
 
+	// Native SDK Methods - User Additional Details
+	@Cordova()
+	setUserAdditionalDetails(userAdditionalDetails: any): Promise<string> {
+		return;
+	}
+
+	// Native SDK Methods - Device Information
+	@Cordova()
+	setIMEI(imei1: string, imei2: string): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	setMacAddress(macAddress: string): Promise<string> {
+		return;
+	}
+
+	// Native SDK Methods - Dynamic Link Creation
+	@Cordova()
+	createDynamicLink(dynamicLinkConfig: {
+		templateId?: string;
+		link?: string;
+		domainUriPrefix?: string;
+		deepLinkValue?: string;
+		androidParameters?: {
+			redirectLink: string;
+		};
+		iosParameters?: {
+			redirectLink: string;
+		};
+		desktopParameters?: {
+			redirectLink: string;
+		};
+		sdkParameters?: { [key: string]: string };
+		socialMetaTagParameters?: {
+			title: string;
+			description: string;
+			imageLink: string;
+		};
+		attributionParameters?: {
+			channel?: string;
+			campaign?: string;
+			mediaSource?: string;
+			p1?: string;
+			p2?: string;
+			p3?: string;
+			p4?: string;
+			p5?: string;
+		};
+	}): Promise<string> {
+		return;
+	}
+
+	// Native SDK Methods - Deeplink URL Resolution
+	@Cordova()
+	resolveDeeplinkUrl(url: string): Promise<{
+		url: string;
+		dlv: string;
+		sdkParams: { [key: string]: any };
+	}> {
+		return;
+	}
+
 	@Cordova()
 	parseDeepLink(uri: any): Promise<string> {
 		return;
@@ -280,7 +355,7 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 		observable: true // This allows callback-based events
 	  })
 	  setDeferredDeeplinkCallbackListener(): Observable<string> {
-		return new Observable((observer) => {
+		return new Observable((observer: any) => {
 		  cordova.exec(
 			(deepLinkUrl: string) => {
 			  observer.next(deepLinkUrl);
