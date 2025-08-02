@@ -19,6 +19,18 @@ class TrackierCordovaPlugin : CDVPlugin {
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
             config.setSDKVersion(sdkVersion: "1.6.74")
+            
+            // Set Region Support
+            if let regionStr = dict?["region"] as? String {
+                if regionStr.uppercased() == "IN" {
+                    config.setRegion(.IN)
+                } else if regionStr.uppercased() == "GLOBAL" {
+                    config.setRegion(.GLOBAL)
+                } else {
+                    config.setRegion(.NONE)
+                }
+            }
+            
             TrackierSDK.initialize(config: config)
 
             pluginResult = CDVPluginResult(
@@ -70,6 +82,190 @@ class TrackierCordovaPlugin : CDVPlugin {
             case "Female": TrackierSDK.setGender(gender: .FEMALE)
             case "Others": TrackierSDK.setGender(gender: .OTHERS)
             default: print("No Gender found")
+        }
+    }
+
+    //  User Additional Details
+    @objc(setUserAdditionalDetails:)
+    func setUserAdditionalDetails(command: CDVInvokedUrlCommand){
+        let msg = command.arguments[0] as? String ?? ""
+        if let data = msg.data(using: .utf8) {
+            do {
+                if let userDetails = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    TrackierSDK.setUserAdditionalDetails(userAdditionalDetails: userDetails)
+                }
+            } catch {
+                print("Error parsing user additional details: \(error)")
+            }
+        }
+    }
+
+    // Device Information (iOS doesn't have IMEI/MAC, but we'll add placeholder methods)
+    @objc(setIMEI:)
+    func setIMEI(command: CDVInvokedUrlCommand){
+        // iOS doesn't support IMEI placeholder for consistency
+        print("IMEI setting is not supported on iOS")
+    }
+
+    @objc(setMacAddress:)
+    func setMacAddress(command: CDVInvokedUrlCommand){
+        // iOS doesn't support MAC address placeholder for consistency
+        print("MAC address setting is not supported on iOS")
+    }
+
+    // Dynamic Link Creation
+    @objc(createDynamicLink:)
+    func createDynamicLink(command: CDVInvokedUrlCommand){
+        let msg = command.arguments[0] as? String ?? ""
+        if let data = msg.data(using: .utf8) {
+            do {
+                if let dynamicLinkData = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    
+                    // Create DynamicLink using Builder pattern (as in native SDK)
+                    let builder = DynamicLink.Builder()
+                    
+                    // Set basic properties
+                    if let templateId = dynamicLinkData["templateId"] as? String {
+                        builder.setTemplateId(templateId)
+                    }
+                    if let link = dynamicLinkData["link"] as? String {
+                        builder.setLink(link)
+                    }
+                    if let domainUriPrefix = dynamicLinkData["domainUriPrefix"] as? String {
+                        builder.setDomainUriPrefix(domainUriPrefix)
+                    }
+                    if let deepLinkValue = dynamicLinkData["deepLinkValue"] as? String {
+                        builder.setDeepLinkValue(deepLinkValue)
+                    }
+                    
+                    // Set Android parameters
+                    if let androidParams = dynamicLinkData["androidParameters"] as? [String: Any],
+                       let redirectLink = androidParams["redirectLink"] as? String {
+                        let androidParameters = AndroidParameters.Builder()
+                            .setRedirectLink(redirectLink)
+                            .build()
+                        builder.setAndroidParameters(androidParameters)
+                    }
+                    
+                    // Set iOS parameters
+                    if let iosParams = dynamicLinkData["iosParameters"] as? [String: Any],
+                       let redirectLink = iosParams["redirectLink"] as? String {
+                        let iosParameters = IosParameters.Builder()
+                            .setRedirectLink(redirectLink)
+                            .build()
+                        builder.setIosParameters(iosParameters)
+                    }
+                    
+                    // Set Desktop parameters
+                    if let desktopParams = dynamicLinkData["desktopParameters"] as? [String: Any],
+                       let redirectLink = desktopParams["redirectLink"] as? String {
+                        let desktopParameters = DesktopParameters.Builder()
+                            .setRedirectLink(redirectLink)
+                            .build()
+                        builder.setDesktopParameters(desktopParameters)
+                    }
+                    
+                    // Set SDK parameters
+                    if let sdkParams = dynamicLinkData["sdkParameters"] as? [String: String] {
+                        builder.setSDKParameters(sdkParams)
+                    }
+                    
+                    // Set Social Meta Tag parameters
+                    if let socialParams = dynamicLinkData["socialMetaTagParameters"] as? [String: Any],
+                       let title = socialParams["title"] as? String,
+                       let description = socialParams["description"] as? String,
+                       let imageLink = socialParams["imageLink"] as? String {
+                        let socialMetaTagParameters = SocialMetaTagParameters.Builder()
+                            .setTitle(title)
+                            .setDescription(description)
+                            .setImageLink(imageLink)
+                            .build()
+                        builder.setSocialMetaTagParameters(socialMetaTagParameters)
+                    }
+                    
+                    // Set Attribution parameters
+                    if let attrParams = dynamicLinkData["attributionParameters"] as? [String: Any] {
+                        let channel = attrParams["channel"] as? String ?? ""
+                        let campaign = attrParams["campaign"] as? String ?? ""
+                        let mediaSource = attrParams["mediaSource"] as? String ?? ""
+                        let p1 = attrParams["p1"] as? String ?? ""
+                        let p2 = attrParams["p2"] as? String ?? ""
+                        let p3 = attrParams["p3"] as? String ?? ""
+                        let p4 = attrParams["p4"] as? String ?? ""
+                        let p5 = attrParams["p5"] as? String ?? ""
+                        
+                        builder.setAttributionParameters(
+                            channel: channel,
+                            campaign: campaign,
+                            mediaSource: mediaSource,
+                            p1: p1,
+                            p2: p2,
+                            p3: p3,
+                            p4: p4,
+                            p5: p5
+                        )
+                    }
+                    
+                    // Build the DynamicLink
+                    let dynamicLink = builder.build()
+                    
+                    if #available(iOS 13.0, *) {
+                        TrackierSDK.createDynamicLink(
+                            dynamicLink: dynamicLink,
+                            onSuccess: { (result) in
+                                var pluginResult: CDVPluginResult?
+                                pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: result)
+                                self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                            },
+                            onFailure: { (error) in
+                                var pluginResult: CDVPluginResult?
+                                pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: error)
+                                self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                            }
+                        )
+                    } else {
+                        var pluginResult: CDVPluginResult?
+                        pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Dynamic links require iOS 13.0+")
+                        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                    }
+                }
+            } catch {
+                var pluginResult: CDVPluginResult?
+                pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Error parsing dynamic link data: \(error)")
+                self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+            }
+        }
+    }
+
+    // Deeplink URL Resolution
+    @objc(resolveDeeplinkUrl:)
+    func resolveDeeplinkUrl(command: CDVInvokedUrlCommand){
+        let url = command.arguments[0] as? String ?? ""
+        if #available(iOS 13.0, *) {
+            TrackierSDK.resolveDeeplinkUrl(
+                inputUrl: url,
+                completion: { (result) in
+                    switch result {
+                    case .success(let dlData):
+                        var pluginResult: CDVPluginResult?
+                        let resultDict: [String: Any] = [
+                            "url": dlData.url ?? "",
+                            "dlv": dlData.dlv ?? "",
+                            "sdkParams": dlData.sdkParams ?? [:]
+                        ]
+                        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: resultDict)
+                        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                    case .failure(let error):
+                        var pluginResult: CDVPluginResult?
+                        pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: error.localizedDescription)
+                        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                    }
+                }
+            )
+        } else {
+            var pluginResult: CDVPluginResult?
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Deeplink resolution requires iOS 13.0+")
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         }
     }
 

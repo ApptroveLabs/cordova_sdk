@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Trackier SDK Demo - Initialization
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Trackier SDK Demo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Trackier SDK Initialization (README Pattern)</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>The Trackier SDK is initialized following the README pattern:</p>
+        <ul>
+          <li>SDK Key: ee9f21fb-5848-4ed9-8d9c-e4093e6d220c</li>
+          <li>Environment: Development</li>
+          <li>Initialization: In ngOnInit() method</li>
+        </ul>
+        <p>Check the console for initialization logs.</p>
+        <ion-button expand="block" color="primary" (click)="ngOnInit()">
+          Re-initialize SDK
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
