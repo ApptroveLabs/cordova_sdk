@@ -5,6 +5,11 @@ export declare enum TrackierEnvironment {
     Production = "production",
     Testing = "testing"
 }
+export declare enum TrackierRegion {
+    IN = "IN",
+    GLOBAL = "GLOBAL",
+    NONE = "NONE"
+}
 export declare class TrackierConfig {
     private appToken;
     private environment;
@@ -15,6 +20,7 @@ export declare class TrackierConfig {
     private facebookAppId;
     private androidId;
     private attributionParams;
+    private region;
     constructor(appToken: string, environment: TrackierEnvironment);
     setAppSecret(key: string, value: string): void;
     setManualMode(value: boolean): void;
@@ -24,6 +30,7 @@ export declare class TrackierConfig {
     }): void;
     setFacebookAppId(value: string): void;
     setAndroidId(value: string): void;
+    setRegion(region: TrackierRegion): void;
 }
 export declare class TrackierEvent {
     private eventId;
@@ -92,6 +99,15 @@ export declare class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
     getIsRetargeting(): Promise<string>;
     updateAppleAdsToken(token: any): Promise<string>;
     createDynamicLink(value: any): Promise<string>;
+    setMacAddress(value: any): Promise<string>;
+    setIMEI(value: any): Promise<string>;
+    resolveDeeplinkUrl(url: string): Promise<{
+        url: string;
+        dlv: string;
+        sdkParams: {
+            [key: string]: any;
+        };
+    }>;
     setDeferredDeeplinkCallbackListener(): Observable<string>;
     storeRetargetting(dob: any): Promise<string>;
 }
