@@ -9,6 +9,12 @@ export enum TrackierEnvironment {
 	Testing = 'testing',
 }
 
+export enum TrackierRegion {
+	IN = 'IN',
+	GLOBAL = 'GLOBAL',
+	NONE = 'NONE'
+}
+
 export class TrackierConfig {
 	private appToken: string;
 	private environment: TrackierEnvironment;
@@ -19,6 +25,7 @@ export class TrackierConfig {
 	private facebookAppId: string = '';
 	private androidId: string = '';
 	private attributionParams: { [key: string]: string } = {};
+	private region: string = '';
 	
 	constructor(appToken: string, environment: TrackierEnvironment) {
 		this.appToken = appToken;
@@ -54,6 +61,10 @@ export class TrackierConfig {
 
 	public setAndroidId(value: string): void {
 		this.androidId = value;
+	}
+
+	public setRegion(region: TrackierRegion): void {
+		this.region = region;
 	}
 
 }
@@ -300,6 +311,15 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 
 	@Cordova()
 	setIMEI(value: any): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	resolveDeeplinkUrl(url: string): Promise<{
+		url: string;
+		dlv: string;
+		sdkParams: { [key: string]: any };
+	}> {
 		return;
 	}
 
