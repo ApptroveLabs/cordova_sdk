@@ -16,6 +16,8 @@ export class TrackierConfig {
 	private secretKey: string = '';
 	private manualMode: boolean = false;
 	private disableOrganic: boolean = false;
+	private facebookAppId: string = '';
+	private androidId: string = '';
 	private attributionParams: { [key: string]: string } = {};
 	
 	constructor(appToken: string, environment: TrackierEnvironment) {
@@ -25,6 +27,8 @@ export class TrackierConfig {
 		this.secretKey = this.secretKey;
 		this.manualMode = this.manualMode;
 		this.disableOrganic = this.disableOrganic;
+		this.androidId = this.androidId;
+		this.facebookAppId = this.facebookAppId;
 	}
 
 	public setAppSecret(key: string, value: string): void {
@@ -43,6 +47,14 @@ export class TrackierConfig {
 	public setAttributionParams(params: { [key: string]: string }): void {
 		this.attributionParams = { ...this.attributionParams, ...params };
 	} 
+
+	public setFacebookAppId(value: string): void {
+		this.facebookAppId = value;
+	}
+
+	public setAndroidId(value: string): void {
+		this.androidId = value;
+	}
 
 }
 
@@ -137,7 +149,7 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 
 	@Cordova()
 	initializeSDK(config: TrackierConfig): Promise<void> {
-	    return;
+		return;
 	}
  
 	 
@@ -276,6 +288,21 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 		return;
 	}
 
+	@Cordova()
+	createDynamicLink(value: any): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	setMacAddress(value: any): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	setIMEI(value: any): Promise<string> {
+		return;
+	}
+
 	@Cordova({
 		observable: true // This allows callback-based events
 	  })
@@ -283,11 +310,11 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 		return new Observable((observer) => {
 		  cordova.exec(
 			(deepLinkUrl: string) => {
-			  observer.next(deepLinkUrl);
-			  observer.complete();
+			observer.next(deepLinkUrl);
+			observer.complete();
 			},
 			(error: any) => {
-			  observer.error(error);
+			observer.error(error);
 			},
 			"TrackierCordovaPlugin",
 			"trackier_deferredDeeplink",
