@@ -12,7 +12,8 @@ export declare class TrackierConfig {
     private secretKey;
     private manualMode;
     private disableOrganic;
-    boolean: boolean;
+    private facebookAppId;
+    private androidId;
     private attributionParams;
     constructor(appToken: string, environment: TrackierEnvironment);
     setAppSecret(key: string, value: string): void;
@@ -21,6 +22,8 @@ export declare class TrackierConfig {
     setAttributionParams(params: {
         [key: string]: string;
     }): void;
+    setFacebookAppId(value: string): void;
+    setAndroidId(value: string): void;
 }
 export declare class TrackierEvent {
     private eventId;
@@ -88,6 +91,7 @@ export declare class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
     getPid(): Promise<string>;
     getIsRetargeting(): Promise<string>;
     updateAppleAdsToken(token: any): Promise<string>;
+    createDynamicLink(value: any): Promise<string>;
     setDeferredDeeplinkCallbackListener(): Observable<string>;
     storeRetargetting(dob: any): Promise<string>;
 }
