@@ -30,19 +30,30 @@ exports.TrackierEnvironment = void 0;
     TrackierEnvironment["Production"] = "production";
     TrackierEnvironment["Testing"] = "testing";
 })(exports.TrackierEnvironment || (exports.TrackierEnvironment = {}));
+exports.TrackierRegion = void 0;
+(function (TrackierRegion) {
+    TrackierRegion["IN"] = "IN";
+    TrackierRegion["GLOBAL"] = "GLOBAL";
+    TrackierRegion["NONE"] = "NONE";
+})(exports.TrackierRegion || (exports.TrackierRegion = {}));
 var TrackierConfig = /** @class */ (function () {
     function TrackierConfig(appToken, environment) {
         this.secretId = '';
         this.secretKey = '';
         this.manualMode = false;
-        this.boolean = false;
+        this.disableOrganic = false;
+        this.facebookAppId = '';
+        this.androidId = '';
         this.attributionParams = {};
+        this.region = '';
         this.appToken = appToken;
         this.environment = environment;
         this.secretId = this.secretId;
         this.secretKey = this.secretKey;
         this.manualMode = this.manualMode;
         this.disableOrganic = this.disableOrganic;
+        this.androidId = this.androidId;
+        this.facebookAppId = this.facebookAppId;
     }
     TrackierConfig.prototype.setAppSecret = function (key, value) {
         this.secretId = key;
@@ -56,6 +67,15 @@ var TrackierConfig = /** @class */ (function () {
     };
     TrackierConfig.prototype.setAttributionParams = function (params) {
         this.attributionParams = tslib.__assign(tslib.__assign({}, this.attributionParams), params);
+    };
+    TrackierConfig.prototype.setFacebookAppId = function (value) {
+        this.facebookAppId = value;
+    };
+    TrackierConfig.prototype.setAndroidId = function (value) {
+        this.androidId = value;
+    };
+    TrackierConfig.prototype.setRegion = function (region) {
+        this.region = region;
     };
     return TrackierConfig;
 }());
@@ -146,6 +166,10 @@ var TrackierCordovaPlugin = /** @class */ (function (_super) {
     TrackierCordovaPlugin.prototype.getPid = function () { return core.cordova(this, "getPid", {}, arguments); };
     TrackierCordovaPlugin.prototype.getIsRetargeting = function () { return core.cordova(this, "getIsRetargeting", {}, arguments); };
     TrackierCordovaPlugin.prototype.updateAppleAdsToken = function (token) { return core.cordova(this, "updateAppleAdsToken", {}, arguments); };
+    TrackierCordovaPlugin.prototype.createDynamicLink = function (value) { return core.cordova(this, "createDynamicLink", {}, arguments); };
+    TrackierCordovaPlugin.prototype.setMacAddress = function (value) { return core.cordova(this, "setMacAddress", {}, arguments); };
+    TrackierCordovaPlugin.prototype.setIMEI = function (value) { return core.cordova(this, "setIMEI", {}, arguments); };
+    TrackierCordovaPlugin.prototype.resolveDeeplinkUrl = function (url) { return core.cordova(this, "resolveDeeplinkUrl", {}, arguments); };
     TrackierCordovaPlugin.prototype.setDeferredDeeplinkCallbackListener = function () { return core.cordova(this, "setDeferredDeeplinkCallbackListener", { "observable": true }, arguments); };
     TrackierCordovaPlugin.prototype.storeRetargetting = function (dob) { return core.cordova(this, "storeRetargetting", {}, arguments); };
     TrackierCordovaPlugin.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.16", ngImport: i0__namespace, type: TrackierCordovaPlugin, deps: null, target: i0__namespace.ɵɵFactoryTarget.Injectable });
@@ -160,7 +184,7 @@ var TrackierCordovaPlugin = /** @class */ (function (_super) {
 }(core.AwesomeCordovaNativePlugin));
 i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.16", ngImport: i0__namespace, type: TrackierCordovaPlugin, decorators: [{
             type: i0.Injectable
-        }], propDecorators: { initializeSDK: [], trackEvent: [], setUserId: [], setUserEmail: [], setUserName: [], setUserPhone: [], setDOB: [], setGender: [], parseDeepLink: [], fireInstall: [], getTrackierId: [], getAd: [], getAdID: [], getCampaign: [], getCampaignID: [], getAdSet: [], getAdSetID: [], getChannel: [], getP1: [], getP2: [], getP3: [], getP4: [], getP5: [], getClickId: [], getDlv: [], getPid: [], getIsRetargeting: [], updateAppleAdsToken: [], setDeferredDeeplinkCallbackListener: [], storeRetargetting: [] } });
+        }], propDecorators: { initializeSDK: [], trackEvent: [], setUserId: [], setUserEmail: [], setUserName: [], setUserPhone: [], setDOB: [], setGender: [], parseDeepLink: [], fireInstall: [], getTrackierId: [], getAd: [], getAdID: [], getCampaign: [], getCampaignID: [], getAdSet: [], getAdSetID: [], getChannel: [], getP1: [], getP2: [], getP3: [], getP4: [], getP5: [], getClickId: [], getDlv: [], getPid: [], getIsRetargeting: [], updateAppleAdsToken: [], createDynamicLink: [], setMacAddress: [], setIMEI: [], resolveDeeplinkUrl: [], setDeferredDeeplinkCallbackListener: [], storeRetargetting: [] } });
 
 exports.TrackierConfig = TrackierConfig;
 exports.TrackierCordovaPlugin = TrackierCordovaPlugin;
