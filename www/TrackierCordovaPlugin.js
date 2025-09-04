@@ -149,6 +149,10 @@ exports.createDynamicLink = function (arg0, success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'createDynamicLink', [JSON.stringify(arg0)]);
 };
 
+exports.resolveDeeplinkUrl = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'resolveDeeplinkUrl', [(arg0)]);
+};
+
 // Deeplink URL Resolution
 exports.resolveDeeplinkUrl = function (arg0, success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'resolveDeeplinkUrl', [(arg0)]);
