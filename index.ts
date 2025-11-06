@@ -15,6 +15,10 @@ export enum TrackierRegion {
 	NONE = 'NONE'
 }
 
+export enum TrackierEncryptionType {
+	AES_GCM = 'AES_GCM'
+}
+
 export class TrackierConfig {
 	private appToken: string;
 	private environment: TrackierEnvironment;
@@ -24,6 +28,9 @@ export class TrackierConfig {
 	private disableOrganic: boolean = false;
 	private facebookAppId: string = '';
 	private androidId: string = '';
+	private appId: string = '';
+	private encryptionKey: string = '';
+	private encryptionType: TrackierEncryptionType | string = '';
 	private attributionParams: { [key: string]: string } = {};
 	private region: string = '';
 	
@@ -61,6 +68,18 @@ export class TrackierConfig {
 
 	public setAndroidId(value: string): void {
 		this.androidId = value;
+	}
+
+	public setAppID(value: string): void {
+		this.appId = value;
+	}
+
+	public setEncryptionKey(value: string): void {
+		this.encryptionKey = value;
+	}
+
+	public setEncryptionType(value: TrackierEncryptionType | string): void {
+		this.encryptionType = value;
 	}
 
 	public setRegion(region: TrackierRegion): void {
@@ -345,6 +364,26 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 
 	@Cordova()
 	storeRetargetting(dob: any): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	sendFcmToken(token: string): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	subscribeAttributionlink(): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	updatePostbackConversion(conversionValue: number): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	waitForATTUserAuthorization(timeoutInterval: number): Promise<string> {
 		return;
 	}
 }

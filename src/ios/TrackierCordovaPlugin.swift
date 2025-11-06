@@ -23,7 +23,7 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
             let config = TrackierSDKConfig(appToken: appToken , env: environment)
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "1.6.75")
+            config.setSDKVersion(sdkVersion: "1.6.77")
             config.setDeeplinkListerner(listener: self)
 
             if let regionStr = dict?["region"] as? String {
@@ -226,6 +226,25 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
     func updateAppleAdsToken(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
         TrackierSDK.updateAppleAdsToken(token: msg)
+    }
+
+    @objc(subscribeAttributionlink:)
+    func subscribeAttributionlink(command: CDVInvokedUrlCommand){
+        if #available(iOS 13.0, *) {
+            TrackierSDK.subscribeAttributionlink()
+        }
+    }
+
+    @objc(updatePostbackConversion:)
+    func updatePostbackConversion(command: CDVInvokedUrlCommand){
+        let conversionValue = command.arguments[0] as? Int ?? 0
+        TrackierSDK.updatePostbackConversion(conversionValue: conversionValue)
+    }
+
+    @objc(waitForATTUserAuthorization:)
+    func waitForATTUserAuthorization(command: CDVInvokedUrlCommand){
+        let timeoutInterval = command.arguments[0] as? Int ?? 0
+        TrackierSDK.waitForATTUserAuthorization(timeoutInterval: timeoutInterval)
     }
 
     @objc(parseDeepLink:)

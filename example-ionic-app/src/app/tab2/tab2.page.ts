@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, Platform } from '@ionic/angular';
 import { Photo, PhotoService } from '../services/photo.service';
-import { TrackierCordovaPlugin, TrackierConfig, TrackierEnvironment, TrackierEvent } from '@awesome-cordova-plugins/trackier/ngx';
+import { TrackierCordovaPlugin, TrackierConfig, TrackierEnvironment, TrackierEvent, TrackierEncryptionType } from '@awesome-cordova-plugins/trackier/ngx';
 
 @Component({
   selector: 'app-tab2',
@@ -10,7 +10,7 @@ import { TrackierCordovaPlugin, TrackierConfig, TrackierEnvironment, TrackierEve
 })
 export class Tab2Page {
 
-  constructor(public photoService: PhotoService, public actionSheetController: ActionSheetController, private trackierCordovaPlugin:TrackierCordovaPlugin) {}
+  constructor(public photoService: PhotoService, public actionSheetController: ActionSheetController, private trackierCordovaPlugin:TrackierCordovaPlugin, private platform: Platform) {}
 
   async ngOnInit() {
     await this.photoService.loadSaved();
@@ -20,7 +20,37 @@ export class Tab2Page {
 
    var key = "0455721b-XXXXX-596d818d910a";//Please pass your Development key here.
    var trackierConfig = new TrackierConfig(key,TrackierEnvironment.Development);
+
+   // Android-specific configuration
+   if (this.platform.is('android')) {
+     trackierConfig.setAppID("your-app-id");
+     trackierConfig.setEncryptionKey("your-encryption-key");
+     trackierConfig.setEncryptionType(TrackierEncryptionType.AES_GCM);
+   }
+
+   // iOS: Configure ATT timeout (should be called before initialization)
+   if (this.platform.is('ios')) {
+     this.trackierCordovaPlugin.waitForATTUserAuthorization(20);
+   }
+
    this.trackierCordovaPlugin.initializeSDK(trackierConfig);
+
+   // Android: Send FCM token
+   if (this.platform.is('android')) {
+     // Replace with actual FCM token from Firebase
+     var fcmToken = "your-fcm-token";
+     this.trackierCordovaPlugin.sendFcmToken(fcmToken);
+   }
+
+   // iOS: Update conversion value
+   if (this.platform.is('ios')) {
+     this.trackierCordovaPlugin.updatePostbackConversion(10);
+   }
+
+   // iOS: Subscribe to attribution
+   if (this.platform.is('ios')) {
+     this.trackierCordovaPlugin.subscribeAttributionlink();
+   }
 
   }
 

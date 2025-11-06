@@ -131,6 +131,22 @@ exports.updateAppleAdsToken = function (arg0, success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'updateAppleAdsToken', [(arg0)]);
 };
 
+exports.sendFcmToken = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'sendFcmToken', [(arg0)]);
+};
+
+exports.subscribeAttributionlink = function (success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'subscribeAttributionlink', []);
+};
+
+exports.updatePostbackConversion = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'updatePostbackConversion', [(arg0)]);
+};
+
+exports.waitForATTUserAuthorization = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'waitForATTUserAuthorization', [(arg0)]);
+};
+
 exports.setUserAdditionalDetails = function (arg0, success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'setUserAdditionalDetails', [JSON.stringify(arg0)]);
 };

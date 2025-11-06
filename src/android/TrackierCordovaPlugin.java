@@ -146,6 +146,9 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
       } else if (action.equals("fireInstall")) {
         fireInstall();
         return true;
+      } else if (action.equals("sendFcmToken")) {
+        String token = com.trackier.cordova_sdk.TrackierCordovaUtil.optString(args, 0);
+        return sendFcmToken(token);
       } 
     } catch (Exception e) {
 
@@ -168,11 +171,27 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
       sdkConfig.setManualMode(com.trackier.cordova_sdk.TrackierCordovaUtil.getBooleanVal("manualMode", trackiersdkConfigJson));
       sdkConfig.disableOrganicTracking(com.trackier.cordova_sdk.TrackierCordovaUtil.getBooleanVal("disableorganic", trackiersdkConfigJson));
       sdkConfig.setSDKType("cordova_sdk");
-      sdkConfig.setSDKVersion("1.6.75");
+      sdkConfig.setSDKVersion("1.6.77");
 
       sdkConfig.setFacebookAppId(com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("facebookAppId", trackiersdkConfigJson));
       sdkConfig.setAndroidId(com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("androidId", trackiersdkConfigJson));
 
+      String appId = com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("appId", trackiersdkConfigJson);
+      if (appId != null && !appId.isEmpty()) {
+        sdkConfig.setAppID(appId);
+      }
+
+      String encryptionKey = com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("encryptionKey", trackiersdkConfigJson);
+      if (encryptionKey != null && !encryptionKey.isEmpty()) {
+        sdkConfig.setEncryptionKey(encryptionKey);
+      }
+
+      String encryptionType = com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("encryptionType", trackiersdkConfigJson);
+      if (encryptionType != null && !encryptionType.isEmpty()) {
+        if (encryptionType.equalsIgnoreCase("AES_GCM")) {
+          sdkConfig.setEncryptionType(com.trackier.sdk.TrackierSDKConfig.EncryptionType.AES_GCM);
+        }
+      }
 
       String regionStr = com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("region", trackiersdkConfigJson);
       if (regionStr != null && !regionStr.isEmpty()) {
@@ -526,6 +545,16 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
       } catch (Exception e) {
         e.printStackTrace();
       }
+    }
+  }
+
+  private boolean sendFcmToken(String token) {
+    try {
+      com.trackier.sdk.TrackierSDK.sendFcmToken(token);
+      return true;
+    } catch (Exception e) {
+      Log.e("TrackierSDK", "Error sending FCM token: " + e.getMessage());
+      return false;
     }
   }
 }
