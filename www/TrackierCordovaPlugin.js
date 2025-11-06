@@ -148,12 +148,23 @@ exports.setMacAddress = function (arg0, success, error) {
 exports.createDynamicLink = function (arg0, success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'createDynamicLink', [JSON.stringify(arg0)]);
 };
-
+// Deeplink URL Resolution
 exports.resolveDeeplinkUrl = function (arg0, success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'resolveDeeplinkUrl', [(arg0)]);
 };
 
-// Deeplink URL Resolution
-exports.resolveDeeplinkUrl = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'resolveDeeplinkUrl', [(arg0)]);
+exports.sendFcmToken = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'sendFcmToken', [(arg0)]);
+};
+
+exports.subscribeAttributionlink = function (success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'subscribeAttributionlink', []);
+};
+
+exports.updatePostbackConversion = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'updatePostbackConversion', [(arg0)]);
+};
+
+exports.waitForATTUserAuthorization = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'waitForATTUserAuthorization', [(arg0)]);
 };
