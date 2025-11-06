@@ -19,5 +19,8 @@ bin
 .project
 .classpath
 
+# DemoApp Android
+DemoApp
+
 
 
