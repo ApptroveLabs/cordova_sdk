@@ -10,6 +10,9 @@ export declare enum TrackierRegion {
     GLOBAL = "GLOBAL",
     NONE = "NONE"
 }
+export declare enum TrackierEncryptionType {
+    AES_GCM = "AES_GCM"
+}
 export declare class TrackierConfig {
     private appToken;
     private environment;
@@ -31,6 +34,9 @@ export declare class TrackierConfig {
     setFacebookAppId(value: string): void;
     setAndroidId(value: string): void;
     setRegion(region: TrackierRegion): void;
+    setAppID(value: string): void;
+    setEncryptionKey(value: string): void;
+    setEncryptionType(value: TrackierEncryptionType | string): void;
 }
 export declare class TrackierEvent {
     private eventId;
@@ -108,6 +114,10 @@ export declare class TrackierCordovaPluginOriginal extends AwesomeCordovaNativeP
             [key: string]: any;
         };
     }>;
+    sendFcmToken(token: string): Promise<string>;
+    subscribeAttributionlink(): Promise<string>;
+    updatePostbackConversion(conversionValue: number): Promise<string>;
+    waitForATTUserAuthorization(timeoutInterval: number): Promise<string>;
     setDeferredDeeplinkCallbackListener(): Observable<string>;
     storeRetargetting(dob: any): Promise<string>;
 }

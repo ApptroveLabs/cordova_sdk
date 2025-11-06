@@ -15,6 +15,10 @@ export enum TrackierRegion {
 	NONE = 'NONE'
 }
 
+export enum TrackierEncryptionType {
+	AES_GCM = 'AES_GCM'
+}
+
 export class TrackierConfig {
 	private appToken: string;
 	private environment: TrackierEnvironment;
@@ -65,6 +69,18 @@ export class TrackierConfig {
 
 	public setRegion(region: TrackierRegion): void {
 		this.region = region;
+	}
+
+	public setAppID(value: string): void {
+		this.appId = value;
+	}
+
+	public setEncryptionKey(value: string): void {
+		this.encryptionKey = value;
+	}
+
+	public setEncryptionType(value: TrackierEncryptionType | string): void {
+		this.encryptionType = value;
 	}
 
 }
@@ -320,6 +336,26 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 		dlv: string;
 		sdkParams: { [key: string]: any };
 	}> {
+		return;
+	}
+
+	@Cordova()
+	sendFcmToken(token: string): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	subscribeAttributionlink(): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	updatePostbackConversion(conversionValue: number): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	waitForATTUserAuthorization(timeoutInterval: number): Promise<string> {
 		return;
 	}
 
