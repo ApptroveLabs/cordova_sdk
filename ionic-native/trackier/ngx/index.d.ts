@@ -24,6 +24,9 @@ export declare class TrackierConfig {
     private androidId;
     private attributionParams;
     private region;
+    private appId;
+    private encryptionKey;
+    private encryptionType;
     constructor(appToken: string, environment: TrackierEnvironment);
     setAppSecret(key: string, value: string): void;
     setManualMode(value: boolean): void;
