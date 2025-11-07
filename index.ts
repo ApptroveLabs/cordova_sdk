@@ -30,6 +30,9 @@ export class TrackierConfig {
 	private androidId: string = '';
 	private attributionParams: { [key: string]: string } = {};
 	private region: string = '';
+	private appId: string = '';
+	private encryptionKey: string = '';
+	private encryptionType: TrackierEncryptionType | string = '';
 	
 	constructor(appToken: string, environment: TrackierEnvironment) {
 		this.appToken = appToken;
