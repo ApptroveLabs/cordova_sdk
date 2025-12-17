@@ -166,13 +166,13 @@ export class AppTroveEvent {
 
 
 @Plugin({
-	pluginName: 'TrackierCordovaPlugin',
-	plugin: 'com.trackier.cordova_sdk', // npm package name, example: cordova-plugin-camera
-	pluginRef: 'cordova.plugins.TrackierCordovaPlugin', // the variable reference to call the plugin, example: navigator.geolocation
-	repo: 'https://github.com/trackier/cordova_sdk', // the github repository URL for the plugin
+	pluginName: 'AppTroveCordovaPlugin',
+	plugin: 'com.apptrove.cordova_sdk', // npm package name, example: cordova-plugin-camera
+	pluginRef: 'cordova.plugins.AppTroveCordovaPlugin', // the variable reference to call the plugin, example: navigator.geolocation
+	repo: 'https://github.com/ApptroveLabs/cordova_sdk', // the github repository URL for the plugin
 	//install: '', // OPTIONAL install command, in case the plugin requires variables
 	//installVariables: [], // OPTIONAL the plugin requires variables
-	platforms: ['Android'] // Array of platforms supported, example: ['Android', 'iOS']
+	platforms: ['Android', 'iOS'] // Array of platforms supported, example: ['Android', 'iOS']
 })
 @Injectable()
 export class AppTroveCordovaPlugin extends AwesomeCordovaNativePlugin {
