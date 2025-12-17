@@ -52,7 +52,7 @@ exports.parseDeepLink = function (arg0, success, error) {
 };
 
 exports.getAppTroveId = function (callback) {
-    cordovaExecCommandCallback('getTrackierId', callback);
+    cordovaExecCommandCallback('getAppTroveId', callback);
 };
 
 exports.getAd = function (callback) {

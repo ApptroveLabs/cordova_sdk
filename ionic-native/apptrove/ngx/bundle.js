@@ -194,11 +194,11 @@ var AppTroveCordovaPlugin = /** @class */ (function (_super) {
     AppTroveCordovaPlugin.prototype.storeRetargetting = function (dob) { return core.cordova(this, "storeRetargetting", {}, arguments); };
     AppTroveCordovaPlugin.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.17", ngImport: i0__namespace, type: AppTroveCordovaPlugin, deps: null, target: i0__namespace.ɵɵFactoryTarget.Injectable });
     AppTroveCordovaPlugin.ɵprov = i0__namespace.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.17", ngImport: i0__namespace, type: AppTroveCordovaPlugin });
-    AppTroveCordovaPlugin.pluginName = "TrackierCordovaPlugin";
-    AppTroveCordovaPlugin.plugin = "com.trackier.cordova_sdk";
-    AppTroveCordovaPlugin.pluginRef = "cordova.plugins.TrackierCordovaPlugin";
+    AppTroveCordovaPlugin.pluginName = "AppTroveCordovaPlugin";
+    AppTroveCordovaPlugin.plugin = "com.apptrove.cordova_sdk";
+    AppTroveCordovaPlugin.pluginRef = "cordova.plugins.AppTroveCordovaPlugin";
     AppTroveCordovaPlugin.repo = "https://github.com/ApptroveLabs/cordova_sdk";
-    AppTroveCordovaPlugin.platforms = ["Android"];
+    AppTroveCordovaPlugin.platforms = ["Android", "iOS"];
     AppTroveCordovaPlugin = tslib.__decorate([], AppTroveCordovaPlugin);
     return AppTroveCordovaPlugin;
 }(core.AwesomeCordovaNativePlugin));

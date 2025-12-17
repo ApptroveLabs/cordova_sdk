@@ -17,7 +17,7 @@
       - [Integrate the AppTrove SDK in the Cordova Application.](#integrate-the-apptrove-sdk-in-the-cordova-application)
       - [Initialize the SDK into your app:](#initialize-the-sdk-into-your-app)
   - [Events Tracking](#events-tracking)
-      - [ **Built-in Events** -](#-built-in-events--)
+    - [ **Built-in Events** -](#-built-in-events--)
     - [Example code for calling Built-in events](#example-code-for-calling-built-in-events)
       - [ **Customs Events** -](#-customs-events--)
       - [Example code for calling Customs Events.](#example-code-for-calling-customs-events)
@@ -34,7 +34,7 @@
 
 ## <a id="qs-add-apptrove-sdk"></a>Quick start guide
 
-We have created a example app for the cordova sdk integration. 
+We have created a example app for the cordova sdk integration.
 
 Please check the [Example](https://github.com/AfficoneTech/cordova_sdk/tree/main/example-ionic-app) directory for know to how the `AppTrove SDK` can be integrated.
 
@@ -59,22 +59,22 @@ $ npm install @awesome-cordova-plugins/core --save
 ```
 
 3. Run the below commands in Terminal/Cmd.
+
 ```
 $ ionic cap sync
 ```
 
-After following all the above steps, Please add the apptrove folder in the the `@awesome-cordova-plugins` which is located in the `node_modules`. 
+After following all the above steps, Please add the apptrove folder in the the `@awesome-cordova-plugins` which is located in the `node_modules`.
 
 You can download the apptrove folder by the click on below link.
 
-Link - https://github.com/trackier/cordova_sdk/releases/tag/1.6.74
+Link - https://github.com/ApptroveLabs/cordova_sdk/releases
 
 Please check the below screenshots for the reference.
 
 <img width="345" alt="Screenshot 2022-08-31 at 1 05 01 AM" src="https://user-images.githubusercontent.com/16884982/187527379-177beea0-b5ab-4dcb-a4fe-8e6ff1e77a7d.png">
 
 Your node_modules looks similar like above screenshots.
- 
 
 ### <a id="qs-implement-apptrove-sdk"></a>Integrate and Initialize the AppTrove SDK
 
@@ -129,13 +129,13 @@ For achieving this, you need to add some line of code in the build.gradle and al
 
 - Add the google advertising id dependency in your **android/app/build.gradle**
 
-
 ```gradle
 dependencies {
   // This can be added where the SDK dependency has been added
   implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
 }
 ```
+
 - Update your Android Manifest file by adding the following permission. This is required if your app is targeting devices with android version 12+
 
 ```xml
@@ -143,12 +143,12 @@ dependencies {
 ```
 
 - Add meta data inside the application tag (If not already added)
+
 ```xml
 <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" /> //Add this meta-data in the manifest.xml under Application tag.
 ```
-
 
 #### <a id="qs-initialize-apptrove-sdk"></a>Integrate the AppTrove SDK in the Cordova Application.
 
@@ -165,9 +165,9 @@ Depending on whether you build your app for testing or for production, you must 
 In your index.js file after you have received the deviceready event, add the following code to initialize the AppTrove SDK:
 
 ```js
- 
+
 import { Component } from '@angular/core';
-import { AppTroveCordovaPlugin, AppTroveConfig, AppTroveEnvironment, AppTroveEvent } from '@awesome-cordova-plugins/apptrove/ngx';
+import { AppTroveCordovaPlugin, AppTroveConfig, AppTroveEnvironment, AppTroveEvent } from '@ionic-native/apptrove/ngx';
 
 @Component({
   selector: 'app-tab1',
@@ -203,38 +203,40 @@ In case you are using ionic native application:
 
 1)Register the provider at app.module.ts:
 
- You need to import the plugin and add the provider into app.module.ts, so add the import line and the provider in @NgModule:
+You need to import the plugin and add the provider into app.module.ts, so add the import line and the provider in @NgModule:
 
-```js   
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AppTroveCordovaPlugin} from '@awesome-cordova-plugins/apptrove/ngx';
+```js
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { RouteReuseStrategy } from "@angular/router";
+import { IonicModule, IonicRouteStrategy } from "@ionic/angular";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { AppTroveCordovaPlugin } from "@ionic-native/apptrove/ngx";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [AppTroveCordovaPlugin,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent]
+  providers: [
+    AppTroveCordovaPlugin,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
-
 ```
 
 ## <a id="qs-track-event"></a>Events Tracking
 
-<a id="qs-retrieve-event-id"></a>AppTrove events trackings enable to provides the insights into how to user interacts with your app. 
+<a id="qs-retrieve-event-id"></a>AppTrove events trackings enable to provides the insights into how to user interacts with your app.
 AppTrove sdk easily get that insights data from the app. Just follow with the simple events integration process
 
 AppTrove provides the `Built-in events` and `Customs events` on the AppTrove panel.
 
-####  <a id="qs-built-in"></a> **Built-in Events** - 
+#### <a id="qs-built-in"></a> **Built-in Events** -
 
-Predefined events are the list of constants events which already been created on the dashboard. 
+Predefined events are the list of constants events which already been created on the dashboard.
 
 You can use directly to track those events. Just need to implements events in the app projects.
 
@@ -284,6 +286,7 @@ export class Tab3Page {
 }
 
 ```
+
 Note:- Argument in AppTrove event class is event Id.
 
 You can integrate inbuilt params with the event. In-built param list are mentioned below:-
@@ -296,9 +299,9 @@ Screenshot[4]
 
 <img width="1000" alt="Screenshot 2022-08-30 at 5 00 07 PM" src="https://user-images.githubusercontent.com/16884982/187426023-a16af54c-8790-49d8-a2d9-9cc8fa939b45.png">
 
-#### <a id="qs-customs-events"></a> **Customs Events** - 
+#### <a id="qs-customs-events"></a> **Customs Events** -
 
-Customs events are created by user as per their required business logic. 
+Customs events are created by user as per their required business logic.
 
 You can create the events in the AppTrove dashboard and integrate those events in the app project.
 
@@ -310,7 +313,7 @@ Screenshot[5]
 
 ```js
 import { Component } from '@angular/core';
-import { AppTroveCordovaPlugin, AppTroveConfig, AppTroveEnvironment, AppTroveEvent } from '@awesome-cordova-plugins/apptrove/ngx';
+import { AppTroveCordovaPlugin, AppTroveConfig, AppTroveEnvironment, AppTroveEvent } from '@ionic-native/apptrove/ngx';
 
 @Component({
   selector: 'app-tab3',
@@ -346,7 +349,8 @@ export class Tab3Page {
 }
 
 ```
-Below are the screenshot of customs events calling 
+
+Below are the screenshot of customs events calling
 
 Screenshot[6]
 
@@ -394,7 +398,7 @@ export class Tab3Page {
 
 ```
 
-Below are the screenshot of example of revenue events 
+Below are the screenshot of example of revenue events
 
 Screenshot[7]
 
@@ -439,8 +443,8 @@ export class Tab2Page {
 Following below are the steps to retrieve the secretId and secretKey :-
 
 - Login your AppTrove Panel and select your application.
-- In the Dashboard, click on the `SDK Integration` option on the left side of panel. 
-- Under on the SDK Integration, click on the Advanced tab. 
+- In the Dashboard, click on the `SDK Integration` option on the left side of panel.
+- Under on the SDK Integration, click on the Advanced tab.
 - Under the Advanced tab, you will get the secretId and secretKey.
 
 Please check on the below screenshot
@@ -453,51 +457,60 @@ Screenshot[8]
 Check below the example code for passing the secretId and secretKey to the SDK
 
 ```ts
-
-import { Component, OnInit } from '@angular/core';
-import { AppTroveCordovaPlugin, AppTroveConfig, AppTroveEnvironment } from '@awesome-cordova-plugins/apptrove/ngx';
-
+import { Component, OnInit } from "@angular/core";
+import {
+  AppTroveCordovaPlugin,
+  AppTroveConfig,
+  AppTroveEnvironment,
+} from "@awesome-cordova-plugins/apptrove/ngx";
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: "app-tab1",
+  templateUrl: "tab1.page.html",
+  styleUrls: ["tab1.page.scss"],
 })
 export class Tab1Page {
-  constructor(private apptroveCordovaPlugin: AppTroveCordovaPlugin) {
-
-  }
+  constructor(private apptroveCordovaPlugin: AppTroveCordovaPlugin) {}
   async ngOnInit() {
-
     // await this.photoService.loadSaved();
 
     /*While Initializing the Sdk, You need to pass the three parameter in the AppTroveSDKConfig.
-         * In first argument, you need to pass the AppTrove SDK api key
-         * In second argument, you need to pass the environment which can be either "development", "production" or "testing". */
+     * In first argument, you need to pass the AppTrove SDK api key
+     * In second argument, you need to pass the environment which can be either "development", "production" or "testing". */
 
-    var key = "abcf2270-xxxx-xxxx-a2ae-34903c6e1d53";//Please pass your Development key here.//abcf2270-d94a-xxxx-xxxx-34903c6e1d53 //6eb549a7-d17c-42fa-b694-1487607e39d0
-    var apptroveConfig = new AppTroveConfig(key, AppTroveEnvironment.Development);
-    apptroveConfig.setAppSecret("659fb6f1xxxxxxxa29d46c9", "9258fcdb-a7a7-xxxxx-xxxx-65835ed38407");
+    var key = "abcf2270-xxxx-xxxx-a2ae-34903c6e1d53"; //Please pass your Development key here.//abcf2270-d94a-xxxx-xxxx-34903c6e1d53 //6eb549a7-d17c-42fa-b694-1487607e39d0
+    var apptroveConfig = new AppTroveConfig(
+      key,
+      AppTroveEnvironment.Development
+    );
+    apptroveConfig.setAppSecret(
+      "659fb6f1xxxxxxxa29d46c9",
+      "9258fcdb-a7a7-xxxxx-xxxx-65835ed38407"
+    );
     this.apptroveCordovaPlugin.initializeSDK(apptroveConfig);
   }
 }
-
 ```
-## <a id="qs-track-uninstall"></a>Uninstall Tracking 
+
+## <a id="qs-track-uninstall"></a>Uninstall Tracking
 
 AppTrove uninstall functionality is used to track the uninstall of the application from the devices. It is very useful for tracking the quality of the user.
 
 ```ts
- this.apptroveCordovaPlugin.getAppTroveId().then(val =>
-      FirebaseAnalytics.setUserProperty({ name: "ct_objectId", value: val, }))
-      .catch(e => console.log('error: ', e)); // Replace this with your actual method to get ct_objectId
-``` 
-* Add the above code to your app to set up a common identifier. 
-* Set the `app_remove` event as a conversion event in Firebase. 
-* Use the Firebase cloud function to send uninstall information to AppTrove MMP. 
-* You can find the support article [here](https://help-mmp.apptrove.com/en/articles/8165821-android-uninstall-tracking).
+this.apptroveCordovaPlugin
+  .getAppTroveId()
+  .then((val) =>
+    FirebaseAnalytics.setUserProperty({ name: "ct_objectId", value: val })
+  )
+  .catch((e) => console.log("error: ", e)); // Replace this with your actual method to get ct_objectId
+```
 
-## <a id="qs-campaign-data"></a>Getting Campaign Data 
+- Add the above code to your app to set up a common identifier.
+- Set the `app_remove` event as a conversion event in Firebase.
+- Use the Firebase cloud function to send uninstall information to AppTrove MMP.
+- You can find the support article [here](https://help.apptrove.com/en/articles/12679414-measure-uninstalls-via-silent-push-in-apptrove).
+
+## <a id="qs-campaign-data"></a>Getting Campaign Data
 
 For getting the campaign data, We have a function that return the campaign data. Please check below the example code.
 
@@ -534,11 +547,11 @@ Deep linking is a techniques in which the user directly redirect to the specific
 
 There are two types deeplinking
 
-* ***Normal deeplinking*** - Direct deep linking occurs when a user already has your app installed on their device. When this is the case, the deep link will redirect the user to the screen specified in the link.
+- **_Normal deeplinking_** - Direct deep linking occurs when a user already has your app installed on their device. When this is the case, the deep link will redirect the user to the screen specified in the link.
 
-* ***Deferred deeplinking*** - Deferred deep linking occurs when a user does not have your app installed on their device. When this is the case, the deep link will first send the user to the device app store to install the app. Once the user has installed and opened the app, the SDK will redirect them to the screen specified in the link.
+- **_Deferred deeplinking_** - Deferred deep linking occurs when a user does not have your app installed on their device. When this is the case, the deep link will first send the user to the device app store to install the app. Once the user has installed and opened the app, the SDK will redirect them to the screen specified in the link.
 
-Please check below the Deeplinking scenario 
+Please check below the Deeplinking scenario
 
 <img width="705" alt="Screenshot 2022-06-22 at 10 48 20 PM" src="https://user-images.githubusercontent.com/16884982/175099075-349910ce-ce7b-4a71-868c-11c34c4331cd.png">
 
@@ -549,12 +562,12 @@ If a user already has your app on their device, it will open when they interact 
 
 You can set up a specific activity to launch when a user interacts with a deep link. To do this:
 
-* Assign the unique scheme name to the activity in your AndroidManifest.xml file.
-* Add the intent-filter section to the activity definition.
-* Assign an android:scheme property value with your preferred scheme name.
+- Assign the unique scheme name to the activity in your AndroidManifest.xml file.
+- Add the intent-filter section to the activity definition.
+- Assign an android:scheme property value with your preferred scheme name.
 
 For example, you could set up an activity called FirstActivity to open like this:
-#### AndroidManifest.xml 
+#### AndroidManifest.xml
 
 ```
 
@@ -579,7 +592,7 @@ https://apptrove.u9ilnk.me/product?dlv=FirstProduct&quantity=10&pid=sms
 ```
 
 ### Normal Deep linking Setup for iOS
-    
+
 There is a Universal Links iOS app opening method which needs to be implemented for deeplink to work. This method directly opens the mobile app at default activity. Universal links take the format of normal web links for example. https://yourbrand.com or https://yourbrand.u9ilnk.me
 
 Follow the steps for configuring Universal Links
@@ -629,12 +642,11 @@ Screenshot[11]
 
 To associate a domain with your app, you need to have the associated domain file on your domain and the appropriate entitlement in your app. Once the unilink is created, AppTrove hosts the apple-app-site-association file. When a user installs your app, the system attempts to download the associated domain file and verify the domains in your Associated Domains Entitlement.
 
-        
-## <a id="qs-progaurd-apptrove-sdk"></a>Proguard Settings 
+## <a id="qs-progaurd-apptrove-sdk"></a>Proguard Settings
 
-If your app is using proguard then add these lines to the proguard config file 
+If your app is using proguard then add these lines to the proguard config file
 
-``` 
+```
   -keep class com.trackier.sdk.** { *; }
   -keep class com.google.android.gms.common.ConnectionResult {
       int SUCCESS;

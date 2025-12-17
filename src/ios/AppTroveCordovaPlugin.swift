@@ -110,8 +110,22 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
         }
     }
 
-    @objc(getTrackierId:)
-    func getTrackierId(command: CDVInvokedUrlCommand){
+    @objc(setUserAdditionalDetails:)
+    func setUserAdditionalDetails(command: CDVInvokedUrlCommand){
+        let msg = command.arguments[0] as? String ?? ""
+        if let data = msg.data(using: .utf8) {
+            do {
+                if let dict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    TrackierSDK.setUserAdditionalDetails(userAdditionalDetails: dict)
+                }
+            } catch {
+                print("Error parsing user additional details: \(error)")
+            }
+        }
+    }
+
+    @objc(getAppTroveId:)
+    func getAppTroveId(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
         pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getTrackierId())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
@@ -164,6 +178,13 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
     func getCampaignID(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
         pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getCampaignID())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getAdSet:)
+    func getAdSet(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getAdSet())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
