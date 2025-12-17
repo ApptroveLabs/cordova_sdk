@@ -2,8 +2,8 @@ import Cordova
 import Cordova
 import trackier_ios_sdk
 
-@objc(TrackierCordovaPlugin) 
-class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
+@objc(AppTroveCordovaPlugin) 
+class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
 
     var deeplinkCallbackId: String?
 
@@ -19,11 +19,11 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
             let environment = dict?["environment"] as! String;
             let secretId = dict?["secretId"] as! String;
             let secretKey = dict?["secretKey"] as! String;
-            let deeplinking = dict?["trackier_deferredDeeplink"] as! Bool?
+            let deeplinking = dict?["apptrove_deferredDeeplink"] as! Bool?
             let config = TrackierSDKConfig(appToken: appToken , env: environment)
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "1.6.77")
+            config.setSDKVersion(sdkVersion: "2.0.0")
             config.setDeeplinkListerner(listener: self)
 
             if let regionStr = dict?["region"] as? String {
@@ -49,8 +49,8 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
         )
     }
 
-    @objc(trackier_deferredDeeplink:)
-    func trackier_deferredDeeplink(command: CDVInvokedUrlCommand) {
+    @objc(apptrove_deferredDeeplink:)
+    func apptrove_deferredDeeplink(command: CDVInvokedUrlCommand) {
         self.deeplinkCallbackId = command.callbackId
         // return NO_RESULT so Cordova keeps callback alive
         let pluginResult = CDVPluginResult(status: CDVCommandStatus_NO_RESULT)
@@ -128,14 +128,14 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
     func updatePostbackConversion(command: CDVInvokedUrlCommand){
         let conversionValue = command.arguments[0] as? Int ?? 0
         TrackierSDK.updatePostbackConversion(conversionValue: conversionValue)
-        print("trackiersdk postback", conversionValue)
+        print("apptrovesdk postback", conversionValue)
     }
 
     @objc(waitForATTUserAuthorization:)
     func waitForATTUserAuthorization(command: CDVInvokedUrlCommand){
         let timeoutInterval = command.arguments[0] as? Int ?? 0
         TrackierSDK.waitForATTUserAuthorization(timeoutInterval: timeoutInterval)
-        print("trackiersdk time", timeoutInterval)
+        print("apptrovesdk time", timeoutInterval)
 
     }
     
@@ -482,3 +482,4 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
         return nil
     }
 }
+

@@ -1,10 +1,10 @@
-package com.trackier.cordova_sdk;
+package com.apptrove.cordova_sdk;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class TrackierCordovaUtil {
+public class AppTroveCordovaUtil {
 
     public static String getStringVal(String key, JSONObject jsonObject) {
         try {

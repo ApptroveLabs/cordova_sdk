@@ -3,25 +3,25 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { fromEvent } from 'rxjs';
 
-export enum TrackierEnvironment {
+export enum AppTroveEnvironment {
 	Development = 'development',
 	Production = 'production',
 	Testing = 'testing',
 }
 
-export enum TrackierRegion {
+export enum AppTroveRegion {
 	IN = 'IN',
 	GLOBAL = 'GLOBAL',
 	NONE = 'NONE'
 }
 
-export enum TrackierEncryptionType {
+export enum AppTroveEncryptionType {
 	AES_GCM = 'AES_GCM'
 }
 
-export class TrackierConfig {
+export class AppTroveConfig {
 	private appToken: string;
-	private environment: TrackierEnvironment;
+	private environment: AppTroveEnvironment;
 	private secretId: string = '';
 	private secretKey: string = '';
 	private manualMode: boolean = false;
@@ -32,9 +32,9 @@ export class TrackierConfig {
 	private region: string = '';
 	private appId: string = '';
 	private encryptionKey: string = '';
-	private encryptionType: TrackierEncryptionType | string = '';
+	private encryptionType: AppTroveEncryptionType | string = '';
 	
-	constructor(appToken: string, environment: TrackierEnvironment) {
+	constructor(appToken: string, environment: AppTroveEnvironment) {
 		this.appToken = appToken;
 		this.environment = environment;
 		this.secretId = this.secretId;
@@ -70,7 +70,7 @@ export class TrackierConfig {
 		this.androidId = value;
 	}
 
-	public setRegion(region: TrackierRegion): void {
+	public setRegion(region: AppTroveRegion): void {
 		this.region = region;
 	}
 
@@ -82,13 +82,13 @@ export class TrackierConfig {
 		this.encryptionKey = value;
 	}
 
-	public setEncryptionType(value: TrackierEncryptionType | string): void {
+	public setEncryptionType(value: AppTroveEncryptionType | string): void {
 		this.encryptionType = value;
 	}
 
 }
 
-export class TrackierEvent {
+export class AppTroveEvent {
 
 	private eventId: string;
 	private orderId: string;
@@ -175,16 +175,16 @@ export class TrackierEvent {
 	platforms: ['Android'] // Array of platforms supported, example: ['Android', 'iOS']
 })
 @Injectable()
-export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
+export class AppTroveCordovaPlugin extends AwesomeCordovaNativePlugin {
 
 	@Cordova()
-	initializeSDK(config: TrackierConfig): Promise<void> {
+	initializeSDK(config: AppTroveConfig): Promise<void> {
 		return;
 	}
  
 	 
 	@Cordova()
-	trackEvent(event: TrackierEvent): Promise<any> {
+	trackEvent(event: AppTroveEvent): Promise<any> {
 		return;
 	}
 
@@ -229,7 +229,7 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 	}
 
 	@Cordova()
-	getTrackierId(): Promise<string> {
+	getAppTroveId(): Promise<string> {
 		return;
 	}
 
@@ -375,8 +375,8 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 			(error: any) => {
 			observer.error(error);
 			},
-			"TrackierCordovaPlugin",
-			"trackier_deferredDeeplink",
+			"AppTroveCordovaPlugin",
+			"apptrove_deferredDeeplink",
 			[]
 		  );
 		});
