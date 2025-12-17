@@ -36,7 +36,7 @@
 
 We have created a example app for the cordova sdk integration.
 
-Please check the [Example](https://github.com/AfficoneTech/cordova_sdk/tree/main/example-ionic-app) directory for know to how the `AppTrove SDK` can be integrated.
+Please check the [Example](https://github.com/ApptroveLabs/cordova_sdk/tree/main/example-ionic-app) directory for know to how the `AppTrove SDK` can be integrated.
 
 ### <a id="qs-add-sdk"></a>Add Cordova SDK to your app
 
