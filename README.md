@@ -42,14 +42,14 @@ Please check the [Example](https://github.com/ApptroveLabs/cordova_sdk/tree/main
 
 Basic integration First, download the library from npm:
 
-    $ npm install AfficoneTech/cordova_sdk
+    $ npm install ApptroveLabs/cordova_sdk
 
 In case you are using Ionic Native, Please follow the below steps for integration:-
 
 1. Install the the apptrove cordova sdk by run the below commands in Terminal/Cmd.
 
 ```
-$ npm install AfficoneTech/cordova_sdk
+$ npm install ApptroveLabs/cordova_sdk
 ```
 
 2. You need to add the awesome cordova plugins by run the below commands in Terminal/Cmd.
@@ -453,7 +453,6 @@ Screenshot[8]
 
 <img width="1000" alt="Screenshot 8" src="https://user-images.githubusercontent.com/16884982/185338826-bcf802d0-c493-4a67-adb3-a9b52bae289e.png">
 
-
 Check below the example code for passing the secretId and secretKey to the SDK
 
 ```ts
@@ -555,7 +554,6 @@ Please check below the Deeplinking scenario
 
 <img width="705" alt="Screenshot 2022-06-22 at 10 48 20 PM" src="https://user-images.githubusercontent.com/16884982/175099075-349910ce-ce7b-4a71-868c-11c34c4331cd.png">
 
-
 ### Normal Deep linking
 
 If a user already has your app on their device, it will open when they interact with a tracker containing a deep link. You can then parse the deep link information for further use. To do this, you need to choose a desired unique scheme name.
@@ -567,6 +565,7 @@ You can set up a specific activity to launch when a user interacts with a deep l
 - Assign an android:scheme property value with your preferred scheme name.
 
 For example, you could set up an activity called FirstActivity to open like this:
+
 #### AndroidManifest.xml
 
 ```
