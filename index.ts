@@ -1,7 +1,6 @@
-import { AwesomeCordovaNativePlugin } from '@awesome-cordova-plugins/core';
+import { Cordova, AwesomeCordovaNativePlugin, Plugin } from '@awesome-cordova-plugins/core';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { fromEvent } from 'rxjs';
 
 export enum TrackierEnvironment {
 	Development = 'development',
@@ -344,6 +343,11 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 
 	@Cordova()
 	sendFcmToken(token: string): Promise<string> {
+		return;
+	}
+
+	@Cordova()
+	sendAPNToken(token: string): Promise<string> {
 		return;
 	}
 

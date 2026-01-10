@@ -23,7 +23,7 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
             let config = TrackierSDKConfig(appToken: appToken , env: environment)
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "1.6.77")
+            config.setSDKVersion(sdkVersion: "1.6.78")
             config.setDeeplinkListerner(listener: self)
 
             if let regionStr = dict?["region"] as? String {
@@ -254,6 +254,15 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
     func parseDeepLink(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
         TrackierSDK.parseDeepLink(uri: msg)
+    }
+
+    @objc(sendAPNToken:)
+    func sendAPNToken(command: CDVInvokedUrlCommand){
+        let token = command.arguments[0] as? String ?? ""
+        print("Sending APN token: \(token)")
+        TrackierSDK.sendAPNToken(token: token)
+        let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "APN Token sent successfully")
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
     // Dynamic Link Creation

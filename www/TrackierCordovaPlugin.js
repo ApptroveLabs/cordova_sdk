@@ -157,6 +157,10 @@ exports.sendFcmToken = function (arg0, success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'sendFcmToken', [(arg0)]);
 };
 
+exports.sendAPNToken = function (arg0, success, error) {
+    exec(success, error, 'TrackierCordovaPlugin', 'sendAPNToken', [(arg0)]);
+};
+
 exports.subscribeAttributionlink = function (success, error) {
     exec(success, error, 'TrackierCordovaPlugin', 'subscribeAttributionlink', []);
 };

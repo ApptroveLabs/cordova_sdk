@@ -118,6 +118,7 @@ export declare class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
         };
     }>;
     sendFcmToken(token: string): Promise<string>;
+    sendAPNToken(token: string): Promise<string>;
     subscribeAttributionlink(): Promise<string>;
     updatePostbackConversion(conversionValue: number): Promise<string>;
     waitForATTUserAuthorization(timeoutInterval: number): Promise<string>;
