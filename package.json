@@ -1,9 +1,9 @@
 {
-  "name": "com.trackier.cordova_sdk",
-  "version": "1.6.78",
-  "description": "This is trackier cordova plugin .",
+  "name": "com.apptrove.cordova_sdk",
+  "version": "2.0.0",
+  "description": "This is AppTrove cordova plugin.",
   "cordova": {
-    "id": "com.trackier.cordova_sdk",
+    "id": "com.apptrove.cordova_sdk",
     "platforms": [
       "android"
     ]

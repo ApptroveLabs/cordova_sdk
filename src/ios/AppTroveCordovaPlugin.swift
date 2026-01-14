@@ -1,9 +1,9 @@
 import Cordova
 import Cordova
-import trackier_ios_sdk
+import apptrove_ios_sdk
 
-@objc(TrackierCordovaPlugin) 
-class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
+@objc(AppTroveCordovaPlugin) 
+class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
 
     var deeplinkCallbackId: String?
 
@@ -19,11 +19,11 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
             let environment = dict?["environment"] as! String;
             let secretId = dict?["secretId"] as! String;
             let secretKey = dict?["secretKey"] as! String;
-            let deeplinking = dict?["trackier_deferredDeeplink"] as! Bool?
-            let config = TrackierSDKConfig(appToken: appToken , env: environment)
+            let deeplinking = dict?["apptrove_deferredDeeplink"] as! Bool?
+            let config = AppTroveSDKConfig(appToken: appToken , env: environment)
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "1.6.78")
+            config.setSDKVersion(sdkVersion: "2.0.0")
             config.setDeeplinkListerner(listener: self)
 
             if let regionStr = dict?["region"] as? String {
@@ -36,7 +36,7 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
                 }
             }
 
-            TrackierSDK.initialize(config: config)
+            AppTroveSDK.initialize(config: config)
 
             pluginResult = CDVPluginResult(
                 status: CDVCommandStatus_OK,
@@ -49,8 +49,8 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
         )
     }
 
-    @objc(trackier_deferredDeeplink:)
-    func trackier_deferredDeeplink(command: CDVInvokedUrlCommand) {
+    @objc(apptrove_deferredDeeplink:)
+    func apptrove_deferredDeeplink(command: CDVInvokedUrlCommand) {
         self.deeplinkCallbackId = command.callbackId
         // return NO_RESULT so Cordova keeps callback alive
         let pluginResult = CDVPluginResult(status: CDVCommandStatus_NO_RESULT)
@@ -72,195 +72,195 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
     @objc(setUserId:)
     func setUserId(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
-        TrackierSDK.setUserID(userId: msg)
+        AppTroveSDK.setUserID(userId: msg)
     }
 
     @objc(setUserEmail:)
     func setUserEmail(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
-        TrackierSDK.setUserEmail(userEmail: msg)
+        AppTroveSDK.setUserEmail(userEmail: msg)
     }
 
     @objc(setUserName:)
     func setUserName(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
-        TrackierSDK.setUserName(userName: msg)
+        AppTroveSDK.setUserName(userName: msg)
     }
 
     @objc(setUserPhone:)
     func setUserPhone(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
-        TrackierSDK.setUserPhone(userPhone: msg)
+        AppTroveSDK.setUserPhone(userPhone: msg)
     }
 
     @objc(setDOB:)
     func setDOB(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
-        TrackierSDK.setDOB(dob: msg)
+        AppTroveSDK.setDOB(dob: msg)
     }
     
     @objc(setGender:)
     func setGender(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
         switch msg {
-            case "Male": TrackierSDK.setGender(gender: .MALE)
-            case "Female": TrackierSDK.setGender(gender: .FEMALE)
-            case "Others": TrackierSDK.setGender(gender: .OTHERS)
+            case "Male": AppTroveSDK.setGender(gender: .MALE)
+            case "Female": AppTroveSDK.setGender(gender: .FEMALE)
+            case "Others": AppTroveSDK.setGender(gender: .OTHERS)
             default: print("No Gender found")
         }
     }
 
-    @objc(getTrackierId:)
-    func getTrackierId(command: CDVInvokedUrlCommand){
+    @objc(getAppTroveId:)
+    func getAppTroveId(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getTrackierId())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getAppTroveId())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
     @objc(subscribeAttributionlink:)
     func subscribeAttributionlink(command: CDVInvokedUrlCommand){
         if #available(iOS 13.0, *) {
-            TrackierSDK.subscribeAttributionlink()
+            AppTroveSDK.subscribeAttributionlink()
         }
     }
 
     @objc(updatePostbackConversion:)
     func updatePostbackConversion(command: CDVInvokedUrlCommand){
         let conversionValue = command.arguments[0] as? Int ?? 0
-        TrackierSDK.updatePostbackConversion(conversionValue: conversionValue)
-        print("trackiersdk postback", conversionValue)
+        AppTroveSDK.updatePostbackConversion(conversionValue: conversionValue)
+        print("apptrovesdk postback", conversionValue)
     }
 
     @objc(waitForATTUserAuthorization:)
     func waitForATTUserAuthorization(command: CDVInvokedUrlCommand){
         let timeoutInterval = command.arguments[0] as? Int ?? 0
-        TrackierSDK.waitForATTUserAuthorization(timeoutInterval: timeoutInterval)
-        print("trackiersdk time", timeoutInterval)
+        AppTroveSDK.waitForATTUserAuthorization(timeoutInterval: timeoutInterval)
+        print("apptrovesdk time", timeoutInterval)
 
     }
     
     @objc(getAd:)
     func getAd(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getAd())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getAd())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getAdID:)
     func getAdID(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getAdID())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getAdID())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getCampaign:)
     func getCampaign(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getCampaign())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getCampaign())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getCampaignID:)
     func getCampaignID(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getCampaignID())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getCampaignID())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getAdSetID:)
     func getAdSetID(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getAdSetID())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getAdSetID())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getChannel:)
     func getChannel(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getChannel())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getChannel())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getP1:)
     func getP1(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getP1())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getP1())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getP2:)
     func getP2(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getP2())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getP2())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getP3:)
     func getP3(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getP3())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getP3())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getP4:)
     func getP4(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getP4())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getP4())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getP5:)
     func getP5(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getP5())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getP5())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getClickId:)
     func getClickId(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getClickId())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getClickId())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getDlv:)
     func getDlv(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getDlv())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getDlv())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getPid:)
     func getPid(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getPid())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getPid())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getIsRetargeting:)
     func getIsRetargeting(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: TrackierSDK.getIsRetargeting())
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getIsRetargeting())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
     @objc(updateAppleAdsToken:)
     func updateAppleAdsToken(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
-        TrackierSDK.updateAppleAdsToken(token: msg)
+        AppTroveSDK.updateAppleAdsToken(token: msg)
     }
 
     @objc(parseDeepLink:)
     func parseDeepLink(command: CDVInvokedUrlCommand){
         let msg = command.arguments[0] as? String ?? ""
-        TrackierSDK.parseDeepLink(uri: msg)
+        AppTroveSDK.parseDeepLink(uri: msg)
     }
 
     @objc(sendAPNToken:)
     func sendAPNToken(command: CDVInvokedUrlCommand){
         let token = command.arguments[0] as? String ?? ""
         print("Sending APN token: \(token)")
-        TrackierSDK.sendAPNToken(token: token)
+        AppTroveSDK.sendAPNToken(token: token)
         let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "APN Token sent successfully")
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
@@ -362,7 +362,7 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
                     let dynamicLink = builder.build()
 
                     if #available(iOS 13.0, *) {
-                        TrackierSDK.createDynamicLink(
+                        AppTroveSDK.createDynamicLink(
                             dynamicLink: dynamicLink,
                             onSuccess: { (result) in
                                 var pluginResult: CDVPluginResult?
@@ -394,7 +394,7 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
     func resolveDeeplinkUrl(command: CDVInvokedUrlCommand){
         let url = command.arguments[0] as? String ?? ""
         if #available(iOS 13.0, *) {
-            TrackierSDK.resolveDeeplinkUrl(
+            AppTroveSDK.resolveDeeplinkUrl(
                 inputUrl: url,
                 completion: { (result) in
                     switch result {
@@ -449,7 +449,7 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
             for (key, value) in ev {
                 ev[key] = value
             }
-            let event = TrackierEvent(id: eventId)
+            let event = AppTroveEvent(id: eventId)
             event.setRevenue(revenue: revenue, currency: currency)
             event.orderId = orderId
             event.setCouponCode(couponCode: couponCode)
@@ -467,7 +467,7 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
             for (key, value) in ev {
                 event.addEventValue(prop: key, val: value)
             }
-            TrackierSDK.trackEvent(event: event)
+            AppTroveSDK.trackEvent(event: event)
 
             pluginResult = CDVPluginResult(
                 status: CDVCommandStatus_OK,

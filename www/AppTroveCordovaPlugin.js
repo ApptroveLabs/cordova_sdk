@@ -5,54 +5,54 @@ function cordovaExecCommandCallback(command, callback) {
     cordova.exec(
         callback,
         function errorHandler(err) { },
-        'TrackierCordovaPlugin',
+        'AppTroveCordovaPlugin',
         command,
         args
     );
 }
 
 exports.initializeSDK = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'initializeSDK', [JSON.stringify(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'initializeSDK', [JSON.stringify(arg0)]);
 };
 
 exports.trackEvent = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'trackEvent', [JSON.stringify(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'trackEvent', [JSON.stringify(arg0)]);
 };
 
 exports.setUserId = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'setUserId', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'setUserId', [(arg0)]);
 };
 
 exports.setUserEmail = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'setUserEmail', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'setUserEmail', [(arg0)]);
 };
 
 exports.setUserName = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'setUserName', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'setUserName', [(arg0)]);
 };
 
 exports.setUserPhone = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'setUserPhone', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'setUserPhone', [(arg0)]);
 };
 
 exports.setDOB = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'setDOB', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'setDOB', [(arg0)]);
 };
 
 exports.setGender = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'setGender', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'setGender', [(arg0)]);
 };
 
 exports.fireInstall = function (success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'fireInstall');
+    exec(success, error, 'AppTroveCordovaPlugin', 'fireInstall');
 };
 
 exports.parseDeepLink = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'parseDeepLink', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'parseDeepLink', [(arg0)]);
 };
 
-exports.getTrackierId = function (callback) {
-    cordovaExecCommandCallback('getTrackierId', callback);
+exports.getAppTroveId = function (callback) {
+    cordovaExecCommandCallback('getAppTroveId', callback);
 };
 
 exports.getAd = function (callback) {
@@ -120,55 +120,55 @@ exports.getIsRetargeting = function (callback) {
 };
 
 exports.setDeferredDeeplinkCallbackListener = function (callback) {
-    exec(callback, null, "TrackierCordovaPlugin", "trackier_deferredDeeplink", []);
+    exec(callback, null, "AppTroveCordovaPlugin", "apptrove_deferredDeeplink", []);
 }
 
 exports.storeRetargetting = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'storeRetargetting', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'storeRetargetting', [(arg0)]);
 };
 
 exports.updateAppleAdsToken = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'updateAppleAdsToken', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'updateAppleAdsToken', [(arg0)]);
 };
 
 exports.setUserAdditionalDetails = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'setUserAdditionalDetails', [JSON.stringify(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'setUserAdditionalDetails', [JSON.stringify(arg0)]);
 };
 
 // Device Information
 exports.setIMEI = function (arg0, arg1, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'setIMEI', [(arg0), (arg1)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'setIMEI', [(arg0), (arg1)]);
 };
 
 exports.setMacAddress = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'setMacAddress', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'setMacAddress', [(arg0)]);
 };
 
 // Dynamic Link Creation
 exports.createDynamicLink = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'createDynamicLink', [JSON.stringify(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'createDynamicLink', [JSON.stringify(arg0)]);
 };
 // Deeplink URL Resolution
 exports.resolveDeeplinkUrl = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'resolveDeeplinkUrl', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'resolveDeeplinkUrl', [(arg0)]);
 };
 
 exports.sendFcmToken = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'sendFcmToken', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'sendFcmToken', [(arg0)]);
 };
 
 exports.sendAPNToken = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'sendAPNToken', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'sendAPNToken', [(arg0)]);
 };
 
 exports.subscribeAttributionlink = function (success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'subscribeAttributionlink', []);
+    exec(success, error, 'AppTroveCordovaPlugin', 'subscribeAttributionlink', []);
 };
 
 exports.updatePostbackConversion = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'updatePostbackConversion', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'updatePostbackConversion', [(arg0)]);
 };
 
 exports.waitForATTUserAuthorization = function (arg0, success, error) {
-    exec(success, error, 'TrackierCordovaPlugin', 'waitForATTUserAuthorization', [(arg0)]);
+    exec(success, error, 'AppTroveCordovaPlugin', 'waitForATTUserAuthorization', [(arg0)]);
 };

@@ -1,19 +1,19 @@
 import { AwesomeCordovaNativePlugin } from '@awesome-cordova-plugins/core';
 import { Observable } from 'rxjs';
-export declare enum TrackierEnvironment {
+export declare enum AppTroveEnvironment {
     Development = "development",
     Production = "production",
     Testing = "testing"
 }
-export declare enum TrackierRegion {
+export declare enum AppTroveRegion {
     IN = "IN",
     GLOBAL = "GLOBAL",
     NONE = "NONE"
 }
-export declare enum TrackierEncryptionType {
+export declare enum AppTroveEncryptionType {
     AES_GCM = "AES_GCM"
 }
-export declare class TrackierConfig {
+export declare class AppTroveConfig {
     private appToken;
     private environment;
     private secretId;
@@ -27,7 +27,7 @@ export declare class TrackierConfig {
     private appId;
     private encryptionKey;
     private encryptionType;
-    constructor(appToken: string, environment: TrackierEnvironment);
+    constructor(appToken: string, environment: AppTroveEnvironment);
     setAppSecret(key: string, value: string): void;
     setManualMode(value: boolean): void;
     disableOrganicTracking(value: boolean): void;
@@ -36,12 +36,12 @@ export declare class TrackierConfig {
     }): void;
     setFacebookAppId(value: string): void;
     setAndroidId(value: string): void;
-    setRegion(region: TrackierRegion): void;
+    setRegion(region: AppTroveRegion): void;
     setAppID(value: string): void;
     setEncryptionKey(value: string): void;
-    setEncryptionType(value: TrackierEncryptionType | string): void;
+    setEncryptionType(value: AppTroveEncryptionType | string): void;
 }
-export declare class TrackierEvent {
+export declare class AppTroveEvent {
     private eventId;
     private orderId;
     private productId;
@@ -78,9 +78,9 @@ export declare class TrackierEvent {
     setRevenue(revenue: number): void;
     setEventValue: (key: string, value: string) => void;
 }
-export declare class TrackierCordovaPluginOriginal extends AwesomeCordovaNativePlugin {
-    initializeSDK(config: TrackierConfig): Promise<void>;
-    trackEvent(event: TrackierEvent): Promise<any>;
+export declare class AppTroveCordovaPlugin extends AwesomeCordovaNativePlugin {
+    initializeSDK(config: AppTroveConfig): Promise<void>;
+    trackEvent(event: AppTroveEvent): Promise<any>;
     setUserId(userId: string): Promise<string>;
     setUserEmail(userEmail: any): Promise<string>;
     setUserName(userName: any): Promise<string>;
@@ -89,7 +89,7 @@ export declare class TrackierCordovaPluginOriginal extends AwesomeCordovaNativeP
     setGender(gender: any): Promise<string>;
     parseDeepLink(uri: any): Promise<string>;
     fireInstall(): Promise<string>;
-    getTrackierId(): Promise<string>;
+    getAppTroveId(): Promise<string>;
     getAd(): Promise<string>;
     getAdID(): Promise<string>;
     getCampaign(): Promise<string>;
@@ -125,5 +125,3 @@ export declare class TrackierCordovaPluginOriginal extends AwesomeCordovaNativeP
     setDeferredDeeplinkCallbackListener(): Observable<string>;
     storeRetargetting(dob: any): Promise<string>;
 }
-
-export declare const TrackierCordovaPlugin: TrackierCordovaPluginOriginal;
