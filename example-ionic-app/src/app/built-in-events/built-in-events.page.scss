@@ -1,0 +1,51 @@
+ion-content {
+  --background: linear-gradient(180deg, #13A58E 0%, #04122B 100%);
+}
+
+ion-card {
+  margin: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+ion-card-header {
+  padding-bottom: 8px;
+}
+
+ion-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #13A58E;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+.parameter-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.delete-icon {
+  color: #eb445a;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+ion-button {
+  --border-radius: 10px;
+  margin-top: 12px;
+}
+
+ion-button[expand="block"] {
+  margin: 16px;
+  height: 50px;
+  font-weight: 600;
+}
+
+ion-select {
+  width: 100%;
+}

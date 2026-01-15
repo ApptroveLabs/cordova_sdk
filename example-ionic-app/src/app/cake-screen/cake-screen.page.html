@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cake Activity</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <!-- Image Section with Styling -->
+    <ion-img [src]="getProductImage()" class="product-img"></ion-img>
+    
+    <!-- Product Details Section -->
+    <div class="product-details">
+      <h2 class="product-name">{{ productId?.toUpperCase() || 'Unknown' }}</h2>
+      <h3 class="product-quantity">Quantity: {{ quantity || '0' }}</h3>
+      <p class="product-description">{{ getJsonData() }}</p>
+    </div>
+
+    <!-- Copy Data Button Section -->
+    <ion-button (click)="copyDataToClipboard()" class="copy-btn">
+      <ion-icon slot="start" name="clipboard"></ion-icon>
+      Copy Data
+    </ion-button>
+  </div>
+</ion-content>

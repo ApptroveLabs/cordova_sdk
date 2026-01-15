@@ -1,0 +1,45 @@
+<ion-header>
+</ion-header>
+
+<ion-content class="content-container">
+  <!-- AppTrove Logo (Image) -->
+  <div class="logo-container">
+    <img src="assets/apptroveLogo.svg" class="logo" alt="AppTrove Logo" />
+  </div>
+
+  <ion-text class="welcome-text">
+    <h2>Welcome to AppTrove SDK Simulator</h2>
+    <p class="subheading">Track and manage your events with ease.</p>
+  </ion-text>
+
+  <div class="button-container">
+    <ion-button expand="block" (click)="onButtonClick('Built-in events')" class="custom-button">
+      <ion-icon slot="start" name="list-circle-outline"></ion-icon>
+      Built-in events
+    </ion-button>
+    <ion-button expand="block" (click)="onButtonClick('Customs Events')" class="custom-button">
+      <ion-icon slot="start" name="create-outline"></ion-icon>
+      Customs Events
+    </ion-button>
+    <ion-button expand="block" (click)="onButtonClick('Deep linking Page')" class="custom-button">
+      <ion-icon slot="start" name="link-outline"></ion-icon>
+      Deep linking Page
+    </ion-button>
+    <ion-button expand="block" (click)="onButtonClick('Product Page')" class="custom-button">
+      <ion-icon slot="start" name="pricetag-outline"></ion-icon>
+      Product Page
+    </ion-button>
+    <ion-button expand="block" (click)="onButtonClick('Dynamic Links')" class="custom-button">
+      <ion-icon slot="start" name="link-outline"></ion-icon>
+      Dynamic Links
+    </ion-button>
+    <ion-button expand="block" (click)="onButtonClick('Complete Event')" class="custom-button" id="complete-event-btn">
+      <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+      Complete Event
+    </ion-button>
+    <ion-button expand="block" (click)="onButtonClick('Campaign Data')" class="custom-button">
+      <ion-icon slot="start" name="analytics-outline"></ion-icon>
+      Campaign Data
+    </ion-button>
+  </div>
+</ion-content>

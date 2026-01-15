@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/product-page" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add to Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cart-content">
+  <div class="content">
+    <div class="logo-container">
+      <img src="assets/apptroveLogo.svg" alt="AppTrove Logo" class="logo" />
+    </div>
+    
+    <h2>Product Details</h2>
+    
+    <ion-card>
+      <ion-card-content>
+        <div class="product-info">
+          <img src="assets/chocochipcupcake.png" alt="Choco Chip Cupcake" class="product-image" />
+          <div class="product-details">
+            <h3>Britannia Cupcake</h3>
+            <p>Price: $30.00</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="block" (click)="purchase()" class="action-button">
+      Purchase
+    </ion-button>
+  </div>
+</ion-content>

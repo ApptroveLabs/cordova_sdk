@@ -1,0 +1,112 @@
+ion-content {
+  --background: linear-gradient(180deg, #13A58E 0%, #04122B 100%);
+}
+
+.container {
+  padding: 16px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+
+  ion-spinner {
+    margin-bottom: 16px;
+    color: white;
+  }
+
+  p {
+    color: white;
+    margin: 0;
+  }
+}
+
+ion-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  ion-label {
+    h3 {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #13A58E;
+    }
+
+    p {
+      color: var(--ion-color-medium);
+      font-size: 14px;
+      margin: 0;
+      word-break: break-all;
+    }
+  }
+
+  ion-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    margin: 0;
+  }
+}
+
+ion-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #13A58E;
+}
+
+ion-button[expand="block"] {
+  margin-bottom: 12px;
+  --border-radius: 10px;
+  height: 50px;
+  font-weight: 600;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Error card styling
+ion-card[color="danger"] {
+  ion-card-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  ion-card {
+    margin-bottom: 12px;
+  }
+
+  ion-item {
+    ion-label {
+      h3 {
+        font-size: 15px;
+      }
+
+      p {
+        font-size: 13px;
+      }
+    }
+  }
+}

@@ -1,0 +1,96 @@
+ion-content.cart-content {
+  --background: linear-gradient(180deg, #13A58E 0%, #04122B 100%);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  min-height: 100%;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+ion-card {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 20px;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-details h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 5px;
+  color: #04122B;
+}
+
+.product-details p {
+  font-size: 16px;
+  color: #13A58E;
+  font-weight: 500;
+}
+
+.action-button {
+  --background: white;
+  --color: #13A58E;
+  --border-radius: 12px;
+  width: 100%;
+  max-width: 350px;
+  height: 52px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .product-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .product-image {
+    margin: 0 0 15px;
+  }
+}
+  

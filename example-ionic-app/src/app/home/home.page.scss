@@ -1,0 +1,161 @@
+ion-content.content-container {
+  --background: linear-gradient(135deg, #13A58E, #04122B); /* AppTrove brand gradient */
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: calc(30px + env(safe-area-inset-top, 0px));
+  --padding-bottom: 30px;
+  text-align: center;
+  color: white;
+}
+
+ion-content.content-container::part(scroll) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+  filter: brightness(0) invert(1); /* Make logo white for dark background */
+}
+
+.welcome-text {
+  margin-bottom: 25px;
+}
+
+.welcome-text h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.subheading {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 350px;
+}
+
+ion-button.custom-button {
+  --background: #13A58E; /* AppTrove brand green */
+  --background-hover: #0f8a76;
+  --background-activated: #0d7a68;
+  --color: white;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 15px rgba(19, 165, 142, 0.3);
+  height: 56px;
+  font-size: 15px;
+  font-weight: 600;
+  width: 100%;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
+
+ion-button.custom-button:hover {
+  --background: #0f8a76;
+}
+
+ion-button.custom-button:focus {
+  outline: none;
+}
+
+ion-button.custom-button ion-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    padding: 20px 15px;
+  }
+
+  .welcome-text h2 {
+    font-size: 20px;
+  }
+
+  .subheading {
+    font-size: 14px;
+  }
+
+  ion-button.custom-button {
+    font-size: 14px;
+    height: 52px;
+  }
+
+  .logo {
+    max-width: 180px;
+  }
+}
+
+/* home.page.scss */
+.exit-alert {
+  --background: #ff8a80; /* Soft red background */
+  --border-radius: 10px;
+  --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  --padding: 20px;
+}
+
+.exit-alert .alert-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+
+.exit-alert .alert-message {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.exit-btn {
+  background-color: #ff1744; /* Bright red for exit */
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.exit-btn:hover {
+  background-color: #d50000; /* Darker red on hover */
+  transform: scale(1.05);
+}
+
+.cancel-btn {
+  background-color: #b0bec5; /* Light gray for cancel */
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cancel-btn:hover {
+  background-color: #78909c; /* Darker gray on hover */
+  transform: scale(1.05);
+}
