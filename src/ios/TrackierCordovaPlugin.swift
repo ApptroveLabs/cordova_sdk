@@ -23,7 +23,7 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
             let config = TrackierSDKConfig(appToken: appToken , env: environment)
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "1.6.78")
+            config.setSDKVersion(sdkVersion: "1.6.79")
             config.setDeeplinkListerner(listener: self)
 
             if let regionStr = dict?["region"] as? String {

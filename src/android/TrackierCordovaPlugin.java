@@ -6,7 +6,6 @@ import org.apache.cordova.CordovaPlugin;
 
 import androidx.annotation.NonNull;
 
-
 import com.trackier.sdk.dynamic_link.AndroidParameters;
 import com.trackier.sdk.dynamic_link.DesktopParameters;
 import com.trackier.sdk.dynamic_link.DynamicLink;
@@ -23,7 +22,6 @@ import com.trackier.sdk.AttributionParams;
 import com.trackier.sdk.DeepLink;
 import com.trackier.sdk.DeepLinkListener;
 import com.trackier.sdk.TrackierSDK;
-
 
 /**
  * This class echoes a string called from JavaScript.
@@ -75,16 +73,16 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
         String url = com.trackier.cordova_sdk.TrackierCordovaUtil.optString(args, 0);
         this.resolveDeeplinkUrl(url, callbackContext);
         return true;
-      // } else if (action.equals("trackSession")) {
-      //   this.trackSession();
-      //   return true;
+        // } else if (action.equals("trackSession")) {
+        // this.trackSession();
+        // return true;
       } else if (action.equals("fireInstall")) {
         this.fireInstall();
         return true;
       } else if (action.equals("storeRetargetting")) {
         String uri = com.trackier.cordova_sdk.TrackierCordovaUtil.optString(args, 0);
         this.storeRetargetting(uri);
-        return true;  
+        return true;
       } else if (action.equals("sendFcmToken")) {
         String token = com.trackier.cordova_sdk.TrackierCordovaUtil.optString(args, 0);
         return sendFcmToken(token);
@@ -149,13 +147,12 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
       } else if (action.equals("fireInstall")) {
         fireInstall();
         return true;
-      } 
+      }
     } catch (Exception e) {
 
     }
     return false;
   }
-
 
   private void initializeSDK(String message, CallbackContext callbackContext, String action) {
     if (message == null && message.length() == 0) {
@@ -165,28 +162,36 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
     try {
       JSONObject trackiersdkConfigJson = new JSONObject(message);
       com.trackier.sdk.TrackierSDKConfig sdkConfig = new com.trackier.sdk.TrackierSDKConfig(webView.getContext(),
-        com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("appToken", trackiersdkConfigJson),
-        com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("environment", trackiersdkConfigJson));
-      sdkConfig.setAppSecret(com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("secretId", trackiersdkConfigJson), com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("secretKey", trackiersdkConfigJson));
-      sdkConfig.setManualMode(com.trackier.cordova_sdk.TrackierCordovaUtil.getBooleanVal("manualMode", trackiersdkConfigJson));
-      sdkConfig.disableOrganicTracking(com.trackier.cordova_sdk.TrackierCordovaUtil.getBooleanVal("disableorganic", trackiersdkConfigJson));
+          com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("appToken", trackiersdkConfigJson),
+          com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("environment", trackiersdkConfigJson));
+      sdkConfig.setAppSecret(
+          com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("secretId", trackiersdkConfigJson),
+          com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("secretKey", trackiersdkConfigJson));
+      sdkConfig.setManualMode(
+          com.trackier.cordova_sdk.TrackierCordovaUtil.getBooleanVal("manualMode", trackiersdkConfigJson));
+      sdkConfig.disableOrganicTracking(
+          com.trackier.cordova_sdk.TrackierCordovaUtil.getBooleanVal("disableorganic", trackiersdkConfigJson));
       sdkConfig.setSDKType("cordova_sdk");
-      sdkConfig.setSDKVersion("1.6.78");
+      sdkConfig.setSDKVersion("1.6.79");
 
-      sdkConfig.setFacebookAppId(com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("facebookAppId", trackiersdkConfigJson));
-      sdkConfig.setAndroidId(com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("androidId", trackiersdkConfigJson));
+      sdkConfig.setFacebookAppId(
+          com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("facebookAppId", trackiersdkConfigJson));
+      sdkConfig
+          .setAndroidId(com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("androidId", trackiersdkConfigJson));
 
       String appId = com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("appId", trackiersdkConfigJson);
       if (appId != null && !appId.isEmpty()) {
         sdkConfig.setAppID(appId);
       }
 
-      String encryptionKey = com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("encryptionKey", trackiersdkConfigJson);
+      String encryptionKey = com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("encryptionKey",
+          trackiersdkConfigJson);
       if (encryptionKey != null && !encryptionKey.isEmpty()) {
         sdkConfig.setEncryptionKey(encryptionKey);
       }
 
-      String encryptionType = com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("encryptionType", trackiersdkConfigJson);
+      String encryptionType = com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("encryptionType",
+          trackiersdkConfigJson);
       if (encryptionType != null && !encryptionType.isEmpty()) {
         if (encryptionType.equalsIgnoreCase("AES_GCM")) {
           sdkConfig.setEncryptionType(com.trackier.sdk.TrackierSDKConfig.EncryptionType.AES_GCM);
@@ -253,7 +258,8 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
     }
     try {
       JSONObject trackierEventJson = new JSONObject(message);
-      com.trackier.sdk.TrackierEvent trackierEvent = new com.trackier.sdk.TrackierEvent(TrackierCordovaUtil.getStringVal("eventId", trackierEventJson));
+      com.trackier.sdk.TrackierEvent trackierEvent = new com.trackier.sdk.TrackierEvent(
+          TrackierCordovaUtil.getStringVal("eventId", trackierEventJson));
       trackierEvent.orderId = TrackierCordovaUtil.getStringVal("orderId", trackierEventJson);
       trackierEvent.currency = TrackierCordovaUtil.getStringVal("currency", trackierEventJson);
       trackierEvent.discount = TrackierCordovaUtil.getFloatVal("discount", trackierEventJson);
@@ -374,10 +380,10 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
   private void createDynamicLink(String message, CallbackContext callbackContext) {
     try {
       JSONObject dynamicLinkJson = new JSONObject(message);
-      
-      // Create DynamicLink 
+
+      // Create DynamicLink
       com.trackier.sdk.dynamic_link.DynamicLink.Builder builder = new com.trackier.sdk.dynamic_link.DynamicLink.Builder();
-      
+
       // Set basic properties
       if (dynamicLinkJson.has("templateId")) {
         builder.setTemplateId(TrackierCordovaUtil.getStringVal("templateId", dynamicLinkJson));
@@ -394,46 +400,43 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
       if (dynamicLinkJson.has("deepLinkValue")) {
         builder.setDeepLinkValue(TrackierCordovaUtil.getStringVal("deepLinkValue", dynamicLinkJson));
       }
-      
+
       // Set Android parameters
       if (dynamicLinkJson.has("androidParameters")) {
         JSONObject androidParams = dynamicLinkJson.getJSONObject("androidParameters");
         if (androidParams.has("redirectLink")) {
           String redirectLink = TrackierCordovaUtil.getStringVal("redirectLink", androidParams);
-          com.trackier.sdk.dynamic_link.AndroidParameters androidParameters = 
-            new com.trackier.sdk.dynamic_link.AndroidParameters.Builder()
+          com.trackier.sdk.dynamic_link.AndroidParameters androidParameters = new com.trackier.sdk.dynamic_link.AndroidParameters.Builder()
               .setRedirectLink(redirectLink)
               .build();
           builder.setAndroidParameters(androidParameters);
         }
       }
-      
+
       // Set iOS parameters
       if (dynamicLinkJson.has("iosParameters")) {
         JSONObject iosParams = dynamicLinkJson.getJSONObject("iosParameters");
         if (iosParams.has("redirectLink")) {
           String redirectLink = TrackierCordovaUtil.getStringVal("redirectLink", iosParams);
-          com.trackier.sdk.dynamic_link.IosParameters iosParameters = 
-            new com.trackier.sdk.dynamic_link.IosParameters.Builder()
+          com.trackier.sdk.dynamic_link.IosParameters iosParameters = new com.trackier.sdk.dynamic_link.IosParameters.Builder()
               .setRedirectLink(redirectLink)
               .build();
           builder.setIosParameters(iosParameters);
         }
       }
-      
+
       // Set Desktop parameters
       if (dynamicLinkJson.has("desktopParameters")) {
         JSONObject desktopParams = dynamicLinkJson.getJSONObject("desktopParameters");
         if (desktopParams.has("redirectLink")) {
           String redirectLink = TrackierCordovaUtil.getStringVal("redirectLink", desktopParams);
-          com.trackier.sdk.dynamic_link.DesktopParameters desktopParameters = 
-            new com.trackier.sdk.dynamic_link.DesktopParameters.Builder()
+          com.trackier.sdk.dynamic_link.DesktopParameters desktopParameters = new com.trackier.sdk.dynamic_link.DesktopParameters.Builder()
               .setRedirectLink(redirectLink)
               .build();
           builder.setDesktopParameters(desktopParameters);
         }
       }
-      
+
       // Set SDK parameters
       if (dynamicLinkJson.has("sdkParameters")) {
         JSONObject sdkParams = dynamicLinkJson.getJSONObject("sdkParameters");
@@ -445,23 +448,22 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
         }
         builder.setSDKParameters(sdkParametersMap);
       }
-      
+
       // Set Social Meta Tag parameters
       if (dynamicLinkJson.has("socialMetaTagParameters")) {
         JSONObject socialParams = dynamicLinkJson.getJSONObject("socialMetaTagParameters");
         String title = TrackierCordovaUtil.getStringVal("title", socialParams);
         String description = TrackierCordovaUtil.getStringVal("description", socialParams);
         String imageLink = TrackierCordovaUtil.getStringVal("imageLink", socialParams);
-        
-        com.trackier.sdk.dynamic_link.SocialMetaTagParameters socialMetaTagParameters = 
-          new com.trackier.sdk.dynamic_link.SocialMetaTagParameters.Builder()
+
+        com.trackier.sdk.dynamic_link.SocialMetaTagParameters socialMetaTagParameters = new com.trackier.sdk.dynamic_link.SocialMetaTagParameters.Builder()
             .setTitle(title)
             .setDescription(description)
             .setImageLink(imageLink)
             .build();
         builder.setSocialMetaTagParameters(socialMetaTagParameters);
       }
-      
+
       // Set Attribution parameters
       if (dynamicLinkJson.has("attributionParameters")) {
         JSONObject attrParams = dynamicLinkJson.getJSONObject("attributionParameters");
@@ -473,25 +475,24 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
         String p3 = TrackierCordovaUtil.getStringVal("p3", attrParams);
         String p4 = TrackierCordovaUtil.getStringVal("p4", attrParams);
         String p5 = TrackierCordovaUtil.getStringVal("p5", attrParams);
-        
+
         builder.setAttributionParameters(channel, campaign, mediaSource, p1, p2, p3, p4, p5);
       }
-      
+
       // Build the DynamicLink
       com.trackier.sdk.dynamic_link.DynamicLink dynamicLink = builder.build();
 
-      // Create dynamic link 
+      // Create dynamic link
       com.trackier.sdk.TrackierSDK.createDynamicLink(
-        dynamicLink,
-        (String result) -> {
-          callbackContext.success(result);
-          return null;
-        },
-        (String error) -> {
-          callbackContext.error(error);
-          return null;
-        }
-      );
+          dynamicLink,
+          (String result) -> {
+            callbackContext.success(result);
+            return null;
+          },
+          (String error) -> {
+            callbackContext.error(error);
+            return null;
+          });
     } catch (Exception e) {
       Log.e("TrackierSDK", "Error creating dynamic link: " + e.getMessage());
       callbackContext.error("Error creating dynamic link: " + e.getMessage());
@@ -511,35 +512,34 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
   private void resolveDeeplinkUrl(String url, CallbackContext callbackContext) {
     try {
       com.trackier.sdk.TrackierSDK.resolveDeeplinkUrl(
-        url,
-        (com.trackier.sdk.DlData result) -> {
-          try {
-            JSONObject resultJson = new JSONObject();
-            resultJson.put("url", result.getUrl() != null ? result.getUrl() : "");
-            resultJson.put("dlv", result.getDlv() != null ? result.getDlv() : "");
-            
-            // Handle sdkParams
-            if (result.getSdkParams() != null) {
-              JSONObject sdkParamsJson = new JSONObject();
-              for (java.util.Map.Entry<String, Object> entry : result.getSdkParams().entrySet()) {
-                sdkParamsJson.put(entry.getKey(), entry.getValue());
+          url,
+          (com.trackier.sdk.DlData result) -> {
+            try {
+              JSONObject resultJson = new JSONObject();
+              resultJson.put("url", result.getUrl() != null ? result.getUrl() : "");
+              resultJson.put("dlv", result.getDlv() != null ? result.getDlv() : "");
+
+              // Handle sdkParams
+              if (result.getSdkParams() != null) {
+                JSONObject sdkParamsJson = new JSONObject();
+                for (java.util.Map.Entry<String, Object> entry : result.getSdkParams().entrySet()) {
+                  sdkParamsJson.put(entry.getKey(), entry.getValue());
+                }
+                resultJson.put("sdkParams", sdkParamsJson);
+              } else {
+                resultJson.put("sdkParams", new JSONObject());
               }
-              resultJson.put("sdkParams", sdkParamsJson);
-            } else {
-              resultJson.put("sdkParams", new JSONObject());
+
+              callbackContext.success(resultJson);
+            } catch (Exception e) {
+              callbackContext.error("Error parsing deeplink result: " + e.getMessage());
             }
-            
-            callbackContext.success(resultJson);
-          } catch (Exception e) {
-            callbackContext.error("Error parsing deeplink result: " + e.getMessage());
-          }
-          return null;
-        },
-        (Throwable error) -> {
-          callbackContext.error("Error resolving deeplink: " + error.getMessage());
-          return null;
-        }
-      );
+            return null;
+          },
+          (Throwable error) -> {
+            callbackContext.error("Error resolving deeplink: " + error.getMessage());
+            return null;
+          });
     } catch (Exception e) {
       Log.e("TrackierSDK", "Error resolving deeplink URL: " + e.getMessage());
       callbackContext.error("Error resolving deeplink URL: " + e.getMessage());
@@ -550,7 +550,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
     if (dplkContext != null) {
       try {
         PluginResult result = new PluginResult(PluginResult.Status.OK, uri);
-        result.setKeepCallback(true);  // Keep callback open for multiple events
+        result.setKeepCallback(true); // Keep callback open for multiple events
         dplkContext.sendPluginResult(result);
       } catch (Exception e) {
         e.printStackTrace();
