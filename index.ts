@@ -18,6 +18,54 @@ export enum TrackierEncryptionType {
 	AES_GCM = 'AES_GCM'
 }
 
+export class TrackierDeepLink {
+	url?: string;
+	isDeferred: boolean;
+	deepLinkValue?: string;
+	partnerId?: string;
+	siteId?: string;
+	subSiteId?: string;
+	campaign?: string;
+	campaignId?: string;
+	ad?: string;
+	adId?: string;
+	adSet?: string;
+	adSetId?: string;
+	channel?: string;
+	clickId?: string;
+	message?: string;
+	p1?: string;
+	p2?: string;
+	p3?: string;
+	p4?: string;
+	p5?: string;
+	sdkParams?: { [key: string]: any };
+
+	constructor(map: any) {
+		this.url = map.url;
+		this.isDeferred = map.isDeferred || false;
+		this.deepLinkValue = map.deepLinkValue;
+		this.partnerId = map.partnerId || map.pid;
+		this.siteId = map.siteId || map.sid;
+		this.subSiteId = map.subSiteId || map.ssid;
+		this.campaign = map.campaign || map.camp;
+		this.campaignId = map.campaignId || map.campId;
+		this.ad = map.ad;
+		this.adId = map.adId;
+		this.adSet = map.adSet;
+		this.adSetId = map.adSetId;
+		this.channel = map.channel;
+		this.clickId = map.clickId;
+		this.message = map.message;
+		this.p1 = map.p1;
+		this.p2 = map.p2;
+		this.p3 = map.p3;
+		this.p4 = map.p4;
+		this.p5 = map.p5;
+		this.sdkParams = map.sdkParams;
+	}
+}
+
 export class TrackierConfig {
 	private appToken: string;
 	private environment: TrackierEnvironment;
@@ -369,12 +417,11 @@ export class TrackierCordovaPlugin extends AwesomeCordovaNativePlugin {
 	@Cordova({
 		observable: true // This allows callback-based events
 	  })
-	  setDeferredDeeplinkCallbackListener(): Observable<string> {
+	  setDeferredDeeplinkCallbackListener(): Observable<TrackierDeepLink> {
 		return new Observable((observer) => {
 		  cordova.exec(
-			(deepLinkUrl: string) => {
-			observer.next(deepLinkUrl);
-			observer.complete();
+			(res: any) => {
+			observer.next(new TrackierDeepLink(res));
 			},
 			(error: any) => {
 			observer.error(error);

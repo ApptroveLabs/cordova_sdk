@@ -61,9 +61,50 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
         // DeepLinkListener callback
     func onDeepLinking(result: DeepLink) {
         if let callbackId = self.deeplinkCallbackId {
-            let deepLinkUrl = result.getUrl()
+            var deepLinkData: [String: Any] = [:]
+            let url = result.getUrl()
+            deepLinkData["url"] = url
             
-            let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: deepLinkUrl)
+            deepLinkData["isDeferred"] = true 
+            
+            deepLinkData["deepLinkValue"] = result.getDlv()
+            deepLinkData["partnerId"] = result.getPid()
+            deepLinkData["pid"] = result.getPid()
+            deepLinkData["campaign"] = result.getCamp()
+            deepLinkData["camp"] = result.getCamp()
+            deepLinkData["campaignId"] = result.getCampId()
+            deepLinkData["campId"] = result.getCampId()
+            deepLinkData["ad"] = result.getAd()
+            deepLinkData["adId"] = result.getAdId()
+            deepLinkData["adSet"] = result.getAdSet()
+            deepLinkData["adSetId"] = result.getAdSetId()
+            deepLinkData["channel"] = result.getChannel()
+            deepLinkData["clickId"] = result.getClickId()
+            deepLinkData["message"] = result.getMessage()
+            deepLinkData["p1"] = result.getP1()
+            deepLinkData["p2"] = result.getP2()
+            deepLinkData["p3"] = result.getP3()
+            deepLinkData["p4"] = result.getP4()
+            deepLinkData["p5"] = result.getP5()
+            
+            let queryParams = self.getQueryParams(uri: url)
+            deepLinkData["siteId"] = queryParams["sid"] ?? ""
+            deepLinkData["sid"] = queryParams["sid"] ?? ""
+            deepLinkData["subSiteId"] = queryParams["ssid"] ?? ""
+            deepLinkData["ssid"] = queryParams["ssid"] ?? ""
+            
+            var sdkParams: [String: Any] = [:]
+            for (key, value) in queryParams {
+                sdkParams[key] = value
+            }
+            if let sdkParamsDict = result.getSDKParamsDictionary() {
+                for (key, value) in sdkParamsDict {
+                    sdkParams[key] = "\(value)"
+                }
+            }
+            deepLinkData["sdkParams"] = sdkParams
+            
+            let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: deepLinkData)
             pluginResult?.setKeepCallbackAs(true) // keep it alive for future deeplinks
             self.commandDelegate!.send(pluginResult, callbackId: callbackId)
         }
@@ -489,5 +530,18 @@ class TrackierCordovaPlugin : CDVPlugin, DeepLinkListener {
             } catch {}
         }
         return nil
+    }
+
+    private func getQueryParams(uri: String) -> [String: String] {
+        var map = [String: String]()
+        guard let url = URL(string: uri),
+              let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems else {
+            return map
+        }
+        for item in queryItems {
+            map[item.name] = item.value ?? ""
+        }
+        return map
     }
 }
