@@ -175,7 +175,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
       sdkConfig.disableOrganicTracking(
           com.trackier.cordova_sdk.TrackierCordovaUtil.getBooleanVal("disableorganic", trackiersdkConfigJson));
       sdkConfig.setSDKType("cordova_sdk");
-      sdkConfig.setSDKVersion("1.6.80");
+      sdkConfig.setSDKVersion("1.6.81");
 
       sdkConfig.setFacebookAppId(
           com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("facebookAppId", trackiersdkConfigJson));
