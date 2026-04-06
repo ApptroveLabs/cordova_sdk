@@ -139,6 +139,9 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
         parseDeepLink(url);
       } else if (action.equals("trackier_deferredDeeplink")) {
         TrackierCordovaPlugin.dplkContext = callbackContext;
+        PluginResult result = new PluginResult(PluginResult.Status.NO_RESULT);
+        result.setKeepCallback(true);
+        callbackContext.sendPluginResult(result);
         return true;
       } else if (action.equals("storeRetargetting")) {
         String url = com.trackier.cordova_sdk.TrackierCordovaUtil.optString(args, 0);
@@ -155,7 +158,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
   }
 
   private void initializeSDK(String message, CallbackContext callbackContext, String action) {
-    if (message == null && message.length() == 0) {
+    if (message == null || message.length() == 0) {
       callbackContext.error("Expected one non-empty string argument.");
       return;
     }
@@ -172,7 +175,7 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
       sdkConfig.disableOrganicTracking(
           com.trackier.cordova_sdk.TrackierCordovaUtil.getBooleanVal("disableorganic", trackiersdkConfigJson));
       sdkConfig.setSDKType("cordova_sdk");
-      sdkConfig.setSDKVersion("1.6.80");
+      sdkConfig.setSDKVersion("1.6.81");
 
       sdkConfig.setFacebookAppId(
           com.trackier.cordova_sdk.TrackierCordovaUtil.getStringVal("facebookAppId", trackiersdkConfigJson));
@@ -239,8 +242,53 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
       sdkConfig.setDeepLinkListener(new DeepLinkListener() {
         @Override
         public void onDeepLinking(@NonNull DeepLink deepLink) {
-          String deepLinkUrl = deepLink.getUrl();
-          sendDeeplinkToJS(deepLink.getUrl());
+          try {
+            JSONObject deepLinkData = new JSONObject();
+            deepLinkData.put("url", deepLink.getUrl());
+            deepLinkData.put("isDeferred", deepLink.isDeferred());
+            deepLinkData.put("deepLinkValue", deepLink.getDeepLinkValue());
+            deepLinkData.put("partnerId", deepLink.getPartnerId());
+            deepLinkData.put("pid", deepLink.getPartnerId());
+            deepLinkData.put("siteId", deepLink.getSiteId());
+            deepLinkData.put("sid", deepLink.getSiteId());
+            deepLinkData.put("subSiteId", deepLink.getSubSiteId());
+            deepLinkData.put("ssid", deepLink.getSubSiteId());
+            deepLinkData.put("campaign", deepLink.getCampaign());
+            deepLinkData.put("camp", deepLink.getCampaign());
+            deepLinkData.put("campaignId", deepLink.getStringValue("campId"));
+            deepLinkData.put("campId", deepLink.getStringValue("campId"));
+            deepLinkData.put("ad", deepLink.getStringValue("ad"));
+            deepLinkData.put("adId", deepLink.getStringValue("adId"));
+            deepLinkData.put("adSet", deepLink.getStringValue("adSet"));
+            deepLinkData.put("adSetId", deepLink.getStringValue("adSetId"));
+            deepLinkData.put("channel", deepLink.getStringValue("channel"));
+            deepLinkData.put("clickId", deepLink.getStringValue("clickId"));
+            deepLinkData.put("message", deepLink.getStringValue("message"));
+            deepLinkData.put("p1", deepLink.getP1());
+            deepLinkData.put("p2", deepLink.getP2());
+            deepLinkData.put("p3", deepLink.getP3());
+            deepLinkData.put("p4", deepLink.getP4());
+            deepLinkData.put("p5", deepLink.getP5());
+
+            JSONObject sdkParams = new JSONObject();
+            java.util.Map<String, Object> params = deepLink.getSdkParams();
+            if (params != null) {
+              for (java.util.Map.Entry<String, Object> entry : params.entrySet()) {
+                sdkParams.put(entry.getKey(), entry.getValue());
+              }
+            }
+            java.util.Map<String, String> data = deepLink.getData();
+            if (data != null) {
+              for (java.util.Map.Entry<String, String> entry : data.entrySet()) {
+                sdkParams.put(entry.getKey(), entry.getValue());
+              }
+            }
+            deepLinkData.put("sdkParams", sdkParams);
+
+            sendDeeplinkToJS(deepLinkData);
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
         }
       });
       com.trackier.sdk.TrackierSDK.initialize(sdkConfig);
@@ -546,10 +594,10 @@ public class TrackierCordovaPlugin extends CordovaPlugin {
     }
   }
 
-  private static void sendDeeplinkToJS(String uri) {
+  private static void sendDeeplinkToJS(JSONObject deepLinkData) {
     if (dplkContext != null) {
       try {
-        PluginResult result = new PluginResult(PluginResult.Status.OK, uri);
+        PluginResult result = new PluginResult(PluginResult.Status.OK, deepLinkData);
         result.setKeepCallback(true); // Keep callback open for multiple events
         dplkContext.sendPluginResult(result);
       } catch (Exception e) {

@@ -100,6 +100,7 @@ var TrackierConfig = /** @class */ (function () {
 export { TrackierConfig };
 var TrackierEvent = /** @class */ (function () {
     function TrackierEvent(eventId) {
+
         this.eventId = eventId;
     }
     TrackierEvent.prototype.setOrderId = function (orderId) {
@@ -153,6 +154,33 @@ var TrackierEvent = /** @class */ (function () {
     return TrackierEvent;
 }());
 export { TrackierEvent };
+var TrackierDeepLink = /** @class */ (function () {
+    function TrackierDeepLink(map) {
+        this.url = map.url;
+        this.isDeferred = map.isDeferred || false;
+        this.deepLinkValue = map.deepLinkValue;
+        this.partnerId = map.partnerId || map.pid;
+        this.siteId = map.siteId || map.sid;
+        this.subSiteId = map.subSiteId || map.ssid;
+        this.campaign = map.campaign || map.camp;
+        this.campaignId = map.campaignId || map.campId;
+        this.ad = map.ad;
+        this.adId = map.adId;
+        this.adSet = map.adSet;
+        this.adSetId = map.adSetId;
+        this.channel = map.channel;
+        this.clickId = map.clickId;
+        this.message = map.message;
+        this.p1 = map.p1;
+        this.p2 = map.p2;
+        this.p3 = map.p3;
+        this.p4 = map.p4;
+        this.p5 = map.p5;
+        this.sdkParams = map.sdkParams;
+    }
+    return TrackierDeepLink;
+}());
+export { TrackierDeepLink };
 var TrackierCordovaPluginOriginal = /** @class */ (function (_super) {
     __extends(TrackierCordovaPluginOriginal, _super);
     function TrackierCordovaPluginOriginal() {
