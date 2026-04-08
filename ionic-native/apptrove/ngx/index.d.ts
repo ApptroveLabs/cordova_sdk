@@ -78,6 +78,32 @@ export declare class AppTroveEvent {
     setRevenue(revenue: number): void;
     setEventValue: (key: string, value: string) => void;
 }
+export declare class AppTroveDeepLink {
+    url?: string;
+    isDeferred: boolean;
+    deepLinkValue?: string;
+    partnerId?: string;
+    siteId?: string;
+    subSiteId?: string;
+    campaign?: string;
+    campaignId?: string;
+    ad?: string;
+    adId?: string;
+    adSet?: string;
+    adSetId?: string;
+    channel?: string;
+    clickId?: string;
+    message?: string;
+    p1?: string;
+    p2?: string;
+    p3?: string;
+    p4?: string;
+    p5?: string;
+    sdkParams?: {
+        [key: string]: any;
+    };
+    constructor(map: any);
+}
 export declare class AppTroveCordovaPlugin extends AwesomeCordovaNativePlugin {
     initializeSDK(config: AppTroveConfig): Promise<void>;
     trackEvent(event: AppTroveEvent): Promise<any>;
@@ -122,6 +148,6 @@ export declare class AppTroveCordovaPlugin extends AwesomeCordovaNativePlugin {
     subscribeAttributionlink(): Promise<string>;
     updatePostbackConversion(conversionValue: number): Promise<string>;
     waitForATTUserAuthorization(timeoutInterval: number): Promise<string>;
-    setDeferredDeeplinkCallbackListener(): Observable<string>;
+    setDeferredDeeplinkCallbackListener(): Observable<AppTroveDeepLink>;
     storeRetargetting(dob: any): Promise<string>;
 }
