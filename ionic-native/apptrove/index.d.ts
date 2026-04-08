@@ -27,6 +27,7 @@ export declare class AppTroveConfig {
     private appId;
     private encryptionKey;
     private encryptionType;
+    private apptrove_deferredDeeplink;
     constructor(appToken: string, environment: AppTroveEnvironment);
     setAppSecret(key: string, value: string): void;
     setManualMode(value: boolean): void;
@@ -40,6 +41,7 @@ export declare class AppTroveConfig {
     setAppID(value: string): void;
     setEncryptionKey(value: string): void;
     setEncryptionType(value: AppTroveEncryptionType | string): void;
+    setDeferredDeeplink(value: boolean): void;
 }
 export declare class AppTroveEvent {
     private eventId;

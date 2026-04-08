@@ -79,6 +79,7 @@ export class AppTroveConfig {
 	private appId: string = '';
 	private encryptionKey: string = '';
 	private encryptionType: AppTroveEncryptionType | string = '';
+	private apptrove_deferredDeeplink: boolean = false;
 	
 	constructor(appToken: string, environment: AppTroveEnvironment) {
 		this.appToken = appToken;
@@ -130,6 +131,10 @@ export class AppTroveConfig {
 
 	public setEncryptionType(value: AppTroveEncryptionType | string): void {
 		this.encryptionType = value;
+	}
+
+	public setDeferredDeeplink(value: boolean): void {
+		this.apptrove_deferredDeeplink = value;
 	}
 
 }

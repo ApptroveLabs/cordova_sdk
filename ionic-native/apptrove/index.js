@@ -95,6 +95,9 @@ var AppTroveConfig = /** @class */ (function () {
     AppTroveConfig.prototype.setEncryptionType = function (value) {
         this.encryptionType = value;
     };
+    AppTroveConfig.prototype.setDeferredDeeplink = function (value) {
+        this.apptrove_deferredDeeplink = value;
+    };
     return AppTroveConfig;
 }());
 export { AppTroveConfig };
