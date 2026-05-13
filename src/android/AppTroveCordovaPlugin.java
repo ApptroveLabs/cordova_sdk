@@ -60,7 +60,8 @@ public class AppTroveCordovaPlugin extends CordovaPlugin {
         callbackContext.success(appTroveId);
       } else if (action.equals("setUserAdditionalDetails")) {
         String message = args.getString(0);
-        return setUserAdditionalDetails(message);
+        this.setUserAdditionalDetails(message, callbackContext);
+        return true;
       } else if (action.equals("setIMEI")) {
         String imei1 = com.apptrove.cordova_sdk.AppTroveCordovaUtil.optString(args, 0);
         String imei2 = com.apptrove.cordova_sdk.AppTroveCordovaUtil.optString(args, 1);
@@ -380,8 +381,9 @@ public class AppTroveCordovaPlugin extends CordovaPlugin {
     com.apptrove.sdk.AppTroveSDK.storeRetargetting(cordova.getContext(), uri);
   }
 
-  private boolean setUserAdditionalDetails(String message) {
+  private void setUserAdditionalDetails(String message, CallbackContext callbackContext) {
     try {
+      Log.d("AppTroveSDK", "setUserAdditionalDetails called with: " + message);
       JSONObject userAdditionalDetailsJson = new JSONObject(message);
       java.util.Map<String, Object> userAdditionalDetails = new java.util.HashMap<>();
       java.util.Iterator<String> keys = userAdditionalDetailsJson.keys();
@@ -389,11 +391,14 @@ public class AppTroveCordovaPlugin extends CordovaPlugin {
         String key = keys.next();
         userAdditionalDetails.put(key, userAdditionalDetailsJson.get(key));
       }
+      Log.d("AppTroveSDK", "Calling native SDK setUserAdditionalDetails with map: " + userAdditionalDetails.toString());
       com.apptrove.sdk.AppTroveSDK.setUserAdditionalDetails(userAdditionalDetails);
-      return true;
+      Log.d("AppTroveSDK", "setUserAdditionalDetails completed successfully");
+      callbackContext.success();
     } catch (Exception e) {
       Log.e("AppTroveSDK", "Error setting user additional details: " + e.getMessage());
-      return false;
+      e.printStackTrace();
+      callbackContext.error("Error setting user additional details: " + e.getMessage());
     }
   }
 
