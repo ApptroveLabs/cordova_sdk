@@ -270,6 +270,11 @@ export class AppTroveCordovaPlugin extends AwesomeCordovaNativePlugin {
 	}
 
 	@Cordova()
+	setUserAdditionalDetails(details: { [key: string]: any }): Promise<string> {
+		return;
+	}
+
+	@Cordova()
 	parseDeepLink(uri: any): Promise<string> {
 		return;
 	}

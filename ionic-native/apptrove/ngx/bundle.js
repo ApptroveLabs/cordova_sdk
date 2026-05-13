@@ -162,6 +162,7 @@ var AppTroveCordovaPlugin = /** @class */ (function (_super) {
     AppTroveCordovaPlugin.prototype.setUserPhone = function (userPhone) { return core.cordova(this, "setUserPhone", {}, arguments); };
     AppTroveCordovaPlugin.prototype.setDOB = function (dob) { return core.cordova(this, "setDOB", {}, arguments); };
     AppTroveCordovaPlugin.prototype.setGender = function (gender) { return core.cordova(this, "setGender", {}, arguments); };
+    AppTroveCordovaPlugin.prototype.setUserAdditionalDetails = function (details) { return core.cordova(this, "setUserAdditionalDetails", {}, arguments); };
     AppTroveCordovaPlugin.prototype.parseDeepLink = function (uri) { return core.cordova(this, "parseDeepLink", {}, arguments); };
     AppTroveCordovaPlugin.prototype.fireInstall = function () { return core.cordova(this, "fireInstall", {}, arguments); };
     AppTroveCordovaPlugin.prototype.getAppTroveId = function () { return core.cordova(this, "getAppTroveId", {}, arguments); };
@@ -205,7 +206,7 @@ var AppTroveCordovaPlugin = /** @class */ (function (_super) {
 }(core.AwesomeCordovaNativePlugin));
 i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.17", ngImport: i0__namespace, type: AppTroveCordovaPlugin, decorators: [{
             type: i0.Injectable
-        }], propDecorators: { initializeSDK: [], trackEvent: [], setUserId: [], setUserEmail: [], setUserName: [], setUserPhone: [], setDOB: [], setGender: [], parseDeepLink: [], fireInstall: [], getAppTroveId: [], getAd: [], getAdID: [], getCampaign: [], getCampaignID: [], getAdSet: [], getAdSetID: [], getChannel: [], getP1: [], getP2: [], getP3: [], getP4: [], getP5: [], getClickId: [], getDlv: [], getPid: [], getIsRetargeting: [], updateAppleAdsToken: [], createDynamicLink: [], setMacAddress: [], setIMEI: [], resolveDeeplinkUrl: [], sendFcmToken: [], sendAPNToken: [], subscribeAttributionlink: [], updatePostbackConversion: [], waitForATTUserAuthorization: [], setDeferredDeeplinkCallbackListener: [], storeRetargetting: [] } });
+        }], propDecorators: { initializeSDK: [], trackEvent: [], setUserId: [], setUserEmail: [], setUserName: [], setUserPhone: [], setDOB: [], setGender: [], setUserAdditionalDetails: [], parseDeepLink: [], fireInstall: [], getAppTroveId: [], getAd: [], getAdID: [], getCampaign: [], getCampaignID: [], getAdSet: [], getAdSetID: [], getChannel: [], getP1: [], getP2: [], getP3: [], getP4: [], getP5: [], getClickId: [], getDlv: [], getPid: [], getIsRetargeting: [], updateAppleAdsToken: [], createDynamicLink: [], setMacAddress: [], setIMEI: [], resolveDeeplinkUrl: [], sendFcmToken: [], sendAPNToken: [], subscribeAttributionlink: [], updatePostbackConversion: [], waitForATTUserAuthorization: [], setDeferredDeeplinkCallbackListener: [], storeRetargetting: [] } });
 
 exports.AppTroveConfig = AppTroveConfig;
 exports.AppTroveCordovaPlugin = AppTroveCordovaPlugin;

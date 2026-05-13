@@ -1,6 +1,6 @@
 {
   "name": "com.apptrove.cordova_sdk",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "This is AppTrove cordova plugin.",
   "cordova": {
     "id": "com.apptrove.cordova_sdk",

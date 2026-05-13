@@ -23,7 +23,7 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
             let config = AppTroveSDKConfig(appToken: appToken , env: environment)
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "2.0.1")
+            config.setSDKVersion(sdkVersion: "2.0.2")
             config.setDeeplinkListerner(listener: self)
 
             if let regionStr = dict?["region"] as? String {
@@ -151,6 +151,29 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
         }
     }
 
+    @objc(setUserAdditionalDetails:)
+    func setUserAdditionalDetails(command: CDVInvokedUrlCommand){
+        let msg = command.arguments[0] as? String ?? ""
+        if let data = msg.data(using: .utf8) {
+            do {
+                if let userAdditionalDetails = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    AppTroveSDK.setUserAdditionalDetails(userAdditionalDetails: userAdditionalDetails)
+                    let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "User additional details set successfully")
+                    self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                } else {
+                    let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Invalid JSON format")
+                    self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+                }
+            } catch {
+                let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Error parsing user additional details: \(error)")
+                self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+            }
+        } else {
+            let pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: "Invalid data format")
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        }
+    }
+
     @objc(getAppTroveId:)
     func getAppTroveId(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
@@ -205,6 +228,13 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
     func getCampaignID(command: CDVInvokedUrlCommand){
         var pluginResult: CDVPluginResult?
         pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getCampaignID())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+    
+    @objc(getAdSet:)
+    func getAdSet(command: CDVInvokedUrlCommand){
+        var pluginResult: CDVPluginResult?
+        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: AppTroveSDK.getAdSet())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     

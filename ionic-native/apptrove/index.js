@@ -196,6 +196,7 @@ var AppTroveCordovaPluginOriginal = /** @class */ (function (_super) {
     AppTroveCordovaPluginOriginal.prototype.setUserPhone = function (userPhone) { return cordova(this, "setUserPhone", {}, arguments); };
     AppTroveCordovaPluginOriginal.prototype.setDOB = function (dob) { return cordova(this, "setDOB", {}, arguments); };
     AppTroveCordovaPluginOriginal.prototype.setGender = function (gender) { return cordova(this, "setGender", {}, arguments); };
+    AppTroveCordovaPluginOriginal.prototype.setUserAdditionalDetails = function (details) { return cordova(this, "setUserAdditionalDetails", {}, arguments); };
     AppTroveCordovaPluginOriginal.prototype.parseDeepLink = function (uri) { return cordova(this, "parseDeepLink", {}, arguments); };
     AppTroveCordovaPluginOriginal.prototype.fireInstall = function () { return cordova(this, "fireInstall", {}, arguments); };
     AppTroveCordovaPluginOriginal.prototype.getAppTroveId = function () { return cordova(this, "getAppTroveId", {}, arguments); };
