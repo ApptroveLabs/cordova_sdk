@@ -115,6 +115,9 @@ export declare class AppTroveCordovaPlugin extends AwesomeCordovaNativePlugin {
     setUserPhone(userPhone: any): Promise<string>;
     setDOB(dob: any): Promise<string>;
     setGender(gender: any): Promise<string>;
+    setUserAdditionalDetails(details: {
+        [key: string]: any;
+    }): Promise<string>;
     parseDeepLink(uri: any): Promise<string>;
     fireInstall(): Promise<string>;
     getAppTroveId(): Promise<string>;
