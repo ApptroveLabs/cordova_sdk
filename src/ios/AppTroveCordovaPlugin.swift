@@ -23,7 +23,7 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
             let config = AppTroveSDKConfig(appToken: appToken , env: environment)
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "2.0.2")
+            config.setSDKVersion(sdkVersion: "2.0.3")
             config.setDeeplinkListerner(listener: self)
 
             if let regionStr = dict?["region"] as? String {
