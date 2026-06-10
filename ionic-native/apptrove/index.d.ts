@@ -13,6 +13,11 @@ export declare enum AppTroveRegion {
 export declare enum AppTroveEncryptionType {
     AES_GCM = "AES_GCM"
 }
+export declare enum AppTroveCoarseValue {
+    low = "low",
+    medium = "medium",
+    high = "high"
+}
 export declare class AppTroveConfig {
     private appToken;
     private environment;
@@ -42,6 +47,8 @@ export declare class AppTroveConfig {
     setEncryptionKey(value: string): void;
     setEncryptionType(value: AppTroveEncryptionType | string): void;
     setDeferredDeeplink(value: boolean): void;
+    enableSkanAttribution(): void;
+    disableSkanAttribution(): void;
 }
 export declare class AppTroveEvent {
     private eventId;
@@ -151,7 +158,7 @@ export declare class AppTroveCordovaPluginOriginal extends AwesomeCordovaNativeP
     sendFcmToken(token: string): Promise<string>;
     sendAPNToken(token: string): Promise<string>;
     subscribeAttributionlink(): Promise<string>;
-    updatePostbackConversion(conversionValue: number): Promise<string>;
+    updatePostbackConversion(conversionValue: number, coarseValue?: AppTroveCoarseValue, lockWindow?: boolean): Promise<string>;
     waitForATTUserAuthorization(timeoutInterval: number): Promise<string>;
     setDeferredDeeplinkCallbackListener(): Observable<AppTroveDeepLink>;
     storeRetargetting(dob: any): Promise<string>;

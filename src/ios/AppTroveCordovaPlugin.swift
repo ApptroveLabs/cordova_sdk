@@ -20,11 +20,19 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
             let secretId = dict?["secretId"] as! String;
             let secretKey = dict?["secretKey"] as! String;
             let deeplinking = dict?["apptrove_deferredDeeplink"] as! Bool?
+            _ = deeplinking 
             let config = AppTroveSDKConfig(appToken: appToken , env: environment)
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "2.0.3")
+            config.setSDKVersion(sdkVersion: "2.0.5")
             config.setDeeplinkListerner(listener: self)
+            
+            let skanAttribution = dict?["skanAttribution"] as? Bool ?? false
+            if skanAttribution {
+                config.enableSkanAttribution()
+            } else {
+                config.disableSkanAttribution()
+            }
 
             if let regionStr = dict?["region"] as? String {
                 if regionStr.uppercased() == "IN" {
@@ -88,10 +96,10 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
             deepLinkData["p5"] = result.getP5()
             
             let queryParams = self.getQueryParams(uri: url)
-            deepLinkData["siteId"] = queryParams["sid"] ?? ""
-            deepLinkData["sid"] = queryParams["sid"] ?? ""
-            deepLinkData["subSiteId"] = queryParams["ssid"] ?? ""
-            deepLinkData["ssid"] = queryParams["ssid"] ?? ""
+            deepLinkData["siteId"] = result.getQueryParamValue(key: "sid")
+            deepLinkData["sid"] = result.getQueryParamValue(key: "sid")
+            deepLinkData["subSiteId"] = result.getQueryParamValue(key: "ssid")
+            deepLinkData["ssid"] = result.getQueryParamValue(key: "ssid")
             
             var sdkParams: [String: Any] = [:]
             for (key, value) in queryParams {
@@ -191,8 +199,28 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
     @objc(updatePostbackConversion:)
     func updatePostbackConversion(command: CDVInvokedUrlCommand){
         let conversionValue = command.arguments[0] as? Int ?? 0
-        AppTroveSDK.updatePostbackConversion(conversionValue: conversionValue)
-        print("apptrovesdk postback", conversionValue)
+        var coarseValue: AppTroveCoarseValue? = nil
+        var lockWindow: Bool? = nil
+        
+        if command.arguments.count > 1, let cv = command.arguments[1] as? String {
+            coarseValue = AppTroveCoarseValue(rawValue: cv)
+        }
+        
+        if command.arguments.count > 2, let lw = command.arguments[2] as? Bool {
+            lockWindow = lw
+        }
+        
+        AppTroveSDK.updatePostbackConversion(conversionValue, coarseValue: coarseValue, lockWindow: lockWindow) { error in
+            var pluginResult: CDVPluginResult?
+            if let err = error {
+                print("SKAN postback failed: \(err.localizedDescription)")
+                pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: err.localizedDescription)
+            } else {
+                print("apptrovesdk postback", conversionValue)
+                pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Success")
+            }
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        }
     }
 
     @objc(waitForATTUserAuthorization:)
@@ -349,16 +377,16 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
 
                     // Set basic properties
                     if let templateId = dynamicLinkData["templateId"] as? String {
-                        builder.setTemplateId(templateId)
+                        _ = builder.setTemplateId(templateId)
                     }
                     if let link = dynamicLinkData["link"] as? String {
-                        builder.setLink(link)
+                        _ = builder.setLink(link)
                     }
                     if let domainUriPrefix = dynamicLinkData["domainUriPrefix"] as? String {
-                        builder.setDomainUriPrefix(domainUriPrefix)
+                        _ = builder.setDomainUriPrefix(domainUriPrefix)
                     }
                     if let deepLinkValue = dynamicLinkData["deepLinkValue"] as? String {
-                        builder.setDeepLinkValue(deepLinkValue)
+                        _ = builder.setDeepLinkValue(deepLinkValue)
                     }
 
                     // Set Android parameters
@@ -367,7 +395,7 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
                         let androidParameters = AndroidParameters.Builder()
                             .setRedirectLink(redirectLink)
                             .build()
-                        builder.setAndroidParameters(androidParameters)
+                        _ = builder.setAndroidParameters(androidParameters)
                     }
 
                     // Set iOS parameters
@@ -376,7 +404,7 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
                         let iosParameters = IosParameters.Builder()
                             .setRedirectLink(redirectLink)
                             .build()
-                        builder.setIosParameters(iosParameters)
+                        _ = builder.setIosParameters(iosParameters)
                     }
 
                     // Set Desktop parameters
@@ -385,12 +413,12 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
                         let desktopParameters = DesktopParameters.Builder()
                             .setRedirectLink(redirectLink)
                             .build()
-                        builder.setDesktopParameters(desktopParameters)
+                        _ = builder.setDesktopParameters(desktopParameters)
                     }
 
                     // Set SDK parameters
                     if let sdkParams = dynamicLinkData["sdkParameters"] as? [String: String] {
-                        builder.setSDKParameters(sdkParams)
+                        _ = builder.setSDKParameters(sdkParams)
                     }
 
                     // Set Social Meta Tag parameters
@@ -403,7 +431,7 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
                             .setDescription(description)
                             .setImageLink(imageLink)
                             .build()
-                        builder.setSocialMetaTagParameters(socialMetaTagParameters)
+                        _ = builder.setSocialMetaTagParameters(socialMetaTagParameters)
                     }
 
                     // Set Attribution parameters
@@ -417,7 +445,7 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
                         let p4 = attrParams["p4"] as? String ?? ""
                         let p5 = attrParams["p5"] as? String ?? ""
 
-                        builder.setAttributionParameters(
+                        _ = builder.setAttributionParameters(
                             channel: channel,
                             campaign: campaign,
                             mediaSource: mediaSource,

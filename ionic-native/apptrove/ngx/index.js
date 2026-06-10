@@ -19,6 +19,12 @@ export var AppTroveEncryptionType;
 (function (AppTroveEncryptionType) {
     AppTroveEncryptionType["AES_GCM"] = "AES_GCM";
 })(AppTroveEncryptionType || (AppTroveEncryptionType = {}));
+export var AppTroveCoarseValue;
+(function (AppTroveCoarseValue) {
+    AppTroveCoarseValue["low"] = "low";
+    AppTroveCoarseValue["medium"] = "medium";
+    AppTroveCoarseValue["high"] = "high";
+})(AppTroveCoarseValue || (AppTroveCoarseValue = {}));
 var AppTroveConfig = /** @class */ (function () {
     function AppTroveConfig(appToken, environment) {
         this.secretId = '';
@@ -74,6 +80,12 @@ var AppTroveConfig = /** @class */ (function () {
     };
     AppTroveConfig.prototype.setDeferredDeeplink = function (value) {
         this.apptrove_deferredDeeplink = value;
+    };
+    AppTroveConfig.prototype.enableSkanAttribution = function () {
+        this.skanAttribution = true;
+    };
+    AppTroveConfig.prototype.disableSkanAttribution = function () {
+        this.skanAttribution = false;
     };
     return AppTroveConfig;
 }());
@@ -201,7 +213,7 @@ var AppTroveCordovaPlugin = /** @class */ (function (_super) {
     AppTroveCordovaPlugin.prototype.sendFcmToken = function (token) { return cordova(this, "sendFcmToken", {}, arguments); };
     AppTroveCordovaPlugin.prototype.sendAPNToken = function (token) { return cordova(this, "sendAPNToken", {}, arguments); };
     AppTroveCordovaPlugin.prototype.subscribeAttributionlink = function () { return cordova(this, "subscribeAttributionlink", {}, arguments); };
-    AppTroveCordovaPlugin.prototype.updatePostbackConversion = function (conversionValue) { return cordova(this, "updatePostbackConversion", {}, arguments); };
+    AppTroveCordovaPlugin.prototype.updatePostbackConversion = function (conversionValue, coarseValue, lockWindow) { return cordova(this, "updatePostbackConversion", {}, arguments); };
     AppTroveCordovaPlugin.prototype.waitForATTUserAuthorization = function (timeoutInterval) { return cordova(this, "waitForATTUserAuthorization", {}, arguments); };
     AppTroveCordovaPlugin.prototype.setDeferredDeeplinkCallbackListener = function () { return cordova(this, "setDeferredDeeplinkCallbackListener", { "observable": true }, arguments); };
     AppTroveCordovaPlugin.prototype.storeRetargetting = function (dob) { return cordova(this, "storeRetargetting", {}, arguments); };
