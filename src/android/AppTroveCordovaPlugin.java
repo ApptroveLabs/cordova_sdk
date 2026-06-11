@@ -153,6 +153,9 @@ public class AppTroveCordovaPlugin extends CordovaPlugin {
       } else if (action.equals("fireInstall")) {
         fireInstall();
         return true;
+      } else if (action.equals("updatePostbackConversion")) {
+        callbackContext.success("Not supported on Android");
+        return true;
       } 
     } catch (Exception e) {
 
@@ -175,7 +178,7 @@ public class AppTroveCordovaPlugin extends CordovaPlugin {
       sdkConfig.setManualMode(com.apptrove.cordova_sdk.AppTroveCordovaUtil.getBooleanVal("manualMode", appTroveSDKConfigJson));
       sdkConfig.disableOrganicTracking(com.apptrove.cordova_sdk.AppTroveCordovaUtil.getBooleanVal("disableorganic", appTroveSDKConfigJson));
       sdkConfig.setSDKType("cordova_sdk");
-      sdkConfig.setSDKVersion("2.0.3");
+      sdkConfig.setSDKVersion("2.0.5");
 
       sdkConfig.setFacebookAppId(com.apptrove.cordova_sdk.AppTroveCordovaUtil.getStringVal("facebookAppId", appTroveSDKConfigJson));
       sdkConfig.setAndroidId(com.apptrove.cordova_sdk.AppTroveCordovaUtil.getStringVal("androidId", appTroveSDKConfigJson));

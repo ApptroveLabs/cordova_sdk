@@ -18,6 +18,12 @@ export enum AppTroveEncryptionType {
 	AES_GCM = 'AES_GCM'
 }
 
+export enum AppTroveCoarseValue {
+	low = 'low',
+	medium = 'medium',
+	high = 'high'
+}
+
 export class AppTroveDeepLink {
 	url?: string;
 	isDeferred: boolean;
@@ -80,6 +86,7 @@ export class AppTroveConfig {
 	private encryptionKey: string = '';
 	private encryptionType: AppTroveEncryptionType | string = '';
 	private apptrove_deferredDeeplink: boolean = false;
+	private skanAttribution: boolean = false;
 	
 	constructor(appToken: string, environment: AppTroveEnvironment) {
 		this.appToken = appToken;
@@ -135,6 +142,14 @@ export class AppTroveConfig {
 
 	public setDeferredDeeplink(value: boolean): void {
 		this.apptrove_deferredDeeplink = value;
+	}
+
+	public enableSkanAttribution(): void {
+		this.skanAttribution = true;
+	}
+
+	public disableSkanAttribution(): void {
+		this.skanAttribution = false;
 	}
 
 }
@@ -414,7 +429,7 @@ export class AppTroveCordovaPlugin extends AwesomeCordovaNativePlugin {
 	}
 
 	@Cordova()
-	updatePostbackConversion(conversionValue: number): Promise<string> {
+	updatePostbackConversion(conversionValue: number, coarseValue?: AppTroveCoarseValue, lockWindow?: boolean): Promise<string> {
 		return;
 	}
 
