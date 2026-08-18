@@ -104,12 +104,6 @@ var AppTroveConfig = /** @class */ (function () {
     AppTroveConfig.prototype.setDeferredDeeplink = function (value) {
         this.apptrove_deferredDeeplink = value;
     };
-    AppTroveConfig.prototype.enableSkanAttribution = function () {
-        this.skanAttribution = true;
-    };
-    AppTroveConfig.prototype.disableSkanAttribution = function () {
-        this.skanAttribution = false;
-    };
     return AppTroveConfig;
 }());
 export { AppTroveConfig };

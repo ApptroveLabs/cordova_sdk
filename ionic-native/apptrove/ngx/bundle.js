@@ -40,6 +40,12 @@ exports.AppTroveEncryptionType = void 0;
 (function (AppTroveEncryptionType) {
     AppTroveEncryptionType["AES_GCM"] = "AES_GCM";
 })(exports.AppTroveEncryptionType || (exports.AppTroveEncryptionType = {}));
+exports.AppTroveCoarseValue = void 0;
+(function (AppTroveCoarseValue) {
+    AppTroveCoarseValue["low"] = "low";
+    AppTroveCoarseValue["medium"] = "medium";
+    AppTroveCoarseValue["high"] = "high";
+})(exports.AppTroveCoarseValue || (exports.AppTroveCoarseValue = {}));
 var AppTroveConfig = /** @class */ (function () {
     function AppTroveConfig(appToken, environment) {
         this.secretId = '';
@@ -190,7 +196,7 @@ var AppTroveCordovaPlugin = /** @class */ (function (_super) {
     AppTroveCordovaPlugin.prototype.sendFcmToken = function (token) { return core.cordova(this, "sendFcmToken", {}, arguments); };
     AppTroveCordovaPlugin.prototype.sendAPNToken = function (token) { return core.cordova(this, "sendAPNToken", {}, arguments); };
     AppTroveCordovaPlugin.prototype.subscribeAttributionlink = function () { return core.cordova(this, "subscribeAttributionlink", {}, arguments); };
-    AppTroveCordovaPlugin.prototype.updatePostbackConversion = function (conversionValue) { return core.cordova(this, "updatePostbackConversion", {}, arguments); };
+    AppTroveCordovaPlugin.prototype.updatePostbackConversion = function (conversionValue, coarseValue, lockWindow) { return core.cordova(this, "updatePostbackConversion", {}, arguments); };
     AppTroveCordovaPlugin.prototype.waitForATTUserAuthorization = function (timeoutInterval) { return core.cordova(this, "waitForATTUserAuthorization", {}, arguments); };
     AppTroveCordovaPlugin.prototype.setDeferredDeeplinkCallbackListener = function () { return core.cordova(this, "setDeferredDeeplinkCallbackListener", { "observable": true }, arguments); };
     AppTroveCordovaPlugin.prototype.storeRetargetting = function (dob) { return core.cordova(this, "storeRetargetting", {}, arguments); };

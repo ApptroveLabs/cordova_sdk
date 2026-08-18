@@ -165,8 +165,25 @@ exports.subscribeAttributionlink = function (success, error) {
     exec(success, error, 'AppTroveCordovaPlugin', 'subscribeAttributionlink', []);
 };
 
-exports.updatePostbackConversion = function (arg0, success, error) {
-    exec(success, error, 'AppTroveCordovaPlugin', 'updatePostbackConversion', [(arg0)]);
+exports.updatePostbackConversion = function (conversionValue, coarseValue, lockWindow, success, error) {
+    // Preserve the original updatePostbackConversion(value, success, error)
+    // signature while supporting the optional SKAN 4 arguments.
+    if (typeof coarseValue === 'function') {
+        error = lockWindow;
+        success = coarseValue;
+        coarseValue = null;
+        lockWindow = null;
+    } else if (typeof lockWindow === 'function') {
+        error = success;
+        success = lockWindow;
+        lockWindow = null;
+    }
+
+    exec(success, error, 'AppTroveCordovaPlugin', 'updatePostbackConversion', [
+        conversionValue,
+        coarseValue == null ? null : coarseValue,
+        lockWindow == null ? null : lockWindow
+    ]);
 };
 
 exports.waitForATTUserAuthorization = function (arg0, success, error) {
