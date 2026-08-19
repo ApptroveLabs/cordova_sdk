@@ -14,7 +14,7 @@
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
         <source-file src="src/android/AppTroveCordovaPlugin.java" target-dir="src/com/apptrove/cordova_sdk/AppTroveCordovaPlugin" />
-        <framework src="com.apptrove:android-sdk:2.0.0" />
+        <framework src="com.apptrove:android-sdk:2.0.2" />
         <source-file src="src/android/AppTroveCordovaUtil.java" target-dir="src/com/apptrove/cordova_sdk/AppTroveCordovaUtil" />
     </platform>
     <platform name="ios">
