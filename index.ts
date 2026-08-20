@@ -86,7 +86,6 @@ export class AppTroveConfig {
 	private encryptionKey: string = '';
 	private encryptionType: AppTroveEncryptionType | string = '';
 	private apptrove_deferredDeeplink: boolean = false;
-	private skanAttribution: boolean = false;
 	
 	constructor(appToken: string, environment: AppTroveEnvironment) {
 		this.appToken = appToken;
@@ -142,14 +141,6 @@ export class AppTroveConfig {
 
 	public setDeferredDeeplink(value: boolean): void {
 		this.apptrove_deferredDeeplink = value;
-	}
-
-	public enableSkanAttribution(): void {
-		this.skanAttribution = true;
-	}
-
-	public disableSkanAttribution(): void {
-		this.skanAttribution = false;
 	}
 
 }

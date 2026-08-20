@@ -47,8 +47,6 @@ export declare class AppTroveConfig {
     setEncryptionKey(value: string): void;
     setEncryptionType(value: AppTroveEncryptionType | string): void;
     setDeferredDeeplink(value: boolean): void;
-    enableSkanAttribution(): void;
-    disableSkanAttribution(): void;
 }
 export declare class AppTroveEvent {
     private eventId;

@@ -178,7 +178,7 @@ public class AppTroveCordovaPlugin extends CordovaPlugin {
       sdkConfig.setManualMode(com.apptrove.cordova_sdk.AppTroveCordovaUtil.getBooleanVal("manualMode", appTroveSDKConfigJson));
       sdkConfig.disableOrganicTracking(com.apptrove.cordova_sdk.AppTroveCordovaUtil.getBooleanVal("disableorganic", appTroveSDKConfigJson));
       sdkConfig.setSDKType("cordova_sdk");
-      sdkConfig.setSDKVersion("2.0.5");
+      sdkConfig.setSDKVersion("2.0.7");
 
       sdkConfig.setFacebookAppId(com.apptrove.cordova_sdk.AppTroveCordovaUtil.getStringVal("facebookAppId", appTroveSDKConfigJson));
       sdkConfig.setAndroidId(com.apptrove.cordova_sdk.AppTroveCordovaUtil.getStringVal("androidId", appTroveSDKConfigJson));

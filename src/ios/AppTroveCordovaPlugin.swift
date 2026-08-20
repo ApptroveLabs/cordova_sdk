@@ -24,15 +24,8 @@ class AppTroveCordovaPlugin : CDVPlugin, DeepLinkListener {
             let config = AppTroveSDKConfig(appToken: appToken , env: environment)
             config.setAppSecret(secretId: secretId, secretKey: secretKey)
             config.setSDKType(sdkType: "cordova_sdk")
-            config.setSDKVersion(sdkVersion: "2.0.5")
+            config.setSDKVersion(sdkVersion: "2.0.7")
             config.setDeeplinkListerner(listener: self)
-            
-            let skanAttribution = dict?["skanAttribution"] as? Bool ?? false
-            if skanAttribution {
-                config.enableSkanAttribution()
-            } else {
-                config.disableSkanAttribution()
-            }
 
             if let regionStr = dict?["region"] as? String {
                 if regionStr.uppercased() == "IN" {
